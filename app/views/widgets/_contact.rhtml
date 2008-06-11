@@ -1,0 +1,7 @@
+<span class="contact_type">E: </span><%= mail_to person.email, person.email, :class => "email non_link", :title => "Send email" %>
+<% if person.tel.length > 0 %>
+  <br/><span class="contact_type"><abbr class="type" title="TEL">T</abbr>: </span><span class="tel"><%=h person.tel %></span>
+<% end %>
+<% if person.mobile.length > 0 %>
+  <br/><span class="contact_type"><abbr class="type" title="CELL">M</abbr>: </span><span class="mobile"><%=h person.mobile %></span>
+<% end %>

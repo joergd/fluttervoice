@@ -1,0 +1,3 @@
+InvoiceMailer#thankyou
+
+Find me in app/views/invoice_mailer/thankyou.rhtml

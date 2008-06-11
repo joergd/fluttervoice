@@ -1,0 +1,28 @@
+<div id="sidebar">
+  <%= render :partial => "submenu" %>
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <h2>Thank you message</h2>
+  
+  <%= error_messages_for :preference %>
+  
+  <% form_tag :action => 'thankyous' do -%>  
+  
+    <h4>Write a thank you message</h4>
+    <p>The message you write here will appear in your thank you message when you send one. You can change it if you like at the time of sending.</p>
+    
+    <div class="box">
+      <%= text_area :preference, :thankyou_message, :cols => 40, :rows => 10 %>
+    </div>
+    
+    <div class="submit_box">
+      <%= submit_tag 'Save message' %>
+    </div>
+  <% end -%>
+  
+</div>

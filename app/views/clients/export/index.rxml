@@ -1,0 +1,28 @@
+xml.instruct!
+xml.clients("xmlns:xlink" => "http://www.w3.org/1999/xlink", "xmlns" => "http://www.#{@app_config['domain']}/api") do
+  for c in @account.clients
+    xml.client("xlink:href" => url_for({ :action => "show", :id => c.id, :only_path => false }), "id" => "#{c.id}") do
+      xml.name(c.name)
+      xml.address1(c.address1)
+      xml.address2(c.address2)
+      xml.city(c.city)
+      xml.state(c.state)
+      xml.postalcode(c.postalcode)
+      xml.country(c.country)
+      xml.web(c.web)
+      xml.tel(c.tel)
+      xml.fax(c.fax)
+      xml.contacts do
+        for p in c.contacts
+          xml.contact("xlink:href" => url_for({ :controller => "people", :action => "show", :id => p.id, :only_path => false }), "id" => "#{p.id}") do
+            xml.firstname(p.firstname)
+            xml.lastname(p.lastname)
+            xml.email(p.email)
+            xml.tel(p.tel)
+            xml.mobile(p.mobile)
+          end
+        end
+      end
+    end
+  end
+end

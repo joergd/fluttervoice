@@ -1,0 +1,7 @@
+<% if !main_site? && user? %>
+  <ul>
+    <li><%= link_to 'Invoices', { :controller => '/invoices', :action => 'index' }, :title => 'A summary view of your invoices' %></li>
+    <li><%= link_to 'Clients', { :controller => '/clients', :action => 'index' }, :title => 'View or setup your clients'  %></li>
+    <li class="new_invoice"><a href="<%= url_for :controller => '/invoices', :action => 'create' %>" title="Create a new invoice"><span class="hilite">+</span> Create New Invoice</a></li>
+  </ul>
+<% end %>

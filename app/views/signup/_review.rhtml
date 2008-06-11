@@ -1,0 +1,11 @@
+<li>
+  <fieldset class="review">
+    <legend><% if @account.plan.free? %>4. <% else %>5. <% end %>Review and accept</legend>
+    <p>So, to summarize: <%= @account.plan.summary(@app_config['site']) %></p>
+    <% if !@account.plan.free? -%>
+      <p><strong>You can cancel your account at any time by going into your Account section once you have logged in.</strong></p>
+    <% end -%>
+    <%= check_box_tag :i_agree, "1", false, :onclick => "$(create_account).disabled = !this.checked;" %> Yes, I agree to the <%= link_to "privacy policy", "/privacy", :title => "Fluttervoice Privacy Policy Statement" %> and the <%= link_to "terms of service", "/terms", :title => "Fluttervoice Terms of Service" %>.
+    <p><%= submit_tag 'Create Account', :id => "create_account", :disabled => true %></p>    
+  </fieldset>
+</li>

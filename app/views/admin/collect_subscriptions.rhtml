@@ -1,0 +1,57 @@
+<div id="sidebar">
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <% if (@acc && !@acc.errors.empty?) || !flash[:cc_error].blank? -%>
+    <div class="formError"><span>Something went wrong with taking the payment. Please look at the highlighted messages below to see if you can correct the problem.</span>
+			<br/>
+			<%= error_messages_for 'acc' %>
+			<br/>
+			<%= flash[:cc_error] %>
+		</div>
+
+  <% end -%>
+
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Subdomain</th>
+			<th>Plan</th>
+			<th>Contact</th>
+			<th>Created at</th>
+			<th>Last Payment</th>
+			<th>Amount</th>
+			<th>Due</th>
+			<th>Last 4 CC</th>
+			<th>CC Expiry</th>
+			<th>Cross Reference</th>
+			<th></th>
+		</tr>
+		<% @accounts.each do |account| -%>
+			<% if !account.plan.free? -%>
+				<% if account.credit_card_transactions.last && account.credit_card_transactions.last.created_on < 30.days.ago -%>
+					<tr>
+						<td><%= account.id %></td>
+						<td><%= account.subdomain %></td>
+						<td><%= account.plan.name %></td>
+						<td><%= account.primary_user.name %></td>
+						<td><%= account.created_on.to_s(:db) %></td>
+						<td><%= account.credit_card_transactions.last.created_on.to_s(:db) %></td>
+						<td><%= account.credit_card_transactions.last.currency %><%= account.credit_card_transactions.last.amount %></td>
+						<td><%= account.effective_date.to_s(:db) %></td>
+						<td><%= account.cc_last_4_digits %></td>
+						<td><%= account.cc_expiry.to_s(:db) %></td>
+						<td><%= account.credit_card_transactions.last.vp_cross_reference %></td>
+						<td><%= button_to "Collect", { :action => "collect", :id => account.id } %></td>
+					</tr>
+				<% end -%>
+			<% end -%>
+		<% end -%>
+	</table>
+	
+	
+</div>

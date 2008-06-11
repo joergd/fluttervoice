@@ -1,0 +1,6 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first_binary:
+  id: 1
+  data: sfsddsfbalbalbalbsfjslsjfszdjljdsjfsdalkj
+another_binary:
+  id: 2

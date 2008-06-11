@@ -1,0 +1,17 @@
+<%= @account.today_timezone_date %>
+
+Thank for signing up to Fluttervoice <%= @account.plan.name %>.
+Your order number is: <%= @order_number %>
+
+Your subscription is for:
+Fluttervoice <%= @account.plan.name %> @ <%= @account.currency %><%= number_to_currency(@amount, { :unit => '' }) %>/month.
+
+The total amount of <%= @account.currency %><%= number_to_currency(@amount, { :unit => '' }) %> has been charged to your credit card number xxxx-xxxx-xxxx-<%= @account.cc_last_4_digits %>.
+
+Please print this page as confirmation of your subscription. To cancel your subscription, please go to your account page (after logging in), where you will be able to cancel. Please note, however, that this charge to your credit card cannot be reversed. But you will be able to cancel your account for the next billing cycle.
+
+Enjoy
+The F-Team
+
+Go to Fluttervoice's home page:
+http://<%= @home_url %>

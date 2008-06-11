@@ -1,0 +1,15 @@
+<% if !address.blank? -%>
+<%= address.lines.join("\n") %>
+<% end -%>
+<% if defined?(mobile) && !mobile.blank? -%>
+M: <%=h mobile %>
+<% end -%>
+<% if defined?(tel) && !tel.blank? -%>
+O: <%=h tel %>
+<% end -%>
+<% if defined?(fax) && !fax.blank? -%>
+F: <%=h fax %>
+<% end -%>
+<% if defined?(web) && !web.blank? -%>
+http://<%=h web %>
+<% end -%>

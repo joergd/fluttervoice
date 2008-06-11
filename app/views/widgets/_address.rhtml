@@ -1,0 +1,26 @@
+<% if !address.blank? ||
+      !tel.blank? ||
+      !fax.blank? || 
+      (defined?(mobile) && !mobile.blank?) -%>
+  <ul class="address">
+    <% if !address.blank? -%>
+      <li class="adr">
+        <% address.vcard_lines.each do |line| -%>
+          <%= line %><br/>
+        <% end -%>
+      </li>
+    <% end -%>
+    <% if defined?(mobile) && !mobile.blank? -%>
+      <li><span class="contact_type"><abbr class="type" title="CELL">M</abbr>: </span><span class=""><%=h mobile %></span></li>
+    <% end -%>
+    <% if defined?(tel) && !tel.blank? -%>
+      <li><span class="contact_type"><abbr class="type" title="WORK">O</abbr>: </span><span class="tel"><%=h tel %></span></li>
+    <% end -%>
+    <% if defined?(fax) && !fax.blank? -%>
+      <li><span class="contact_type"><abbr class="type" title="FAX">F</abbr>: </span><span class="fax"><%=h fax %></span></li>
+    <% end -%>
+    <% if defined?(web) && !web.blank? -%>
+      <li><%= link_to web, "http://#{web}", :title => "Visit site", :class => "non_link" %></li>
+    <% end -%>
+  </ul>
+<% end -%>

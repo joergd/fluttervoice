@@ -1,0 +1,28 @@
+xml.instruct!
+xml.invoice("xmlns:xlink" => "http://www.w3.org/1999/xlink", "xmlns" => "http://www.#{@app_config['domain']}/api", "xlink:href" => url_for({ :action => "show", :id => @invoice.id, :only_path => false }), "id" => "#{@invoice.id}") do
+  xml.client(@invoice.client.name, "xlink:href" => url_for({ :controller => "clients", :action => "show", :id => @invoice.client.id, :only_path => false }), "id" => "#{@invoice.client.id}")
+  xml.number(@invoice.number)
+  xml.state(@invoice.state.downcase)
+  xml.date(@invoice.date)
+  xml.due_date(@invoice.due_date)
+  xml.po_number(@invoice.po_number)
+  xml.terms(@invoice.terms)
+  xml.currency(@invoice.currency_id)
+  xml.subtotal(@invoice.subtotal)
+  xml.tax(@invoice.tax)
+  xml.shipping(@invoice.shipping)
+  xml.late_fee(@invoice.late_fee)
+  xml.total(@invoice.total)
+  xml.paid(@invoice.paid)
+  xml.amount_due(@invoice.amount_due)
+  xml.lines do
+    @invoice.invoice_lines.each do |il|
+      xml.line do
+        xml.type(il.invoice_line_type.name.downcase)
+        xml.type(il.quantity)
+        xml.type(il.description)
+        xml.type(il.price)
+      end
+    end
+  end
+end

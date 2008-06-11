@@ -1,0 +1,13 @@
+<div id="cancel_account_panel">
+  <% link_to_section("Cancel My Account") do |cancel| %>
+    <h4>Cancel My Account</h4>
+    <p><%= link_to_function("Hide Details", cancel) %></p>
+    <p>It's obviously a pity to see you go.<% if !@account.plan.free? %> If you meant <strong>downgrading</strong> your account to a free account rather, then click the <em>downgrade</em> link in the Plans table - as cancelling will result in all of your data being deleted.<% end %></p>
+    <p>But we understand if you want to leave.</p>
+    <% if !@account.plan.free? %><p>We cannot reimburse you for the money you have already paid for this current billing cycle, but by cancelling your account, your credit card will no longer be billed from the next billing cycle onward.</p><% end %>
+    <p>Please remember that if you <strong>cancel</strong> your account, <strong>all of your invoices and clients and all other data you have created will be deleted immediately.</strong></p>
+    <% form_tag :action => 'cancel' do -%>
+      <p><%= submit_tag 'Cancel Account' %></p>
+    <% end -%>    
+  <% end %>    
+</div>

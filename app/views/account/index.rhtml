@@ -1,0 +1,30 @@
+<div id="sidebar">
+  <%= render :partial =>  "widgets/account_submenu" %>
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <h2>Account Details</h2>
+
+  <%= render :partial => 'account_status' %>
+
+  <div class="vcard">
+    <h3 class="fn org"><% if !@account.web.blank? %><%= link_to @account.name, "http://#{@account.web}", :class => "url", :title => "Go to website", :popup => true %><% else %><%=h @account.name %><% end %></h3>
+    <%= render :partial => 'widgets/address', :locals => { :address => @account.address, :tel => @account.tel, :fax => @account.fax } %>
+  </div>
+  <% if primary_user? %>
+    <%= link_to "Edit my company information", { :action => "edit" }, :title => 'Change my company contact information' %>
+  <% end %>
+  
+  <%= render :partial => 'plans' %>
+  
+  <%= render :partial => 'cancel_account' %>
+
+  <div class="export">
+    Export all your clients and invoices to <%= link_to "xml", { :action => "export", :format => "xml" }, :title => "Export all your information to xml" %>, or into <%= link_to "Excel", { :action => "export", :format => "xls" }, :title => "Export all your information into Excel" %>.
+  </div>
+
+</div>

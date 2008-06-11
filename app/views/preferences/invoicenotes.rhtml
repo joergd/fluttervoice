@@ -1,0 +1,28 @@
+<div id="sidebar">
+  <%= render :partial => "submenu" %>
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <h2>Default invoice notes</h2>
+  
+  <%= error_messages_for :preference %>
+  
+  <% form_tag :action => 'invoicenotes' do -%>  
+  
+    <h4>Add additional invoice details to your invoices</h4>
+    <p>These could be anything you like, from payment details, such as your banking details, or notes like salesperson information. Any notes you enter here will appear at the bottom of your invoice. Or you can simply leave it blank if you don't want to add any extra information. You can override these default notes on individual invoices.</p>
+    
+    <div class="box">
+      <%= text_area :preference, :invoice_notes, :cols => 40, :rows => 10 %>
+    </div>
+    
+    <div class="submit_box">
+      <%= submit_tag 'Save invoice notes' %>
+    </div>
+  <% end -%>
+  
+</div>

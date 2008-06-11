@@ -1,0 +1,8 @@
+<%= display_error %>
+<%= display_notice %>
+
+<h2>All received payments from <%=h @invoice.client.name %></h2>
+
+<h3>Invoice <%=h @invoice.number %></h3>
+
+<%= render :partial => "payments" %>

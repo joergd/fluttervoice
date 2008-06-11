@@ -1,0 +1,20 @@
+<%= error_messages_for :creditcard %>
+<dl class="form">
+  <%= error_message_on :account, :cc_name, "Your name " %>
+  <dt><label for="account_cc_name">Name on card</label></dt><dd><%= text_field :account, :cc_name, :maxlength => 100, :size => 30  %></dd>
+  <%= error_message_on :account, :cc_address1, "Your address " %>
+  <dt><label for="account_cc_address1">Address 1</label></dt><dd><%= text_field :account, :cc_address1, :maxlength => 150, :size => 30  %></dd>
+  <dt><label for="account_cc_address2">Address 2</label></dt><dd><%= text_field :account, :cc_address2, :maxlength => 150, :size => 30  %></dd>
+  <%= error_message_on :account, :cc_city, "Your city " %>
+  <dt><label for="account_cc_city">City</label></dt><dd><%= text_field :account, :cc_city, :maxlength => 100, :size => 30  %></dd>
+  <%= error_message_on :account, :cc_postalcode, "Your postal code " %>
+  <dt><label for="account_cc_postalcode">Postalcode</label></dt><dd><%= text_field :account, :cc_postalcode, :maxlength => 15, :size => 10  %></dd>
+  <dt><label for="account_cc_country">Country</label></dt><dd><%= country_select :account, :cc_country, @app_config["priority_countries"], {}, :style => "width:205px;"  %></dd>
+  <dt><label for="account_cc_type">Card type</label></dt><dd><%= select :account, :cc_type, [ "VISA", "MasterCard" ] %><%= image_tag "cards.gif", :size => "55x17", :alt => "cards" %></dd>
+  <%= error_message_on :account, :cc_number, "Your credit card number " %>
+  <dt><label for="account_cc_number">Card number</label></dt><dd><%= text_field :account, :cc_number, :maxlength => 20, :size => 30, :onkeypress => "return onlynumbers(event);" %></dd>
+  <%= error_message_on :account, :cc_code, "Your 3 digit security code " %>
+  <dt><label for="account_cc_code">Security code</label></dt><dd><%= text_field :account, :cc_code, :maxlength => 3, :size => 4, :onkeypress => "return onlynumbers(event);"  %>(CVV - Last 3 digits on back of card)</dd>
+  <%= error_message_on :account, :cc_expiry, "Your card expiration date " %>
+  <dt>Expires</dt><dd><%= date_select :account, :cc_expiry, :start_year => Date.today.year, :discard_day => true, :include_blank => true, :order => [:month, :year]  %></dd>
+</dl>

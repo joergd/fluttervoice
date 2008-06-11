@@ -1,0 +1,99 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+joerg:
+  id: 1
+  type: User
+  account_id: 1
+  salted_password: d12e6552c1de085253554ac1139d6931fb58467f # atest
+  salt: 56c17eb467336ce345568304a0ad35205429dc8e
+  email: joergd@pobox.com
+  firstname: joerg
+  lastname: diekmann
+  security_token: 97a47600867ef07ad2ced777c3a731b59fb26de8
+  token_expiry: <%= Date.today + 1 %>
+
+sean:
+  id: 6
+  type: User
+  account_id: 1
+  salted_password: ed29ceb52ae7ca716936589a6520ebd769b91669 # atest
+  salt: 6423513447d21b8fd8ccb688093ff474e3b138f8
+  email: sean@test.com
+  firstname: sean
+  lastname: wilson
+
+kyle:
+  id: 2
+  type: User
+  account_id: 1
+  salted_password: ed29ceb52ae7ca716936589a6520ebd769b91669 # atest
+  salt: 6423513447d21b8fd8ccb688093ff474e3b138f8
+  email: kyle@test.com
+  firstname: kyke
+  lastname: hudson
+
+sarita:
+  id: 3
+  type: User
+  account_id: 2
+  salted_password: aa4535cc9bf7eabcd69bb0c19fd48fb37e44e9d7 # alongtest
+  salt: ffe072f3e8339526d7f26e6cd8db667658adeb18
+  email: sarita@test.com
+  firstname: sarita
+  lastname: gous
+
+deletejoerg1:
+  id: 4
+  type: User
+  account_id: 2
+  salted_password: 67f1869db8039aeebf19f02a6592ed0124ff3caa # alongtest
+  salt: 5e38fdab8c6b3b101f14820323873de0863d63a3
+  email: deletejoerg1@test.com
+  firstname: joerg
+  lastname: deletejoerg1
+
+deletejoerg2:
+  id: 5
+  type: User
+  account_id: 2
+  salted_password: 4e6d4d205fb986101e40038cefe9ac2723495af5 # alongtest
+  salt: ac54479bd31ff2d4e0900e7e6688409c30249c0d
+  email: deletejoerg2@test.com
+  firstname: joerg
+  lastname: deletejoerg2
+
+jonny:
+  id: 7
+  type: Contact
+  account_id: 1
+  client_id: 1
+  email: jonnycohen@test.com
+  firstname: Jonny
+  lastname: Cohen
+
+henri:
+  id: 8
+  type: Contact
+  account_id: 1
+  client_id: 2
+  email: henri@test.com
+  firstname: Henri
+  lastname: Johnson
+
+nonni:
+  id: 9
+  type: Contact
+  account_id: 2
+  client_id: 3
+  email: nonni@test.com
+  firstname: Nonni
+  lastname: Mahlangu
+
+leigh:
+  id: 10
+  type: Contact
+  account_id: 1
+  client_id: 1
+  email: leigh@test.com
+  firstname: Leigh
+  lastname: Bremmer

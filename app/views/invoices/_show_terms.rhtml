@@ -1,0 +1,4 @@
+<div>
+  All amounts are in <%= invoice.currency.name %><br/>
+  Invoice Due: <strong><%=h fmt_date(invoice.due_date) %><% if !invoice.terms.empty? %>&nbsp;(<%=h invoice.terms %>)<% end %></strong>
+</div>

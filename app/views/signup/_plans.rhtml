@@ -1,0 +1,71 @@
+<table id="plans" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td style="border: 0px;">&nbsp;</td>
+    <% @plans.each do |plan| -%>
+      <th class="" valign="top"><%=h plan.name %><br/><span class="price"><%= plan.display_montly_cost(@app_config['site']) %></span><br/>
+        <strong><%= link_to("Signup", :action => plan.name.downcase) if plan.free? %></strong>
+      </th>
+    <% end -%>
+  </tr>
+  <tr>
+    <td class="feature">Invoices you can send during each monthly interval</td>
+    <% @plans.each do |plan| -%>
+      <td class=""><% if plan.invoices == 0 %>Unlimited<% else %><%=h plan.invoices %><% end %></td>
+    <% end -%>
+  </tr>
+  <tr>
+    <td class="feature">Users that can send invoices</td>
+    <% @plans.each do |plan| -%>
+      <td class=""><% if plan.users == 0 %>Unlimited<% else %><%=h plan.users %><% end %></td>
+    <% end -%>
+  </tr>
+  <tr>
+    <td class="feature">Clients you can create</td>
+    <% @plans.each do |plan| -%>
+      <td class=""><% if plan.clients == 0 %>Unlimited<% else %><%=h plan.clients %><% end %></td>
+    <% end -%>
+  </tr>
+  <tr>
+    <td class="feature">Payment reminders</td>
+    <% @plans.each do |plan| -%>
+      <td class="">Yes</td>
+    <% end -%>
+  </tr>
+  <tr>
+    <td class="feature">Thankyou emails</td>
+    <% @plans.each do |plan| -%>
+      <td class="">Yes</td>
+    <% end -%>
+  </tr>
+  <tr>
+    <td class="feature">Unbranded emails</td>
+    <% @plans.each do |plan| -%>
+      <td class=""><% if plan.unbranded_emails? %>Yes<% else %>No<strong>*</strong><% end %></td>
+    <% end -%>
+  </tr>
+  <tr>
+    <td class="feature">Draft invoices</td>
+    <% @plans.each do |plan| -%>
+      <td class=""><% if plan.draft_invoices? %>Yes<% else %>No<% end %></td>
+    <% end -%>
+  </tr>
+  <tr>
+    <td class="description">Selection of different invoice templates</td>
+    <% @plans.each do |plan| -%>
+      <td class="<%=h plan.name.downcase %>"><% if plan.invoice_templates? %>Yes<% else %>No<% end %></td>
+    <% end -%>
+  </tr>
+  <tr>
+    <td class="feature">Customize look &amp; feel of invoices</td>
+    <% @plans.each do |plan| -%>
+      <td class=""><% if plan.allow_custom_css? %>Yes<% else %>No<% end %></td>
+    <% end -%>
+  </tr>
+  <tr>
+    <td class="feature">Includes stylesheets for easy printing</td>
+    <% @plans.each do |plan| -%>
+      <td class=""><% if plan.print_css? %>Yes<% else %>No<% end %></td>
+    <% end -%>
+  </tr>
+</table>
+<p><small><strong>*</strong> Emails sent from free accounts will have a <%= @app_config["app_name"] %> link appended to the end of the emails</small></p>

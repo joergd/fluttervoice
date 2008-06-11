@@ -1,0 +1,16 @@
+<div id="sidebar">
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <%= render_cancel_button %>
+
+  <%= render :partial => "blurb" %>
+  <% form_tag :action => 'ultimate' do -%>
+    <%= render :partial => "form" %>
+  <% end -%>
+  
+</div>

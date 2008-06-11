@@ -1,0 +1,57 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+make_brochure:
+  id: 1
+  invoice_line_type_id: 2
+  account_id: 1
+  invoice_id: 1
+  price: 16000.00
+  quantity: 1
+  description: make a brochure website
+fix_car:
+  id: 2
+  invoice_line_type_id: 1
+  account_id: 1
+  invoice_id: 3
+  price: 200.00
+  quantity: 3
+  description: fix your car
+host_brochure:
+  id: 3
+  invoice_line_type_id: 2
+  account_id: 1
+  invoice_id: 1
+  price: 500.00
+  quantity: 1
+  description: host brochure website
+painting:
+  id: 4
+  invoice_line_type_id: 3
+  account_id: 2
+  invoice_id: 2
+  price: 1000.00
+  quantity: 1
+  description: one painting
+open_invoice_line:
+  id: 5
+  invoice_line_type_id: 1
+  account_id: 1
+  invoice_id: 3
+  price: 1000.00
+  quantity: 1
+  description: open invoice line
+closed_invoice_line:
+  id: 6
+  invoice_line_type_id: 3
+  account_id: 1
+  invoice_id: 4
+  price: 1000.00
+  quantity: 1
+  description: closed invoice line
+pastdue_invoice_line:
+  id: 7
+  invoice_line_type_id: 2
+  account_id: 1
+  invoice_id: 5
+  price: 1000.00
+  quantity: 1
+  description: pastdue invoice line

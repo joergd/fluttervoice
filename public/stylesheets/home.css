@@ -1,0 +1,588 @@
+/*-------------------------------------------------
+GENERAL
+-------------------------------------------------*/
+
+body {
+  margin: 0; padding: 0;
+  font-family: verdana, "Lucida Grande", arial, helvetica, sans-serif;
+  font-size: 14px;
+  color: #737373;
+  background-color: #FFF;
+  text-align: left;
+  margin: 0px;
+  padding: 10px 10px 20px 10px;
+}
+
+.hilite {
+  font-weight: 900;
+  color: #E9999A;
+}
+
+.clearall, .clearallrule {
+	margin: 0 0 7px;
+	padding: 7px 0 0 0;
+	clear: both;
+	font-size: 2px;
+}
+
+.clearallrule {
+	border-bottom: 1px solid #ccc;
+}
+
+#big-spacer {
+  clear: both;
+  margin-top: 250px;
+  height: 2px;
+}
+
+.img a {
+  border: none;
+}
+
+#wrapper {
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	border-top: 3px solid #BCBCAD;
+	width: 850px;  /* bmh */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width: 850px;
+}
+
+html>#wrapper	{
+	width: 848px;
+}
+
+small {
+  font-size: 11px;
+}
+
+a {
+  color: #000;
+  text-decoration: underline;
+}
+
+input.fancy {
+  background: #fff url(/images/input-bg.gif) repeat-x;
+  border: 1px solid #E4E4D2;
+  font-size: 18px;
+  color: #737373;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+h2 {
+  font-weight: 100;
+}
+
+dt {
+  margin: 0px;
+  padding: 0px;
+}
+
+dd {
+  margin: 0px;
+  padding: 0px;
+}
+
+dl {
+  margin: 0px;
+  padding: 0px;
+}
+
+#content_wrapper {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+  color: #737373;
+}
+
+#content {
+  border-top: 1px solid #BCBCAD;
+}
+
+#narrow_content {
+	margin: 0;
+	padding: 8px;
+	width: 624px;
+  border-top: 1px solid #BCBCAD;
+}
+
+#sidebar {
+  display: block !important;
+  margin: 0px;
+  padding: 8px 8px 0 8px;
+  border-top: 1px solid #BCBCAD;
+  float: right;
+  width: 186px;
+  height: 650px;
+  text-align: left;
+  background: #FFFFFF url(/images/vertical.gif) top left no-repeat;
+}
+
+#cancel {
+  float: right;
+  padding: 5px;
+}
+
+#cancel a {
+  font-size: 14px;
+  font-weight: 900;
+  color: #E9999A;
+  text-decoration: none;
+}
+
+#cancel a:hover {
+  text-decoration: underline;
+}
+
+#cancel img {
+  margin-right: 5px;
+}
+
+
+/*-------------------------------------------------
+HEADER
+-------------------------------------------------*/
+
+#logo {
+  float: left;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  width: 415px;
+  height: 47px;
+  background: url(/images/fluttervoice_60.gif) no-repeat;
+}
+
+#tagline {
+  clear: left;
+  float: left;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  width: 800px;
+}
+
+/*-------------------------------------------------
+NAVIGATION
+-------------------------------------------------*/
+
+#nav {
+  float: right;
+  margin-top: 45px;
+  margin-right: 8px;
+}
+
+#nav ul {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-align: center;
+	clear: left;
+	}
+
+#nav ul li {
+	display: block;
+	float: left;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+#nav ul li a {
+  color: #E5B405;
+	padding: 0px;
+	margin-left: 1.8em;
+	text-decoration: none;
+	display: block;
+	text-align: center;
+	font-weight: 300;
+	letter-spacing: 1px;
+	line-height: 2em;
+	font-size: 16px;      
+	voice-family: "\"}\"";   
+	voice-family: inherit;   
+	font-size:    16px;   
+	}
+
+html>#nav ul li a  {
+	font-size: 16px;   
+} 
+
+#nav ul li a:hover {
+	text-decoration: underline;
+}
+
+body#home_index li#nav-home a,
+body#home_examples li#nav-examples a,
+body#home_plans li#nav-signup a,
+body#signup_free li#nav-signup a,
+body#blog li#nav-blog a {
+  color: #E4E4D2;
+}
+
+/*-------------------------------------------------
+BUBBLE
+-------------------------------------------------*/
+
+#bubble {
+  clear: both;
+  padding-top: 17px;
+  width: 850px;
+  background: url(/images/home-bubble-top.gif) top left no-repeat;
+}
+
+#bubble-hilite {
+  clear: both;
+  padding-top: 17px;
+  width: 850px;
+  background: url(/images/home-bubble-top-hilite.gif) top left no-repeat;
+}
+
+#bubble-container {
+  margin: 0px;
+  width: 850px;
+  background: #ffffff url(/images/home-bubble-sides.gif) top left repeat-y;
+  text-align: left;
+  border-bottom: 1px solid #868685;
+}
+
+#bubble-content {
+  margin: 15px;
+  margin-top: 0px;
+  padding-top: 20px;
+}
+
+#bubble-bottom {
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 17px;
+  background: url(/images/home-bubble-gradient.gif) bottom left repeat-x;
+}
+
+#message {
+  float: right;
+  margin-right: 0px;
+  width: 600px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #838485;
+  background-color: #ffffff;
+}
+
+#sample {
+  clear: all;
+  margin-top: 40px;
+  width: 820px;
+  height: 178px;
+  background: url(/images/home-sample.gif) top left no-repeat;
+}
+
+/*-------------------------------------------------
+BUTTONS
+-------------------------------------------------*/
+
+.float-right {
+  float: right;
+}
+
+.web2000-1-xl {
+  display: block;
+  font-size: 36px; 
+  padding: 5px;
+  width: 160px;
+  color: #737373;
+  background-color: #FEF7C1;
+  text-decoration: none;
+  text-align: center; 
+}
+
+a:hover.web2000-1-xl {
+  background-color: #FAC505;
+}
+
+.web2000-2-s {
+  display: block;
+  font-size: 18px; 
+  width: 60px;
+  padding: 5px;
+  color: #737373;
+  background-color: #FEF7C1;
+  text-decoration: none;
+  text-align: center; 
+}
+
+a:hover.web2000-2-s {
+  background-color: #FAC505;
+}
+
+/*-------------------------------------------------
+FOOTER
+-------------------------------------------------*/
+
+#footer {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  clear: both;
+  background-color: #E4E4D2;
+  border-top: 1px dashed #737373;
+  border-bottom: 1px dashed #737373;
+  text-align: left;
+}
+
+#footer-content {
+	position: relative;
+	margin: 0 auto 0px auto;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 30px;
+	width: 750px;  /* bmh */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width: 748px;
+}
+
+html>#footer-content	{
+	width: 748px;
+}
+
+#footer h2 {
+  color: #737373;
+}
+
+/*-------------------------------------------------
+FAQ
+-------------------------------------------------*/
+
+#faq {
+	position: relative;
+	margin: 0px auto 30px auto;
+	text-align: left;
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 140%;
+	margin-top: 0;
+	font-family: georgia;
+	width: 750px;  /* bmh */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width: 748px;
+}
+
+html>#faq	{
+	width: 748px;
+}
+
+div.question {
+	float: left;
+	width: 300px;
+	text-align: right;
+}
+
+div.question h1 {
+	font-family: georgia;
+	font-size: 28px;
+	font-weight: normal;
+	text-align: right;
+	line-height: 120%;
+}
+
+div.answer {
+	float: right;
+	width: 400px;
+}
+
+#faq p {
+	margin-bottom: 15px;
+}
+
+/*-------------------------------------------------
+SIGNUP
+-------------------------------------------------*/
+
+ul#signup {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  margin-top: 60px;
+}
+
+ul#signup li {
+  margin-bottom: 40px;
+}
+
+legend {
+  padding: 8px;
+  background-color: #FEF7C1;
+  font-weight: 300;
+  color: #000000;
+}
+
+fieldset {
+  padding: 10px;
+  padding-bottom: 30px;
+  border: 0px;
+  /* border-bottom : 1px solid #E4E4D2; */
+  background: transparent url(/images/horizontal.gif) bottom left no-repeat;
+  width: 500px;
+}
+
+fieldset.review {
+  border-top : 1px solid #E9999A;
+  border-bottom : 1px solid #E9999A;
+  background-image: none;
+}
+
+fieldset p {
+  font-size: .8em;
+}
+
+#signup-info {
+  float: right;
+  width: 300px;
+  margin-top: 40px;
+  color: #FFFFFF;
+  font-weight: 300;
+}
+
+#signup dt {
+	float: left;
+	clear: left;
+	text-align: right;
+	margin: 5px 10px;
+	width: 100px;
+}
+
+#signup dd {
+	margin-bottom: 5px;
+}
+
+/*-------------------------------------------------
+PLANS
+-------------------------------------------------*/
+
+table#plans th {
+  padding: 8px;
+  background-color: #FEF7C1;
+  font-weight: 300;
+  color: #000;
+}
+
+table#plans td {
+  padding: 8px;
+  border-bottom: 1px solid #F8F6EA;
+}
+
+table#plans .price {
+  color: #E9999A;
+}
+
+
+/*-------------------------------------------------
+CHANGE ACCOUNT FORM
+-------------------------------------------------*/
+ul#change_account {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  margin-top: 60px;
+}
+
+ul#change_account li {
+  margin-bottom: 40px;
+}
+
+ul#change_account li dt {
+	float: left;
+	clear: left;
+	text-align: right;
+	margin: 5px 10px;
+	width: 100px;
+}
+
+ul#change_account li dd {
+	margin-bottom: 5px;
+}
+
+
+/*-------------------------------------------------
+ERRORS
+-------------------------------------------------*/
+
+.fieldWithErrors {
+  padding: 2px;
+}
+
+.fieldWithErrors input {
+  border: 2px solid #E9999A;
+}
+
+.formError
+{
+	color: #E9999A;
+}
+
+
+#errorExplanation {
+  width: 400px;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  color: #E9999A;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+}
+
+#errorExplanation p {
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+  margin: 0px;
+  padding: 0px;
+}
+
+#notice {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #FDD4ED;
+  border-top: 1px solid #FD7CCB;
+  border-bottom: 1px solid #FD7CCB;
+}
+
+#error {
+  margin-bottom: 20px;
+  padding: 10px;
+  color: #97180E;
+  font-size: 14px;
+  font-weight: 900;
+  background-color: #FDADDE;
+  border-top: 1px solid #FD7CCB;
+  border-bottom: 1px solid #FD7CCB;
+}
+
+
+/*-------------------------------------------------
+BLOG
+-------------------------------------------------*/
+
+.entry-footer {
+  font-size: 11px;
+}
+
+.post {
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  background: transparent url(/images/horizontal.gif) bottom left no-repeat;
+}

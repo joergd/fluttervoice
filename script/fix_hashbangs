@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+current_path = ARGV[0]
+new_hashbang = ARGV[1]
+f_names = %w(dispatch.cgi dispatch.rb dispatch.fcgi)
+f_names.each do |name|
+  puts `ls -al "#{current_path}/public/#{name}" `
+  File.open("#{current_path}/public/#{name}", "r+") do |f|
+    f_contents = f.read
+    f_contents.gsub!(/^#!.+$/, new_hashbang)
+    f.rewind
+    f.write(f_contents)
+  end
+end

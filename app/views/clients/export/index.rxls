@@ -1,0 +1,50 @@
+<table>
+  <tr>
+    <th>Client Name</th>
+    <th>Address1</th>
+    <th>Address2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Postal Code</th>
+    <th>Country</th>
+    <th>Web</th>
+    <th>Tel</th>
+    <th>Fax</th>
+    <th>Contacts</th>
+  </tr>
+  
+  <% @account.clients.each do |c| -%>
+
+    <tr>
+      <td><%=h c.name %></td>
+      <td><%=h c.address1 %></td>
+      <td><%=h c.address1 %></td>
+      <td><%=h c.city %></td>
+      <td><%=h c.state %></td>
+      <td><%=h c.postalcode %></td>
+      <td><%=h c.country %></td>
+      <td><%=h c.web %></td>
+      <td><%=h c.tel %></td>
+      <td><%=h c.fax %></td>
+      <td>
+        <table>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Tel</th>
+            <th>Mobile</th>
+          </tr>
+          <% c.contacts.each do |p| -%>
+            <td><%=h p.firstname %></td>
+            <td><%=h p.lastname %></td>
+            <td><%=h p.email %></td>
+            <td><%=h p.tel %></td>
+            <td><%=h p.mobile %></td>
+          <% end -%>
+        </table>
+      </td>
+    </tr>
+    
+  <% end -%>
+</table>

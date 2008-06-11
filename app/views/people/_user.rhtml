@@ -1,0 +1,13 @@
+<tr>
+  <td class="action">
+    <% if primary_user? %>
+      <%= link_to "Edit", { :controller => "people", :action => "edit", :id => user.id }, :title => 'Edit login details and contact informmation' %>
+      <% if user.id != @account.primary_person_id %>
+        &nbsp;|&nbsp;
+        <%= link_to "Delete", { :controller => "people", :action => "delete", :id => user.id }, :title => 'Delete this user', :confirm => "Are you sure you want to delete this person forever?" %>
+      <% end %>
+    <% end %>
+  </td>
+  <td class="name"><%=h user.firstname %> <%=h user.lastname %></td>
+  <td class="email"><%= mail_to user.email, truncate(user.email, 30), :title => 'Send email' %></td>
+</tr>

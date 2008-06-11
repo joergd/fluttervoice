@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+Immediate_term:
+  id: 1
+  description: Immediate
+  days: 0
+fifteen_days_term:
+  id: 2
+  description: 15 days
+  days: 15
+thirty_days_term:
+  id: 3
+  description: 30 days
+  days: 30

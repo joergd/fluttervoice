@@ -1,0 +1,25 @@
+<fieldset>
+  <dl class="client_form">
+    <%= error_message_on :client, :name, "Your client name " %>
+    <dt><strong><label for="client_name">Client name *</label></strong></dt><dd><%= text_field :client, :name, :maxlength => 100, :size => 30  %></dd>
+    <dt><label for="client_address1">Address1</label></dt><dd><%= text_field :client, :address1, :maxlength => 100, :size => 30  %></dd>
+    <dt><label for="client_address2">Address2</label></dt><dd><%= text_field :client, :address2, :maxlength => 100, :size => 30  %></dd>
+    <dt><label for="client_city">City</label></dt><dd><%= text_field :client, :city, :maxlength => 100, :size => 30  %></dd>
+    <dt><label for="client_state">State</label></dt><dd><%= text_field :client, :state, :maxlength => 100, :size => 30  %></dd>
+    <dt><label for="client_postalcode">Postalcode</label></dt><dd><%= text_field :client, :postalcode, :maxlength => 15, :size => 10  %></dd>
+    <dt><label for="client_country">Country</label></dt><dd><%= text_field :client, :country, :maxlength => 100, :size => 30 %></dd>
+  </dl>
+</fieldset>
+<fieldset>  
+  <dl class="client_form">
+    <%= error_message_on :client, :web, "Your web address " %>
+    <dt><label for="client_web">Web</label></dt><dd>http://<%= text_field :client, :web, :maxlength => 100, :size => 25  %></dd>
+    <dt><label for="client_office">Office Tel</label></dt><dd><%= text_field :client, :tel, :maxlength => 30, :size => 30  %></dd>
+    <dt><label for="client_fax">Fax</label></dt><dd><%= text_field :client, :fax, :maxlength => 30, :size => 30  %></dd>
+  </dl>
+</fieldset>
+<fieldset>
+  <dl class="client_form">
+    <dt><label for="client_vat_registration">VAT Registration</label></dt><dd><%= text_field :client, :vat_registration, :maxlength => 50, :size => 30  %></dd>
+  </dl>
+</fieldset>

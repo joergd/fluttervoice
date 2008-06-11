@@ -1,0 +1,38 @@
+<table id="invoice_calcs" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <th class="c1"><strong>Subtotal</strong></th>
+    <td class="c2"><strong><%=h invoice.currency_symbol %><%=h fmt_currency(invoice.subtotal) %></strong></td>
+  </tr>
+  <% if invoice.use_tax? %>
+    <tr>
+      <th class="c1"><%=h invoice.tax_system %> @ <%= fmt_percentage(invoice.tax_percentage) %></th>
+      <td class="c2"><%=h invoice.currency_symbol %><%=h fmt_currency(invoice.tax) %></td>
+    </tr>
+  <% end %>
+  <% if invoice.shipping > 0 %>
+    <tr>
+      <th class="c1">Shipping</th>
+      <td class="c2"><%=h invoice.currency_symbol %><%=h fmt_currency(invoice.shipping) %></td>
+    </tr>
+  <% end %>
+  <% if invoice.apply_late_fee? %>
+    <tr>
+      <th class="c1">Late Fee @ <%= fmt_percentage(invoice.late_fee_percentage) %></th>
+      <td class="c2"><%=h invoice.currency_symbol %><%=h fmt_currency(invoice.late_fee) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <th class="c1"><strong>TOTAL</strong></th>
+    <td class="c2"><strong><%=h invoice.currency_symbol %><%=h fmt_currency(invoice.total + invoice.late_fee) %></strong></td>
+  </tr>
+  <% if invoice.paid > 0 -%>
+    <tr>
+      <th class="c1">Payments</th>
+      <td class="c2">(<%=h invoice.currency_symbol %><%=h fmt_currency(invoice.paid) %>)</td>
+    </tr>
+  <% end -%>
+  <tr class="hilite">
+    <th class="c1"><strong>Amount Due</strong></th>
+    <td class="c2 total"><strong><%=h invoice.currency_symbol %><%=h fmt_currency(invoice.amount_due) %></strong></td>
+  </tr>
+</table>

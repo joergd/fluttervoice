@@ -1,0 +1,99 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+diageo_invoice:
+  id: 1
+  account_id: 1
+  client_id: 1
+  number: 0001
+  use_tax: 1
+  tax_percentage: 14.00
+  shipping: 20.00
+  late_fee_percentage: 5.00
+  currency_id: ZAR
+  date: <%= Date.today - 1%>
+  due_date: <%= Date.today + 1 %>
+  status_id: 1
+  subtotal: 16500
+  timezone: Pretoria
+  
+dbsa_invoice:
+  id: 2
+  account_id: 2
+  client_id: 3
+  number: 0002
+  use_tax: 1
+  tax_percentage: 14.00
+  shipping: 30.00
+  late_fee_percentage: 3.00
+  currency_id: ZAR
+  date: <%= Date.today - 1%>
+  due_date: <%= Date.today + 1 %>
+  status_id: 1
+  subtotal: 1000
+  timezone: Pretoria
+
+open_invoice:
+  id: 3
+  account_id: 1
+  client_id: 1
+  number: 0003
+  use_tax: 1
+  tax_percentage: 14.00
+  shipping: 30.00
+  late_fee_percentage: 3.00
+  currency_id: ZAR
+  date: <%= Date.today - 1 %>
+  due_date: <%= Date.today + 1 %>
+  status_id: 1
+  subtotal: 1000
+  timezone: Pretoria
+
+closed_invoice:
+  id: 4
+  account_id: 1
+  client_id: 1
+  number: 0004
+  use_tax: 0
+  tax_percentage: 14.00
+  shipping: 0.00
+  late_fee_percentage: 0.00
+  currency_id: ZAR
+  date: <%= Date.today - 1 %>
+  due_date: <%= Date.today + 1 %>
+  status_id: 2
+  subtotal: 1000
+  paid: 1000
+  timezone: Pretoria
+
+pastdue_invoice:
+  id: 54
+  account_id: 1
+  client_id: 1
+  number: 0005
+  use_tax: 0
+  tax_percentage: 14.00
+  shipping: 0.00
+  late_fee_percentage: 0.00
+  currency_id: ZAR
+  date: <%= Date.today - 2 %>
+  due_date: <%= Date.today - 1 %>
+  status_id: 1
+  subtotal: 1000
+  paid: 0
+  timezone: Pretoria
+
+draft_invoice:
+  id: 55
+  account_id: 1
+  client_id: 1
+  number: 0006
+  use_tax: 0
+  tax_percentage: 14.00
+  shipping: 0.00
+  late_fee_percentage: 0.00
+  currency_id: ZAR
+  date: <%= Date.today - 2 %>
+  due_date: <%= Date.today - 1 %>
+  status_id: 3
+  subtotal: 1000
+  paid: 0
+  timezone: Pretoria

@@ -1,0 +1,23 @@
+<div id="sidebar">
+  <%= render :partial =>  "action_menu" %>
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <h2>Clients</h2>
+  
+  <%= render :partial => "client", :collection => @account.clients %>
+  
+  <% if @account.clients.size > 0 -%>
+    <div class="export">
+      Export your clients to <%= link_to "xml", { :format => "xml" }, :title => "Export your clients to xml" %>, or to <%= link_to "Excel", { :format => "xls" }, :title => "Export your clients into Excel" %>.
+    </div>
+  <% else -%>
+    <div class="firsttime">
+      Go ahead, create a client - it's easy. Once you have created some clients, you will see their information and all the contacts for that client listed below. 
+    </div>
+  <% end -%>
+</div>

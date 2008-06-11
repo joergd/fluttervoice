@@ -1,0 +1,18 @@
+<div id="sidebar">
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <%= render_cancel_button %>
+
+  <h2>Cancel My Account</h2>
+
+  <% form_tag :action => 'destroy', :id => @account.id do -%>
+    <h4><%= check_box_tag :i_understand, "1", false, :onclick => "$(cancel_account_button).disabled = !this.checked;" %> I understand that all my data will be deleted <strong>immediately</strong>.</h4>
+    <p><%= submit_tag 'Cancel Account', :id => "cancel_account_button", :disabled => true %></p>
+  <% end -%>    
+
+</div>

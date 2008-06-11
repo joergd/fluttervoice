@@ -1,0 +1,19 @@
+<div id="sidebar"></div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <%= render_cancel_button %>
+
+  <h2>Client limit reached</h2>
+  
+  <div class="limits">
+    <p>Sorry, you have reached the limits of your current plan. You are using <strong><%= @app_config["app_name"] %> <%= @account.plan.name %></strong>, which allows you to create up to <strong><%= @account.plan.clients %> clients</strong>.</p>
+    <p>If you want to create more clients, you will need to <strong>upgrade</strong> to a different plan.</p>
+  </div>
+  
+  <%= render :partial => 'account/plans' %>
+
+</div>

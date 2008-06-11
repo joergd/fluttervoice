@@ -1,0 +1,8 @@
+<tr onclick="document.location = '/invoices/show/<%= invoice.id %>';">
+  <td class="state"><span class="<%= invoice.state.downcase %>"><%=h invoice.state %></span></td>
+  <td class="date"><span class="<%= invoice.state.downcase %>"><%=h fmt_date(invoice.date) %></span></td>
+  <td class="number"><span class="<%= invoice.state.downcase %>"><%=h invoice.number %></span></td>
+  <td class="client"><span class="<%= invoice.state.downcase %>"><%=h invoice.client.name %></span></td>
+  <td class="paid"><span class="<%= invoice.state.downcase %>"><%=h invoice.currency.symbol if invoice.currency %><%=h fmt_currency(invoice.paid) %></span></td>
+  <td class="total"><span class="<%= invoice.state.downcase %>"><%=h invoice.currency.symbol if invoice.currency %><%=h fmt_currency(invoice.total) %></span></td>
+</tr>

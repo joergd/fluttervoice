@@ -1,0 +1,65 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+free_plan:
+  id: 1
+  name: Free
+  invoices: 4
+  users: 1
+  clients: 2
+  allow_custom_css: 0
+  print_css: 0
+  unbranded_emails: 0
+  cost_for_za: 0
+  cost_for_com: 0
+  cost_for_uk: 0
+  display_cost_for_za: Free
+  display_cost_for_com: Free
+  display_cost_for_uk: Free
+  seq: 1
+light_plan:
+  id: 2
+  name: Lite
+  invoices: 20
+  users: 3
+  clients: 10
+  allow_custom_css: 1
+  print_css: 1
+  unbranded_emails: 1
+  cost_for_za: 45
+  cost_for_com: 6
+  cost_for_uk: 3
+  display_cost_for_za: R45
+  display_cost_for_com: $6
+  display_cost_for_uk: £3
+  seq: 2
+heavy_plan:
+  id: 3
+  name: Hardcore
+  invoices: 100
+  users: 10
+  clients: 0
+  allow_custom_css: 1
+  print_css: 1
+  unbranded_emails: 1
+  cost_for_za: 100
+  cost_for_com: 12
+  cost_for_uk: 6
+  display_cost_for_za: R100
+  display_cost_for_com: $12
+  display_cost_for_uk: £6
+  seq: 3
+ultimate_plan:
+  id: 4
+  name: Ultimate
+  invoices: 400
+  users: 0
+  clients: 0
+  allow_custom_css: 1
+  print_css: 1
+  unbranded_emails: 1
+  cost_for_za: 250
+  cost_for_com: 24
+  cost_for_uk: 12
+  display_cost_for_za: R250
+  display_cost_for_com: $24
+  display_cost_for_uk: £12
+  seq: 4

@@ -1,0 +1,18 @@
+<table id="invoice_header_table" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td class="logo">
+      <% if !logo.nil? %>
+        <%= image_tag "/account/logo/#{logo.id}.gif", :size => "#{logo.width}x#{logo.height}", :alt => "#{h account.name} logo", :title => "#{h account.name} Your company logo" %>
+      <% end %>
+    </td>
+    <td class="address">
+      <div class="vcard">
+        <strong class="fn org"><%=h @account.name %></strong>
+        <%= render(:partial => '/widgets/address', :locals => { :address => @account.address, :tel => @account.tel, :fax => @account.fax, :web => @account.web }) %>
+      </div>
+      <% if !@account.vat_registration.blank? -%>
+        <p class="account_vat_registration">VAT Registration: <%=h @account.vat_registration %></p>
+      <% end -%>
+    </td>
+  </tr>
+</table>

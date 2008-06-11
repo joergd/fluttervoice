@@ -1,0 +1,11 @@
+#footer, #preview, #sidebar, #what_is_this, #invoice_state_indicator, #header, #filter_table, #payments_panel, .export {
+  display: none !important;
+}
+
+#wrapper {
+  width: 635px;
+}
+
+#invoice_header_for_printing {
+  display: block;
+}

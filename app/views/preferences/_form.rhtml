@@ -1,0 +1,19 @@
+<h4>Payment terms</h4>
+<fieldset>
+  <p>These are your default payment terms. These settings can be changed on each individual invoice.</p>
+  <dl class="preferences_form">
+    <dt><label for="preference_currency_id">Currency</label></dt><dd><%= collection_select :preference, :currency_id, @currencies, :code, :name, {}, :style => "width:205px;"  %></dd>
+    <dt><label for="preference_terms">Terms</label></dt><dd><%= collection_select :preference, :terms, @terms, :description, :description %></dd>
+    <dt><label for="preference_tax_system">Tax system</label></dt><dd><%= collection_select :preference, :tax_system, @taxes, :name, :name %></dd>
+    <%= error_message_on :preference, :tax_percentage, "The tax percentage " %>
+    <dt><label for="preference_tax_percentage">Tax percentage</label></dt><dd><%= text_field :preference, :tax_percentage, :maxlength => 5, :size => 5 %>%</dd>
+  </dl>
+</fieldset>
+
+<h4>Timezone</h4>
+<fieldset>
+  <p>What timezone are you in?</p>
+  <dl class="preferences_form">
+    <dt><label for="preference_timezone">Timezone</label></dt><dd><%= time_zone_select :preference, :timezone, [], {}, :style => "width:205px;"  %></dd>
+  </dl>
+</fieldset>

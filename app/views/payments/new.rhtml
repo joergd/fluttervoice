@@ -1,0 +1,22 @@
+<div id="sidebar">
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <%= render_cancel_button %>
+
+  <h2>Receive payment from <%=h @invoice.client.name %></h2>
+    
+  <h3>For invoice <%=h @invoice.number %></h3>
+  
+  <% form_tag :action => 'new' do -%>
+    <%= render :partial => 'form' %>
+    <div class="submit_box">
+      <%= submit_tag "Receive payment" %>
+    </div>
+  <% end -%>
+
+</div>

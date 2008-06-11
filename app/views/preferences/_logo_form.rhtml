@@ -1,0 +1,12 @@
+<% form_tag({ :action=>'upload_logo' }, :multipart => true) do %>
+  <h4>Your company logo</h4>
+  <p>This logo appears on your HTML formatted emails and invoices. <strong>It should be no wider than 200px, and must be a gif.</strong></p>
+  <% if !@logo.nil? %>
+    <%= image_tag "/account/logo/#{@logo.id}.gif", :size => "#{@logo.width}x#{@logo.height}", :alt => "Your company logo", :title => "Your company logo" %>
+    <%= link_to "Delete logo", { :action => 'delete_logo' }, :title => "Remove your logo", :post => true, :confirm => "Are you sure you want to delete your logo?" %>
+  <% end %>
+  <div class="horizontal">
+    <%= file_field_tag :image_file %>
+    <%= submit_tag "Upload logo" %>
+  </div>
+<% end -%>

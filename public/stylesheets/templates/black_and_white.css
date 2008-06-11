@@ -1,0 +1,31 @@
+/*-------------------------------------------------
+INVOICE
+-------------------------------------------------*/
+
+#content_wrapper {
+  color: #000;
+  border-top: 3px solid #000;
+}
+
+#content {
+  border-top: 0;
+}
+
+table.invoice_table thead {
+  background-color: #000;
+  color: #FFF;
+  font-weight: bold;
+}
+
+table#invoice_calcs tr.hilite {
+  color: #FFF;
+  background-color: #000;
+}
+
+#invoice_state_indicator {
+  background-color: #000;
+  color: #FFF;
+  border: 2px solid #FFF;
+}
+
+

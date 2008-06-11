@@ -1,0 +1,4 @@
+<% @invoice.client.contacts.each do |contact| %>
+  <%= check_box_tag "invoiceto[#{contact.id}][send]", 1, true, :id => "invoiceto_#{contact.id}_send" %><%=h contact.firstname %> <%=h contact.lastname %>&nbsp;
+<% end %>
+<br/><%= check_box_tag "invoiceto[#{current_user.id}][send]", 1, true, :id => "invoiceto_#{current_user.id}_send" %>Send me a copy as well

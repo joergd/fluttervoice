@@ -1,0 +1,23 @@
+<div id="sidebar"></div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <%= render_cancel_button %>
+  
+  <h2>Editing person</h2>
+  
+  <% if !@person.errors.empty? %>
+    <div class="formError"><span>Something went wrong with saving your information. Please looks at the highlighted messages below to see if you can correct the problems.</span></div>
+  <% end %>
+  
+  <% form_tag :action => 'edit' do -%>
+    <%= render :partial =>  'form' %>
+    <div class="submit_box">
+      <%= submit_tag 'Save person' %>
+    </div>
+  <% end -%>
+
+</div>

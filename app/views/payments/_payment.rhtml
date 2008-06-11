@@ -1,0 +1,7 @@
+<tr>
+  <td class="actions"><%= link_to "Delete", { :controller => "payments", :action => "delete", :id => payment.id }, :title => 'Delete this payment from the invoices', :confirm => "Are you sure you want to delete this payment forever?" %></td>
+  <td class="date"><%=h fmt_date(payment.date) %></td>
+  <td class="method"><%=h payment.means %></td>
+  <td class="reference"><%=h payment.reference %></td>
+  <td class="amount"><%=h @invoice.currency_symbol %><%=h fmt_currency(payment.amount) %></td>
+</tr>

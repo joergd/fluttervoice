@@ -1,0 +1,22 @@
+<ul id="change_account">
+  <li>
+    <% if !flash[:cc_error].blank? -%>
+      <div class="formError"><span><%= flash[:cc_error] %></span></div>
+    <% end -%>
+    <% if !@account.cc_last_4_digits.blank? && !@account.vp_cross_reference.blank? -%>
+      <%= check_box_tag :cc_use_cross_reference, "1", true, :onclick => "if (this.checked) { Effect.Fade('cc_form') } else { Effect.Appear('cc_form') };" %> Use my <%= @account.cc_type %> card with credit card number xxxx-xxxx-xxxx-<%= @account.cc_last_4_digits %>.
+    <% end -%>
+    <div id="cc_form" style="display: <% if @account.cc_last_4_digits.blank? %>block<% else %>none<% end %>;">
+      <fieldset>
+        <legend>Your credit card details</legend>
+        <%= render :partial => "signup/credit_card_form" %>
+      </fieldset>
+    </div>
+  </li>
+  <li>
+    <fieldset>
+      <legend>Please review and accept</legend>
+      <%= render :partial => "review" %>
+    </fieldset>
+  </li>
+</ul>

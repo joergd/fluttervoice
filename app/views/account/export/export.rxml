@@ -1,0 +1,62 @@
+xml.instruct!
+xml.account("xmlns:xlink" => "http://www.w3.org/1999/xlink", "xmlns" => "http://www.#{@app_config['domain']}/api") do
+  xml.clients do
+    for c in @clients
+      xml.client("xlink:href" => url_for({ :controller => "clients", :action => "show", :id => c.id, :only_path => false }), "id" => "#{c.id}") do
+        xml.name(c.name)
+        xml.address1(c.address1)
+        xml.address2(c.address2)
+        xml.city(c.city)
+        xml.state(c.state)
+        xml.postalcode(c.postalcode)
+        xml.country(c.country)
+        xml.web(c.web)
+        xml.tel(c.tel)
+        xml.fax(c.fax)
+        xml.vat_registration(c.vat_registration)
+        xml.contacts do
+          for p in c.contacts
+            xml.contact("xlink:href" => url_for({ :controller => "people", :action => "show", :id => p.id, :only_path => false }), "id" => "#{p.id}") do
+              xml.firstname(p.firstname)
+              xml.lastname(p.lastname)
+              xml.email(p.email)
+              xml.tel(p.tel)
+              xml.mobile(p.mobile)
+            end
+          end
+        end
+      end
+    end
+  end
+  xml.invoices do
+    for i in @invoices
+      xml.invoice("xlink:href" => url_for({ :controller => "invoices", :action => "show", :id => i.id, :only_path => false }), "id" => "#{i.id}") do
+        xml.client(i.client.name, "xlink:href" => url_for({ :controller => "clients", :action => "show", :id => i.client.id, :only_path => false }), "id" => "#{i.client.id}")
+        xml.number(i.number)
+        xml.state(i.state.downcase)
+        xml.date(i.date)
+        xml.due_date(i.due_date)
+        xml.po_number(i.po_number)
+        xml.terms(i.terms)
+        xml.currency(i.currency_id)
+        xml.subtotal(i.subtotal)
+        xml.tax(i.tax)
+        xml.shipping(i.shipping)
+        xml.late_fee(i.late_fee)
+        xml.total(i.total)
+        xml.paid(i.paid)
+        xml.amount_due(i.amount_due)
+        xml.lines do
+          i.invoice_lines.each do |il|
+            xml.line do
+              xml.type(il.invoice_line_type.name.downcase)
+              xml.type(il.quantity)
+              xml.type(il.description)
+              xml.type(il.price)
+            end
+          end
+        end
+      end
+    end
+  end
+end

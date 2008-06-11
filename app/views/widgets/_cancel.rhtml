@@ -1,0 +1,5 @@
+<% if !session[:return_to].nil? && !session[:return_to].empty? %>
+  <div id="cancel">
+    <%= image_tag "star.gif", :size => "13x13", :title => "Cancel this action and go back", :alt => "" %><%= link_to "Cancel and go back", session[:return_to], :title => "Cancel this action and go back" %>
+  </div>
+<% end %>

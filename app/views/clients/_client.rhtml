@@ -1,0 +1,19 @@
+<table id="clients_table" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td class="company">
+      <div class="vcard">
+        <h4 class="fn org"><% if !client.web.blank? %><%= link_to client.name, "http://#{client.web}", :class => "url", :title => "Go to website", :popup => true %><% else %><%=h client.name %><% end %></h4>
+        <%= render(:partial => 'widgets/address', :locals => { :address => client.address, :tel => client.tel, :fax => client.fax }) %>
+      </div>
+      <%= link_to "Edit", { :action => 'edit', :id => client.id }, :title => 'Edit client contact information' %>
+    </td>
+    <td class="contacts">
+      <ul id="client_contacts">
+        <%= render :partial => "contact", :collection => client.contacts %>
+      </ul>
+    </td>
+    <td class="actions">
+      <div class="add"><%= link_to "Add person", { :controller => "people", :action => "new", :id => client.id }, :title => 'Add a new contact to the client' %></div>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+zar_currency:
+  name: South Africa Rand
+  code: ZAR
+  symbol: R
+us_currency:
+  name: U.S. Dollar
+  code: USD
+  symbol: $

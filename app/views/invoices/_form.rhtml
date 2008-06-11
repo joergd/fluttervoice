@@ -1,0 +1,119 @@
+<fieldset>
+  <dl id="inv_preamble_form">
+    <dt><strong><label for="invoice_date">Date</label></strong></dt><dd><%= date_select :invoice, :date, :order => [:day, :month, :year] %></dd>
+    <%= error_message_on :invoice, :number, "The invoice number " %>
+    <dt><strong><label for="invoice_number">Invoice number *</label></strong></dt>
+    <dd>
+      <%= text_field :invoice, :number, :maxlength => 10, :size => 30  %>
+      <% if @invoice.new_record? && @last_invoice_number_used -%>
+        (last used: <%= @last_invoice_number_used %>)
+      <% end -%>
+    </dd>
+    <%= error_message_on :invoice, :po_number, "Purchase order number " %>
+    <dt><label for="invoice_po_number">PO/ref number</label></dt><dd><%= text_field :invoice, :po_number, :maxlength => 10, :size => 30  %></dd>
+  </dl>
+</fieldset>
+
+<fieldset style="text-align: right;">
+  <span id="currency_symbol" style="display: none;"><%=h @invoice.currency_symbol %></span>
+  <div class="invoicecurrency">
+    Invoice in <span id="currency_in_use"><%=h @invoice.currency_id %></span>
+    <%= link_to_function "Change it",  "new Effect.Appear('currencyPanel')" %>
+    <div id="currencyPanel" style="display:none;">
+      <%= collection_select :invoice, :currency_id, @currencies, :code, :name, {}, :style => "width:205px;"  %>
+    </div>
+  </div>
+</fieldset>
+
+
+<!-- ***** invoice lines added through javascript ***** -->
+
+  <%= error_message_on :invoice, :invoice_lines, "A field " %>
+  <%= render :partial => "invoice_line_header" %>
+  <div id="lineitemrows"></div>
+
+<!-- ***** invoice lines added through javascript ***** -->
+
+
+<div class="add">
+  <%= link_to_function "Add new line", "populateLine(null, 1, 0.00, '')", :title => "Add new invoice line" %>
+</div>
+
+<table id="calcs_table_form" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td>
+      <%= error_message_on :invoice, :tax_percentage, "The tax percentage " %>
+      <%= error_message_on :invoice, :shipping, "Your shipping amount " %>
+      <%= error_message_on :invoice, :use_tax, "The use tax checkbox " %>
+      <table id="invoice_calcs" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td></td>
+          <th class="c1"><strong>Subtotal</strong></th>
+          <td class="c2"><strong><span id="subtotal">&nbsp;</span></strong></td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to_function "Change it", "Element.toggle('new_tax', 'default_tax')" %>&nbsp;<span id="default_tax"><%=h @invoice.tax_percentage %>%</span>
+            <span id="new_tax" style="display: none;"><%= text_field :invoice, :tax_percentage, :maxlength => 5, :size => 5, :onkeypress => "return onlynumbers(event);" %>%</span>
+          </td>
+          <th class="c1"><%=h @invoice.tax_system %>&nbsp;<%= check_box :invoice, :use_tax %></th>
+          <td class="c2"><span id="tax">&nbsp;</span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <th class="c1">Shipping</th>
+          <td class="c2"><%= text_field :invoice, :shipping, :maxlength => 7, :size => 7, :style => "text-align: right;", :onkeypress => "return onlynumbers(event);" %></td>
+        </tr>
+        <tr class="hilite">
+          <td></td>
+          <th class="c1">TOTAL</th>
+          <td class="c2"><span id="total" style="white-space: nowrap;"></span></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<%= error_message_on :invoice, :late_fee_percentage, "The late fee percentage amount " %>
+<fieldset>
+  <dl id="inv_terms_form">
+    <dt><strong>Payment is due</strong></dt>
+    <dd>
+      <%= select(:invoice, :terms, @terms.collect { |t| [t.description, t.description] } << ["Set specific date...", ""] ) %>
+      <span id="specific_date" style="display:none;"><%= date_select :invoice, :due_date, :order => [:day, :month, :year] %></span>
+    </dd>
+    <dt><strong>Late fee</strong></dt>
+    <dd>
+      <span id="default_late_fee">
+        <% if @invoice.late_fee_percentage || 0 > 0 -%>
+          <%= @invoice.late_fee_percentage %>% per month
+        <% else -%>
+          No late fee
+        <% end -%>
+        &nbsp;<%= link_to_function "Change it", "Element.toggle('default_late_fee', 'new_late_fee')" -%>
+      </span>
+      <span id="new_late_fee" style="display: none;">
+        <%= text_field :invoice, :late_fee_percentage, :maxlength => 5, :size => 3, :onkeypress => "return onlynumbers(event);"  %>% per month
+      </span>
+    </dd>
+  </dl>
+</fieldset>
+
+<% if @invoice.notes.blank? -%>
+	<%= link_to_function "Add invoice notes", "Effect.Appear('inv_notes_panel')" -%>
+	<fieldset id="inv_notes_panel" style="display: none;">
+		<div class="instructions">These could be anything you like, from payment details, such as your banking details, or notes like salesperson information. Any notes you enter here will appear at the bottom of your invoice.</div>
+	  <dl id="inv_notes_form">
+	    <dt><label for="invoice_notes">Invoice notes</label></dt><dd><%= text_area :invoice, :notes, :cols => 45, :rows => 5 %></dd>
+	  </dl>
+	</fieldset>
+<% else -%>
+	<fieldset>
+	  <dl id="inv_notes_form">
+	    <dt><label for="invoice_notes">Invoice notes</label></dt><dd><%= text_area :invoice, :notes, :cols => 45, :rows => 5 %></dd>
+	  </dl>
+	</fieldset>
+<% end -%>
+
+<%= render(:partial => 'invoice_scripts') %>
+<%= render(:partial => "init_form") %>

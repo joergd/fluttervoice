@@ -1,0 +1,2 @@
+class NewCreditCardTransaction < CreditCardTransaction
+end

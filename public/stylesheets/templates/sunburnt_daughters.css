@@ -1,0 +1,31 @@
+/*-------------------------------------------------
+INVOICE
+-------------------------------------------------*/
+
+body {
+  background-color: #FDF5EA;
+}
+
+#sidebar {
+  background-color: #FDFAF6;
+}
+
+table.invoice_table thead {
+  background-color: #E9999A;
+  color: #FFF;
+  font-weight: bold;
+}
+
+table#invoice_calcs tr.hilite {
+  color: #FFF;
+  background-color: #E9999A;
+}
+
+#invoice_state_indicator {
+  background-color: #E9999A;
+  color: #FFF;
+}
+
+#invoice .overdue {
+  border: 2px solid #FFF;
+}

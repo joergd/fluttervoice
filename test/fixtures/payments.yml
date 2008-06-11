@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first_diageo_payment:
+  id: 1
+  account_id: 1
+  invoice_id : 1
+  amount: 1000
+  date: 2005-09-26
+first_dbsa_payment:
+  id: 2
+  account_id: 2
+  invoice_id: 2
+  amount: 500
+  date: 2005-09-26

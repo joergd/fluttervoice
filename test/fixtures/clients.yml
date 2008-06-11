@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+pathfinder:
+  id: 1
+  name: Pathfinder
+  account_id: 1
+edh:
+  id: 2
+  name: EDH
+  account_id: 1
+dbsa:
+  id: 3
+  name: The Development Bank of Southern Africa
+  account_id: 2

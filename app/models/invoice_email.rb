@@ -1,0 +1,2 @@
+class InvoiceEmail < Email
+end

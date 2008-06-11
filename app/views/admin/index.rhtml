@@ -1,0 +1,16 @@
+<div id="sidebar">
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+	<strong>Paying Accounts: </strong><%= Account.count("deleted = 0 and plan_id > 1") %><br/>
+	<strong>Accounts: </strong><%= Account.count("deleted = 0") %><br/>
+	<strong>Clients: </strong><%= Client.count %><br/>
+	<strong>Contacts: </strong><%= Contact.count %><br/>
+	<strong>Invoices: </strong><%= Invoice.count %><br/>
+	
+	
+</div>

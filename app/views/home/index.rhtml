@@ -1,0 +1,21 @@
+<div id="bubble">
+  <div id="bubble-container">
+    <div id="bubble-content">
+      <div id="message">Create elegantly <strong>designed invoices</strong> and send them to anybody with an email address - online. Perfect for <strong>small businesses and freelancers</strong>, such as designers, filmmakers, IT professionals, photographers, stylists, architects, writers  ... ushers?</div>
+      <%= link_to "sign up", { :controller => "signup", :action => "free" }, :title => "Sign up for a free account to start sending invoices", :class => "web2000-1-xl" %>
+      <div id="sample"></div>
+      <p>Login if you have an account<br/>
+        <small><%= link_to "I forgot my password", { :controller => "login", :action => "forgot_password" }, :title =>  "Please log me back in" %></small>
+      </p>
+      <% form_tag({ :controller => "login", :action => '' } , :id => "frm") do -%>
+        <div class="float-right"><%= submit_link "login", "frm", :class => "web2000-2-s", :title => "Log me in so I can invoice" %></div>
+        <%= text_field_tag :subdomain, "your Fluttervoice ID", :size => 20, :maxlength => 100, :title => "your Fluttervoice ID (your chosen web name)", :class => "fancy", :onfocus => "clickclear(this, 'your Fluttervoice ID');", :style => "width: 200px;" %>&nbsp;&nbsp;
+        <%= text_field :user, :email, :size => 35, :maxlength => 100, :value => "your email address", :title => "your email address", :class => "fancy", :onfocus => "clickclear(this, 'your email address');", :style => "width: 320px;" %>&nbsp;&nbsp;
+        <%= password_field :user, :password, :size => 15, :maxlength => 20, :value => "213das3124", :title => "your password", :class => "fancy", :onfocus => "clickclear(this, '213das3124');", :style => "width: 150px;", :onkeypress => "return submitenter(this, event);" %>
+      <% end -%>
+    </div> <!-- bubble-content -->
+    <div id="bubble-bottom"></div>
+  </div> <!-- bubble-container -->
+</div> <!-- bubble -->
+<%= render :partial => 'faq' %>
+<%= image_tag "fullpage-sample-#{@app_config['site']}.jpg", :size => "850x960", :alt => "Sample image", :title => "You can also record payments against your invoices." %>

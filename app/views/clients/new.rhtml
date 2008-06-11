@@ -1,0 +1,21 @@
+<div id="sidebar">
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <%= render_cancel_button %>
+  
+  <h2>Enter contact information for new client</h2>
+  <% form_tag :action => 'new' do -%>
+    <%= render :partial =>  'client_form' %>
+    <h3>You must enter at least one contact for this client</h3>
+    <%= render :partial =>  'contact_form' %>
+    <div class="submit_box">
+      <%= submit_tag "Save client information" %>
+    </div>
+  <% end -%>
+
+</div>

@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+woodstock_preference:
+  id: 1
+  account_id: 1
+  tax_system: VAT
+  currency_id: ZAR
+  timezone: Pretoria
+  logo_image_id: 1
+  terms: 30 days
+  tax_percentage: 14
+painting_preference:
+  id: 2
+  account_id: 2
+  tax_system: VAT
+  currency_id: ZAR
+  timezone: Pretoria

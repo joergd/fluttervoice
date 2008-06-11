@@ -1,0 +1,6 @@
+<%= @message %>
+
+-----------------------------------------------------------------
+<%= render :partial => "invoice_mailer/summary_link" %>
+-----------------------------------------------------------------
+<% if @account.plan.free? %><%= render :partial => "invoice_mailer/fluttervoice_link" %><% end -%>

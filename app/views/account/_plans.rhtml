@@ -1,0 +1,81 @@
+<table id="plans" class="ruler" cellpadding="0" cellspacing="0" border="0">
+  <thead>
+    <tr>
+      <th class="description">&nbsp;</th>
+      <% @plans.each do |plan| -%>
+        <th class="<%=h plan.name.downcase %>"><%=h plan.name %><br/><span class="cost"><%= plan.display_cost(@app_config['site']) %></span><br/>
+          <% if @account.plan.seq > plan.seq %><%= link_to "Downgrade", :controller => 'change_plan', :action => "jump", :id => plan.id %><% elsif @account.plan.seq < plan.seq %><%= link_to "Upgrade", :controller => 'change_plan', :action => "jump", :id => plan.id %><% end %>
+        </th>
+      <% end -%>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="description">Invoices you can send during each monthly interval</td>
+      <% @plans.each do |plan| -%>
+        <td class="<%=h plan.name.downcase %>"><% if plan.invoices == 0 %>Unlimited<% else %><%=h plan.invoices %><% end %></td>
+      <% end -%>
+    </tr>
+    <tr>
+      <td class="description">Users that can send invoices</td>
+      <% @plans.each do |plan| -%>
+        <td class="<%=h plan.name.downcase %>"><% if plan.users == 0 %>Unlimited<% else %><%=h plan.users %><% end %></td>
+      <% end -%>
+    </tr>
+    <tr>
+      <td class="description">Clients you can create</td>
+      <% @plans.each do |plan| -%>
+        <td class="<%=h plan.name.downcase %>"><% if plan.clients == 0 %>Unlimited<% else %><%=h plan.clients %><% end %></td>
+      <% end -%>
+    </tr>
+    <tr>
+      <td class="description">Payment reminders</td>
+      <% @plans.each do |plan| -%>
+        <td class="<%=h plan.name.downcase %>">Yes</td>
+      <% end -%>
+    </tr>
+    <tr>
+      <td class="description">Thankyou emails</td>
+      <% @plans.each do |plan| -%>
+        <td class="<%=h plan.name.downcase %>">Yes</td>
+      <% end -%>
+    </tr>
+    <tr>
+      <td class="description">Unbranded emails</td>
+      <% @plans.each do |plan| -%>
+        <td class="<%=h plan.name.downcase %>"><% if plan.unbranded_emails? %>Yes<% else %>No*<% end %></td>
+      <% end -%>
+    </tr>
+    <tr>
+      <td class="feature">Draft invoices</td>
+      <% @plans.each do |plan| -%>
+        <td class=""><% if plan.draft_invoices? %>Yes<% else %>No<% end %></td>
+      <% end -%>
+    </tr>
+    <tr>
+      <td class="description">Selection of different invoice templates</td>
+      <% @plans.each do |plan| -%>
+        <td class="<%=h plan.name.downcase %>"><% if plan.invoice_templates? %>Yes<% else %>No<% end %></td>
+      <% end -%>
+    </tr>
+    <tr>
+      <td class="description">Customize look &amp; feel of invoices</td>
+      <% @plans.each do |plan| -%>
+        <td class="<%=h plan.name.downcase %>"><% if plan.allow_custom_css? %>Yes<% else %>No<% end %></td>
+      <% end -%>
+    </tr>
+    <tr>
+      <td class="description">Includes stylesheets for easy printing</td>
+      <% @plans.each do |plan| -%>
+        <td class="<%=h plan.name.downcase %>"><% if plan.print_css? %>Yes<% else %>No<% end %></td>
+      <% end -%>
+    </tr>
+  </tbody>
+</table>
+* Emails sent from free accounts will have a <%= @app_config["app_name"] %> link appended to the end of the emails
+
+<script type="text/javascript">
+//<![CDATA[
+  addLoadEvent(tableruler);
+//]]>
+</script>

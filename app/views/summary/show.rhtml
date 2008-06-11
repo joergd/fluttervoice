@@ -1,0 +1,70 @@
+<div id="sidebar">
+  <% if @invoice && @invoice.client.invoices.size > 1 %>
+    <h3>Summary of all invoices</h3>
+    <table id="client_invoice_summary_table" class="ruler" cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th class="state">State</th>
+          <th class="number">Number</th>
+          <th class="date">Invoice Date</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @invoice.client.live_invoices.each do |invoice| %>
+        <tr onclick="document.location = '/summary/<%= "show".obfuscate %>/<%= invoice.id.to_s.obfuscate %>';">
+          <td class="state"><span class="<%=h invoice.state.downcase %>"><%=h invoice.state %></span></td>
+          <td class="number"><%=h invoice.number %></td>
+          <td class="date"><%=h fmt_date(invoice.date) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+    
+  <div id="what_is_this">
+    <%= link_to "What is this?", "http://www.#{@app_config['domain']}", :title => "Go to #{@app_config['app_name']} and find out more", :popup => true %>
+  </div>
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <% if @invoice.nil? -%>
+    <%= @account.name %> has deleted this invoice. Unfortunately you will no longer be able to view this invoice.
+  <% elsif @invoice.draft? -%>
+    <%= @account.name %> has changed the status of this invoice to a <strong>draft</strong> status. Unfortunately you won't be able to view this invoice.
+  <% else -%>
+  
+    <div id="invoice">
+      <%= render :partial => "invoices/account_header", :locals => { :account => @account, :logo => @logo } %>
+    
+      <div id="invoice_state_indicator" class="<%= @invoice.state.downcase %>"><%= @invoice.state %></div>
+    
+      <h2><%=h @invoice.name %></h2>
+      <h3><%=h @invoice.client.name %></h3>
+      <%= render(:partial => '/widgets/address', :locals => { :address => @invoice.client.address, :tel => @invoice.client.tel, :fax => @invoice.client.fax, :web => @invoice.client.web }) %>
+      <% if !@invoice.client.vat_registration.blank? -%>
+        <p class="client_vat_registration">VAT Registration: <%=h @invoice.client.vat_registration %></p>
+      <% end -%>
+    
+      <% if !@invoice.po_number.blank? -%>
+        <p class="invoice_po_number">PO/Ref Number: <%=h @invoice.po_number %></p>
+      <% end -%>
+    
+      <div id="invoice_date"><%=h fmt_date(@invoice.date) %></div>
+      
+      <%= render :partial => "invoices/show_invoice", :locals => { :invoice => @invoice } %>
+
+    </div>
+      
+  <% end -%>
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+  addLoadEvent(tableruler);
+//]]>
+</script>

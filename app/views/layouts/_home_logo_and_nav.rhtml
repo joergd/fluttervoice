@@ -1,0 +1,12 @@
+<% if !@nonav -%>
+  <div id="nav">
+    <ul>
+      <li id="nav-home"><%= link_to "Home", "http://www.#{@app_config['domain']}", :title => "Go back to the homepage" %></li>
+      <!-- li id="nav-examples"><%= link_to "Examples", "/examples", :title => "View some screenshots and learn more about Fluttervoice" %></li -->
+      <li id="nav-blog"><%= link_to "Blog", "http://www.#{@app_config['domain']}/blog/index", :title => "Read our blog and find out what's happening" %></li>
+      <li id="nav-signup"><%= link_to "Send Invoice", { :controller => 'signup', :action => 'free' }, :title => "Signup for a free account" %></li>
+    </ul>
+  </div> <!-- nav -->
+<% end -%>
+<div id="logo"></div>
+<div id="tagline">Want to <span class="hilite">email invoices?</span> Without the buttpain? We've got the answer.</div>

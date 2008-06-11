@@ -1,0 +1,111 @@
+<table>
+  <tr>
+    <th>Client Name</th>
+    <th>Address1</th>
+    <th>Address2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Postal Code</th>
+    <th>Country</th>
+    <th>Web</th>
+    <th>Tel</th>
+    <th>Fax</th>
+    <th>VAT Registration</th>
+    <th>Contacts</th>
+  </tr>
+  
+  <% @clients.each do |c| -%>
+
+    <tr>
+      <td><%=h c.name %></td>
+      <td><%=h c.address1 %></td>
+      <td><%=h c.address1 %></td>
+      <td><%=h c.city %></td>
+      <td><%=h c.state %></td>
+      <td><%=h c.postalcode %></td>
+      <td><%=h c.country %></td>
+      <td><%=h c.web %></td>
+      <td><%=h c.tel %></td>
+      <td><%=h c.fax %></td>
+      <td><%=h c.vat_registration %></td>
+      <td>
+        <table>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Tel</th>
+            <th>Mobile</th>
+          </tr>
+          <% c.contacts.each do |p| -%>
+            <td><%=h p.firstname %></td>
+            <td><%=h p.lastname %></td>
+            <td><%=h p.email %></td>
+            <td><%=h p.tel %></td>
+            <td><%=h p.mobile %></td>
+          <% end -%>
+        </table>
+      </td>
+    </tr>
+    
+  <% end -%>
+</table>
+
+<table>
+  <tr>
+    <th>Client</th>
+    <th>Number</th>
+    <th>State</th>
+    <th>Date</th>
+    <th>Due Date</th>
+    <th>PO Number</th>
+    <th>Terms</th>
+    <th>Currency</th>
+    <th>Subtotal</th>
+    <th>Tax</th>
+    <th>Shipping</th>
+    <th>Late Fee</th>
+    <th>Total</th>
+    <th>Paid</th>
+    <th>Amount Due</th>
+    <th>Invoice Lines</th>
+  </tr>
+  
+  <% @invoices.each do |i| -%>
+    <tr>
+      <td><%=h i.client.name %></td>
+      <td><%=h i.number %></td>
+      <td><%=h i.state %></td>
+      <td><%=h i.date %></td>
+      <td><%=h i.due_date %></td>
+      <td><%=h i.po_number %></td>
+      <td><%=h i.terms %></td>
+      <td><%=h i.currency_id %></td>
+      <td><%=h i.subtotal %></td>
+      <td><%=h i.tax %></td>
+      <td><%=h i.shipping %></td>
+      <td><%=h i.late_fee %></td>
+      <td><%=h i.total %></td>
+      <td><%=h i.paid %></td>
+      <td><%=h i.amount_due %></td>
+      <td>
+        <table>
+          <tr>
+            <th>Type</th>    
+            <th>Quantity</th>    
+            <th>Description</th>    
+            <th>Price</th>    
+          </tr>
+          <% i.invoice_lines.each do |il| -%>
+            <tr>
+              <td><%= il.invoice_line_type.name %></td>
+              <td><%= il.quantity %></td>
+              <td><%= il.description %></td>
+              <td><%= il.price %></td>
+            </tr>
+          <% end -%>
+        </table>
+      </td>
+    </tr>    
+  <% end -%>
+</table>

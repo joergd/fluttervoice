@@ -1,0 +1,4 @@
+<div id="account_status">
+  You are on the <strong><%=h @account.plan.name %></strong> plan. You have <strong><%=h @account.days_left_in_cycle %> days</strong> left before your next monthly interval begins on <strong><%=h fmt_date(@account.next_cycle_date) %></strong>.
+  Till then, you can send <% if @account.invoice_countdown == 0 %><strong>no more</strong> invoices.<% else %><strong><%= @account.invoice_countdown %> more</strong> invoice<% if @account.invoice_countdown > 1 %>s<% end %>.<% end %>
+</div>

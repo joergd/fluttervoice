@@ -1,0 +1,1 @@
+<p>The account <b><%= request.subdomains(@app_config["tld_length"]).first %>.<%= @app_config['domain'] %></b> does not currently exist. If you want it, it is available for when you sign up. Please visit the main site to find out more. <%= link_to "Main site", "http://www.#{@app_config['domain']}" %></p>

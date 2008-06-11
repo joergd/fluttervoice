@@ -1,0 +1,27 @@
+<div id="content">
+
+  <h2>Login to your <%= @app_config['app_name'] %> account</h2>
+  
+  <%= display_error %>
+  <%= display_notice %>
+  
+  <p><%= link_to "Home", "http://www.#{@app_config['domain']}", :title => "Go to the Home Page" %></p>
+  
+  <div class="clearall"></div>
+  
+  <% form_tag :action => '' do -%>
+  
+    <fieldset>
+      <dl class="login_form">
+          <dt><%= @app_config['app_name'] %> ID</dt><dd><%= text_field_tag(:subdomain, (@account.subdomain unless @account.subdomain == "www"), :size => 25, :maxlength => 100, :class => "fancy") %>.<%= @app_config["domain"] %></dd>
+          <dt>Email</dt><dd><%= text_field :user, :email, :size => 25, :maxlength => 255, :class => "fancy" %></dd>
+          <dt>Password</dt><dd><%= password_field :user, :password, :size => 25, :maxlength => 20, :class => "fancy" %><br/>
+          <%= link_to "I forgot my password", { :action => "forgot_password" }, :title => "Send me an email with my password"  %></dd>
+      </dl>
+    </fieldset>
+    
+    <%= submit_tag "Login" %>
+  
+  <% end -%>
+
+</div>

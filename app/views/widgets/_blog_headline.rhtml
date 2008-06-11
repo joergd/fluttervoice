@@ -1,0 +1,15 @@
+<% if @blog_headline -%>
+  <div id="blog_headline" style="display: none;">
+    <strong>Latest news:</strong><br/>
+    <%= link_to_function @blog_headline.title, "Cookies.set('hide_headline', '#{@blog_headline.id}', '/'); location.href='#{@home_url}#{@blog_headline.url}'", :title => "View article", :popup => true %>
+  </div>
+  
+  <script type="text/javascript" language="javascript" charset="utf-8">
+    // <![CDATA[
+      var blog_headline_id = Cookies.get('hide_headline');
+      if (Number(blog_headline_id) != <%= @blog_headline.id %>) {
+        Effect.Appear('blog_headline');
+      }
+    // ]]>
+  </script>
+<% end -%>

@@ -1,0 +1,37 @@
+<div id="sidebar">
+  <%= render :partial =>  "widgets/account_submenu" %>
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <h2>Your People</h2>
+  
+  <h4><%=h @user.firstname %> <%=h @user.lastname %>
+  <% if @user.id == @account.primary_person_id %>
+    <span style="font-weight:normal;">(You are the main user for this account)</span>
+  <% end %>
+  </h4>
+  
+  <%= render :partial => "widgets/contact", :locals => { :person => @user } %>
+  <br/><%= link_to "Edit my personal information", { :action => "edit", :id => @user.id}, :title => 'Edit login details and personal information' %>
+  
+  <div class="message">Only the main user can change the other people on this account.</div>
+    
+  <h4>People who have access to your <%= @app_config['app_name'] %> account</h4>
+  <p>These people can create, send and edit invoices, send reminder and thankyou emails, but they cannot change your company information, your settings, or your account information, nor can they edit or create other users.</p>
+  <table id="people" cellpadding="0" cellspacing="0" border="0">
+    <thead>
+     <tr><th colspan="3">People</th></tr>
+    </thead>
+    <tbody>
+     <%= render :partial => "user", :collection => @account.users %>
+    </tbody>
+  </table>
+  <div class="add">
+    <%= link_to "Add person", { :action => "new" }, :title => 'Add a new person to have access to your account' %>
+  </div>
+  
+</div>

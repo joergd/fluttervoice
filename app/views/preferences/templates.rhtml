@@ -1,0 +1,37 @@
+<div id="sidebar">
+  <%= render :partial => "submenu" %>
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <h2>Invoice templates</h2>
+  
+  <%= error_messages_for :preference %>
+
+  <% form_tag :action => 'templates' do -%>
+  
+    <h4>Choose a template</h4>
+    <p>Emails will always be formatted in both plain text and simple HTML.</p>
+    <p>You can choose any of these HTML formatted templates, as well as a black and white version. These templates will only be visible on the summary page the client gets to see.</p>
+    <p>These templates don't affect what YOU see, nor do they change the look of the emails. If you have uploaded a company logo, it will appear on the HTML formatted templates.</p>
+    <ul class="templates">
+      <%= render :partial => "template", :collection => @templates %>
+      <% if !@account.plan.free? -%>
+        <li>
+          <%= radio_button :preference, :invoice_template_id, 0 %> Your own CSS<br/>
+          <%= text_area :preference, :invoice_css, :cols => 65, :rows => 20 %>
+        </li>
+      <% end -%>
+    </ul>
+  
+    <div class="message">You can <strong>preview</strong> what your clients see on their summary page, by clicking on the preview link in your individual invoices.</div>
+
+    <div class="submit_box">
+      <%= submit_tag 'Save Template' %>
+    </div>
+  <% end -%>
+  
+</div>

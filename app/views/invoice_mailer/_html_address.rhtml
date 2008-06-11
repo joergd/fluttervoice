@@ -1,0 +1,24 @@
+<% if !address.blank? ||
+      !tel.blank? ||
+      !fax.blank? || 
+      (defined?(mobile) && !mobile.blank?) -%>
+  <p>
+    <% if !address.blank? -%>
+      <% address.lines.each do |line| -%>
+        <%= line %><br/>
+      <% end -%>
+    <% end -%>
+    <% if defined?(mobile) && !mobile.blank? -%>
+      <strong>M: </strong><%=h mobile %><br/>
+    <% end -%>
+    <% if defined?(tel) && !tel.blank? -%>
+      <strong>O: </strong><%=h tel %><br/>
+    <% end -%>
+    <% if defined?(fax) && !fax.blank? -%>
+      <strong>F: </strong><%=h fax %>
+    <% end -%>
+    <% if defined?(web) && !web.blank? -%>
+      <%= link_to web, web, :title => "Visit site" %>
+    <% end -%>
+  </p>
+<% end -%>

@@ -1,0 +1,14 @@
+<table id="payments_table" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <th class="actions">&nbsp;</th>
+    <th class="date">Date</th>
+    <th class="method">Method</th>
+    <th class="reference">Reference</th>
+    <th class="amount">Amount</th>
+  </tr>
+  <%= render :partial => "/payments/payment", :collection => @invoice.payments %>
+  <tr>
+    <td colspan="4" style="border: 0px">&nbsp;</td>
+    <td class="amount" style="border: 0px"><strong><%=h @invoice.currency_symbol %><%=h fmt_currency(@invoice.paid) %></strong></td>
+  </tr>
+</table>

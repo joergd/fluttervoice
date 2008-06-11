@@ -1,0 +1,15 @@
+<script type="text/javascript">
+//<![CDATA[
+  <%= render :partial => "invoice_line_item" %>
+
+  <% @invoice.invoice_lines.each do |il| -%>
+    populateLine(<%= il.invoice_line_type_id %>, <%= il.quantity %>, <%= il.price %>, "<%=h il.description %>");
+  <% end -%>
+
+  recalc();
+
+  <% if @invoice.terms.length == 0 -%>
+    Element.show('specific_date')
+  <% end -%>
+//]]>
+</script>

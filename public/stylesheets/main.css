@@ -1,0 +1,1130 @@
+/*-------------------------------------------------
+GENERAL LAYOUT
+-------------------------------------------------*/
+
+body {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 14px;
+  color: #000;
+  background-color: #FFF;
+  margin: 0px;
+  padding: 10px 10px 20px 10px;
+  text-align: left;
+}
+
+#wrapper {
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	border-top: 3px solid #BCBCAD;
+	width: 850px;  /* bmh */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width: 850px;
+}
+
+html>#wrapper	{
+	width: 848px;
+}
+
+#header {
+  margin:0px;
+  padding: 0 0 8px 0;
+  border-bottom: 1px solid #BCBCAD;
+}
+
+#content_wrapper {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+  color: #737373;
+}
+
+#content {
+	margin: 0;
+	padding: 8px;
+	width: 624px;
+}
+
+#sidebar {
+  display: block !important;
+  margin: 0px;
+  padding: 8px 8px 0 8px;
+  float: right;
+  width: 186px;
+  height: 650px;
+  text-align: left;
+  background: #FFFFFF url(/images/vertical.gif) top left no-repeat;
+}
+
+#logo {
+  float: left;
+  margin-top: 15px;
+  margin-left: 10px;
+  width: 350px;
+}
+
+#footer {
+  color: #ccc;
+  font-size: 11px;
+}
+
+#footer a {
+  color: #ccc;
+}
+
+/*-------------------------------------------------
+GENERAL TAGS
+-------------------------------------------------*/
+
+a {
+  color: #000;
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.links {
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.non_link {
+  color: #737373;
+}
+
+h2 {
+  margin: 0px;
+  padding: 0px;
+  font-weight: 100;
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+h3 {
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 5px;
+}
+
+h4 {
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+h4 a {
+  color: #737373;
+}
+
+h5 {
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 5px;
+  font-size: 12px;
+	font-weight: 900;
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+img {
+  border: 0px;
+}
+
+fieldset {
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 15px;
+  border: 0px;
+}
+
+
+.horizontal {
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  background: transparent url(/images/horizontal.gif) bottom left no-repeat;
+}
+
+.hilite {
+  color: #FEF7C1;
+}
+
+.huge {
+  font-size: 18px;
+}
+
+.clearall {
+	margin: 0 0 7px;
+	padding: 7px 0 0 0;
+	clear: both;
+	font-size: 2px;
+}
+
+.submit_box {
+  padding-top: 20px;
+  margin-top: 15px;
+  background: transparent url(/images/horizontal.gif) top left no-repeat;
+}
+
+#cancel {
+  float: right;
+  padding: 5px;
+}
+
+#cancel a {
+  font-size: 14px;
+  font-weight: 900;
+  color: #E9999A;
+  text-decoration: none;
+}
+
+#cancel a:hover {
+  text-decoration: underline;
+}
+
+#cancel img {
+  margin-right: 5px;
+}
+
+.message {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #F5E7E7;
+  border-top: 1px solid #E4E4D2;
+  border-bottom: 1px solid #E4E4D2;
+}
+
+.instructions {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #F5E7E7;
+  border-top: 1px solid #E4E4D2;
+  border-bottom: 1px solid #E4E4D2;
+}
+
+.firsttime {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #FDD4ED;
+  border-top: 1px solid #FD7CCB;
+  border-bottom: 1px solid #FD7CCB;
+}
+
+.add {
+  background: transparent url(/images/add.gif) 7px 7px no-repeat;
+  padding-top: 7px;
+  padding-left: 25px;
+}
+
+.panel {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #FBFCFE;
+  border-top: 1px solid #E4E4D2;
+  border-bottom: 1px solid #E4E4D2;
+}
+
+.panel_cancel {
+  float: right;
+  padding: 5px;
+}
+
+h2 small {
+  font-size: 12px;
+}
+
+.verysmall {
+  font-size: 10px;
+}
+/*-------------------------------------------------
+TOOLS MENU
+-------------------------------------------------*/
+
+#tools_menu {
+  float: right;
+  width: 250px;
+  margin-top: 15px;
+  padding-right: 12px;
+  margin-bottom: 40px;
+}
+
+#tools_menu ul {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-align: right;
+	clear: left;
+	}
+
+#tools_menu ul li {
+	display: block;
+	float: right;
+	text-align: right;
+	padding: 0;
+	margin: 0;
+	}
+
+#tools_menu ul li a {
+  color: #000;
+	padding: 0px;
+	margin-left: 1.5em;
+	text-decoration: none;
+	display: block;
+	text-align: center;
+	font-weight: 300;
+	letter-spacing: 1px;
+	font-size:    12px;      
+	voice-family: "\"}\"";   
+	voice-family: inherit;   
+	font-size:    12px;   
+	}
+
+html>#tools_menu ul li a  {
+	font-size: 12px;   
+} 
+
+#tools_menu ul li a:hover {
+	text-decoration: underline;
+}
+
+
+/*-------------------------------------------------
+MAIN NAVIGATION
+-------------------------------------------------*/
+
+#nav {
+  clear: both;
+  margin: 0px;
+  padding: 0px;
+  background-color: #BCBCAD;
+  height: 45px;
+}
+
+#nav ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	text-align: left;
+	clear: left;
+	}
+
+#nav ul li {
+	display: block;
+	float: left;
+	height: 45px;
+	width: 125px;
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+	border-right: 1px solid #FFF;
+	}
+
+#nav ul li a {
+  color: #FFF;
+	padding: 0px;
+	margin: 0px;
+	padding: 10px 0 21px 8px;
+	height: 1%;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+	font-weight: 600;
+	voice-family: "\"}\"";   
+	voice-family: inherit;
+  height: 1%;   
+	}
+
+html>body #nav ul li a  {
+	height: auto;   
+} 
+
+#nav ul li.new_invoice {
+  padding-left: 0px;
+  text-align: right;
+	width: 598px;
+	border-right: 0px;
+	background: #BCBCAD url(/images/new_invoice_gradient.gif) bottom left repeat-x;
+}
+
+#nav ul li.new_invoice a {
+  text-align: left;
+  font-size: 24px;
+  font-weight: 600;
+  padding-left: 350px;
+}
+
+#nav ul li a:hover {
+  background-color: #FEF7C1;
+  color: #000;
+}
+
+#nav ul li a:hover span.hilite {
+  background-color: #FEF7C1;
+  color: #000;
+}
+
+
+/*-------------------------------------------------
+FLASH NOTICES, ERRORS, FORM ERRORS
+-------------------------------------------------*/
+
+#notice {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #FDD4ED;
+  border-top: 1px solid #FD7CCB;
+  border-bottom: 1px solid #FD7CCB;
+}
+
+#error {
+  margin-bottom: 20px;
+  padding: 10px;
+  color: #97180E;
+  font-size: 14px;
+  font-weight: 900;
+  background-color: #FDADDE;
+  border-top: 1px solid #FD7CCB;
+  border-bottom: 1px solid #FD7CCB;
+}
+
+.formError {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  color: #E9999A;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.fieldWithErrors input {
+  border: 2px solid #E9999A;
+}
+
+#errorExplanation {
+  width: 400px;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  color: #E9999A;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+}
+
+#errorExplanation p {
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+/*-------------------------------------------------
+GENERAL TABLE TAGS
+-------------------------------------------------*/
+
+th, td {
+  padding: 5px;
+  vertical-align: top;
+}
+
+thead {
+  background-color: #E4E4D2;
+}
+
+td {
+  border-bottom: 1px solid #E4E4D2;
+}
+
+
+/*-------------------------------------------------
+ACTIONS
+-------------------------------------------------*/
+
+ul#actions {
+	margin: 0;
+	padding: 0;
+	list-style-image: url(/images/star.gif);
+	list-style-position: inside;
+	text-align: left;
+	}
+
+ul#actions li {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 8px;
+}
+
+ul#actions li a {
+  color: #737373;
+  font-size: 14px;
+	text-decoration: none;
+	font-weight: 600;
+	padding: 5px;
+}
+
+ul#actions li a:hover {
+  background-color: #FEF7C1;
+  color: #000;
+}
+
+
+/*-------------------------------------------------
+SUBMENU
+-------------------------------------------------*/
+
+ul#submenu {
+	margin: 0;
+	padding: 0;
+	list-style-image: url(/images/star.gif);
+	list-style-position: inside;
+	text-align: left;
+	}
+
+ul#submenu li {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 8px;
+}
+
+ul#submenu li a {
+  color: #737373;
+  font-size: 14px;
+	text-decoration: none;
+	font-weight: 600;
+	padding: 5px;
+}
+
+ul#submenu li a:hover {
+  background-color: #FEF7C1;
+  color: #000;
+}
+
+
+/*-------------------------------------------------
+FILTER
+-------------------------------------------------*/
+
+#filter {
+  margin: 0px;
+  padding: 0px;
+  margin-left: 15px;
+}
+
+#filter ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-align: left;
+	clear: left;
+}
+
+#filter ul li {
+  display: inline;
+	text-align: left;
+	padding: 0;
+	margin: 0;
+	margin-right: 10px;
+}
+
+table#filter_table td {
+  border-bottom: 0px;
+}
+
+/*-------------------------------------------------
+INVOICE TABLE STYLE
+-------------------------------------------------*/
+
+table#invoices td.state, table#invoices th.state {
+  width: 65px;
+}
+
+table#invoices td.date, table#invoices th.date {
+  width: 90px;
+}
+
+table#invoices td.number, table#invoices th.number {
+  width: 50px;
+}
+
+table#invoices td.client, table#invoices th.client {
+  width: 170px;
+}
+
+table#invoices td.paid, table#invoices th.paid {
+  text-align: right;
+  width: 100px;
+}
+
+table#invoices td.total, table#invoices th.total {
+  text-align: right;
+  width: 100px;
+}
+
+table#invoices tr.ruled {
+	color: #000;
+	background-color: #F6F6F6;
+	cursor: pointer;
+}
+
+table#invoices tr.ruled span {
+	color: #000;
+}
+
+table#invoices .closed {
+  color: #A3A4A5;
+}
+
+table#invoices td.state .overdue {
+  color: #97180E;
+}
+
+
+/*-------------------------------------------------
+INVOICE
+-------------------------------------------------*/
+
+
+#invoice_date {
+  padding: 5px;
+  text-align: right;
+  font-weight: bold;
+}
+
+table.invoice_table td.type, table.invoice_table th.type {
+  white-space: nowrap;
+  width: 100px;
+}
+
+table.invoice_table td.quantity, table.invoice_table th.quantity {
+  width: 45px;
+}
+
+table.invoice_table td.description, table.invoice_table th.description {
+  width: 230px;
+}
+
+table.invoice_table td.price, table.invoice_table th.price {
+  width: 85px;
+}
+
+table.invoice_table td.total, table.invoice_table th.total {
+  text-align: right;
+  width: 120px;
+}
+
+#invoice_calcs_terms table {
+  margin: 0px;
+  padding: 0px;
+}
+
+#invoice_calcs_terms .terms {
+  vertical-align: bottom;
+  width: 99%;
+}
+
+#invoice_calcs_terms .calcs {
+  text-align: right;
+  padding: 0px;
+  width: 180px;
+}
+
+table#invoice_calcs th, table#invoice_calcs td {
+  border-bottom: 0px;
+}
+
+table#invoice_calcs td.c1, table#invoice_calcs th.c1 {
+  white-space: nowrap;
+  text-align: left;
+}
+
+table#invoice_calcs td.c2, table#invoice_calcs th.c2 {
+  white-space: nowrap;
+  text-align: right;
+}
+
+table#invoice_calcs tr.hilite {
+  font-size: 14px;
+  color: #737373;
+  font-weight: 600;
+  background-color: #E4E4D2;
+}
+
+table#invoice_notes {
+  margin: 0px;
+  padding: 0px;
+	margin-top: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 100%;
+	border: 1px solid #E4E4D2;
+}
+
+table#invoice_notes .details {
+  text-align: left;
+  padding: 0px;
+	padding-left: 5px;
+	font-size: 11px;
+	border: 0px;
+}
+
+#send_invoice_panel, #receive_payment_panel, #send_thankyou_panel, #send_reminder_panel {
+  margin-top: 50px;
+}
+
+#invoice_state_indicator {
+  float: right;
+  text-align: right;
+  width: 80px;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+  background-color: #FBFCFE;
+}
+
+table#invoice_header_table {
+  margin-bottom: 15px;
+}
+
+table#invoice_header_table td.logo {
+  width: 250px;
+}
+
+table#invoice_header_table td.address {
+  width: 375px;
+  text-align: right;
+}
+
+table#invoice_header_table td.address ul.address {
+  text-align: right;
+}
+
+#invoice_header_for_printing {
+  display: none;
+}
+
+#preview {
+}
+
+/*-------------------------------------------------
+INVOICE FORMS
+-------------------------------------------------*/
+
+dl#inv_preamble_form dt {
+	float: left;
+	clear: left;
+	text-align: left;
+	margin: 5px 10px 0 0;
+	width: 100px;
+}
+
+dl#inv_preamble_form dd {
+	margin-bottom: 5px;
+}
+
+.del_line_item {
+  margin-right: 3px;
+}
+
+table#calcs_table_form {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+table#calcs_table_form td {
+  width: 100%;
+  text-align: right;
+}
+
+dl#inv_terms_form dt {
+	float: left;
+	clear: left;
+	text-align: left;
+	margin: 5px 10px 0 0;
+	width: 90px;
+}
+
+dl#inv_terms_form dd {
+	margin-bottom: 5px;
+}
+
+dl#inv_notes_form dt {
+	float: left;
+	clear: left;
+	text-align: left;
+	margin: 5px 10px 0 0;
+	width: 90px;
+}
+
+dl#inv_notes_form dd {
+	margin-bottom: 5px;
+}
+
+dl#create_invoice_form dt {
+	float: left;
+	clear: left;
+	text-align: left;
+	margin: 5px 10px 0 0;
+	width: 60px;
+}
+
+dl#create_invoice_form dd {
+	margin-bottom: 5px;
+}
+
+dl.send_emails_form dt {
+	float: left;
+	clear: left;
+	text-align: left;
+	margin: 5px 10px 0 0;
+	width: 60px;
+}
+
+dl.send_emails_form dd {
+	margin-bottom: 5px;
+}
+
+/*-------------------------------------------------
+EXPORT
+-------------------------------------------------*/
+
+.export {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #EFEFEF;
+  border-top: 1px solid #E4E4D2;
+  border-bottom: 1px solid #E4E4D2;
+}
+
+
+/*-------------------------------------------------
+ACCOUNT
+-------------------------------------------------*/
+
+dl.account_form dt {
+	float: left;
+	clear: left;
+	text-align: left;
+	margin: 5px 10px 0 0;
+	width: 100px;
+}
+
+dl.account_form dd {
+	margin-bottom: 5px;
+}
+
+#cancel_account_panel {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #FBFCFE;
+  border-top: 1px solid #E4E4D2;
+  border-bottom: 1px solid #E4E4D2;
+}
+
+#account_status {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #FDD4ED;
+  border-top: 1px solid #FD7CCB;
+  border-bottom: 1px solid #FD7CCB;
+}
+
+
+/*-------------------------------------------------
+PLANS
+-------------------------------------------------*/
+
+table#plans {
+  margin-top: 15px;
+}
+
+table#plans td.description, table#plans th.description {
+  width: 255px;
+}
+
+table#plans td.ultimate, table#plans th.ultimate {
+  width: 80px;
+}
+
+table#plans td.hardcore, table#plans th.hardcore {
+  width: 80px;
+}
+
+table#plans td.lite, table#plans th.lite {
+  width: 80px;
+}
+
+table#plans td.free, table#plans th.free {
+  width: 80px;
+}
+
+table#plans span.cost {
+  color: #FFF;
+}
+
+table#plans tr.ruled {
+	color: #000;
+	background-color: #FBFCFE;
+}
+
+
+/*-------------------------------------------------
+PEOPLE
+-------------------------------------------------*/
+
+table#people td.action, table#plans th.action {
+  width: 80px;
+}
+
+table#people td.name, table#plans th.name {
+  width: 180px;
+}
+
+table#people td.email, table#plans th.email {
+  width: 415px;
+}
+
+dl#person_form dt {
+	float: left;
+	clear: left;
+	text-align: left;
+	margin: 5px 10px 0 0;
+	width: 80px;
+}
+
+dl#person_form dd {
+	margin-bottom: 5px;
+}
+
+
+/*-------------------------------------------------
+PREFERENCES
+-------------------------------------------------*/
+
+dl.preferences_form dt {
+	float: left;
+	clear: left;
+	text-align: left;
+	margin: 5px 10px 0 0;
+	width: 70px;
+}
+
+dl.preferences_form dd {
+	margin-bottom: 5px;
+}
+
+ul.templates {
+	margin: 0;
+	margin-top: 15px;
+	padding: 0;
+	list-style: none;
+	text-align: left;
+}
+
+ul.templates li {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 8px;
+}
+
+ul.templates li img {
+  border: 1px solid #737373;
+}
+
+/*-------------------------------------------------
+CLIENTS
+-------------------------------------------------*/
+
+table#clients_table td.company, table#clients_table th.company {
+  width: 200px;
+}
+
+table#clients_table td.contacts, table#clients_table th.contacts {
+  width: 300px;
+}
+
+table#clients_table td.actions, table#clients_table th.actions {
+  width: 100px;
+}
+
+
+ul#client_contacts {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-align: left;
+}
+
+ul#client_contacts li {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 8px;
+}
+
+
+dl.client_form dt, dl.contact_form dt {
+	float: left;
+	clear: left;
+	text-align: left;
+	margin: 5px 10px 0 0;
+	width: 80px;
+}
+
+dl.client_form dd, dl.contact_form dd {
+	margin-bottom: 5px;
+}
+
+
+/*-------------------------------------------------
+PAYMENTS
+-------------------------------------------------*/
+
+table#payments_table td.actions, table#payments_table th.actions {
+  width: 90px;
+}
+
+table#payments_table td.date, table#payments_table th.date {
+  width: 90px;
+}
+
+table#payments_table td.method, table#payments_table th.method {
+  width: 100px;
+}
+
+table#payments_table td.reference, table#payments_table th.reference {
+  width: 120px;
+}
+
+table#payments_table td.amount, table#payments_table th.amount {
+  text-align: right;
+  width: 175px;
+}
+
+dl.payment_form dt {
+	float: left;
+	clear: left;
+	text-align: left;
+	margin: 5px 10px 0 0;
+	width: 110px;
+}
+
+dl.payment_form dd {
+	margin-bottom: 5px;
+}
+
+
+/*-------------------------------------------------
+ADDRESS
+-------------------------------------------------*/
+
+ul.address {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 10px;
+	list-style-type: none;
+	text-align: left;
+}
+
+ul.actions li {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 8px;
+}
+
+.contact_type {
+  font-weight: 600;
+}
+
+
+/*-------------------------------------------------
+LOGIN PAGE
+-------------------------------------------------*/
+
+dl.login_form dt {
+	float: left;
+	clear: left;
+	text-align: right;
+	margin: 5px 10px;
+	width: 80px;
+}
+
+dl.login_form dd {
+	margin-bottom: 5px;
+}
+
+
+/*-------------------------------------------------
+SUMMARY PAGE
+-------------------------------------------------*/
+
+table#client_invoice_summary_table td.date, table#client_invoice_summary_table th.date {
+  text-align: right;
+}
+
+table#client_invoice_summary_table td, table#client_invoice_summary_table th {
+  padding: 1px;
+} 
+
+table#client_invoice_summary_table tr.ruled {
+	color: #000;
+	background-color: #F6F6F6;
+	cursor: pointer;
+}
+
+table#client_invoice_summary_table tr.ruled span {
+	color: #000;
+}
+
+table#client_invoice_summary_table .closed {
+  color: #A3A4A5;
+}
+
+table#client_invoice_summary_table td.state .overdue {
+  color: #97180E;
+}
+
+div#what_is_this {
+  display: block !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  margin-top: 50px !important;
+}
+
+div#what_is_this a {
+  display: inline !important;
+  color: #000 !important;
+  font-size: 12px !important;
+}

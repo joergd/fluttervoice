@@ -1,0 +1,12 @@
+<dl>
+  <%= error_message_on :user, :firstname, "The firstname " %>
+  <dt><label for="user_firstname">Firstname</label></dt><dd><%= text_field :user, :firstname, :maxlength => 30, :size => 30  %></dd>
+  <%= error_message_on :user, :lastname, "The lastname " %>
+  <dt><label for="user_lastname">Lastname</label></dt><dd><%= text_field :user, :lastname, :maxlength => 30, :size => 30  %></dd>
+  <%= error_message_on :user, :email, "The email address " %>
+  <dt><label for="user_email">Email</label></dt><dd><%= text_field :user, :email, :maxlength => 255, :size => 30  %>(won't be used for evil)</dd>
+  <%= error_message_on :user, :password, "The password " %>
+  <dt><label for="user_password">Password</label></dt><dd><%= password_field :user, :password, :maxlength => 30, :size => 30 %></dd>
+  <%= error_message_on :user, :password_confirmation, "The password confirmation " %>
+  <dt><label for="user_password_confirmation">Confirm Password</label></dt><dd><%= password_field :user, :password_confirmation, :maxlength => 30, :size => 30 %></dd>
+</dl>

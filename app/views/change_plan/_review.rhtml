@@ -1,0 +1,4 @@
+<p>So, to summarize: <%= @plan.summary(@app_config['site']) %></p>
+<%= check_box_tag :i_agree, "1", false, :onclick => "$(change_account).disabled = !this.checked;" %> Yes, I understand that this change is immediate.
+<% if !@plan.free? %> And that my credit card will be charged immediately with <%= @plan.display_currency_cost(@app_config['site']) %>, and then on a monthly basis. <% end %>
+<p><%= submit_tag 'Change Account Plan', :id => "change_account", :disabled => true %></p>

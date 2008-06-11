@@ -1,0 +1,20 @@
+<div id="sidebar"></div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <%= render_cancel_button %>
+  
+  <h2>Add person</h2>
+  
+  <% form_tag :action => 'new' do -%>
+    <%= hidden_field :person, :type %>
+    <%= render :partial =>  'form' %>
+    <div class="submit_box">
+      <%= submit_tag "Add person" %>
+    </div>
+  <% end -%>
+
+</div>

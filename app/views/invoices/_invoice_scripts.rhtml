@@ -1,0 +1,180 @@
+<script type="text/javascript">
+//<![CDATA[
+  var fieldCount = -1;
+
+  function get_currency_symbol(currency) {
+    new Ajax.Request('/invoices/get_currency_symbol?currency=' + currency,
+      {asynchronous:true,
+        evalScripts:true,
+        onComplete:function(request){set_currency_symbol(request.responseText)}
+      });
+  }
+
+  function addLine() {
+    fieldCount++
+    var newLine = invoice_line_html.replace(/IDX/g, fieldCount);
+    new Insertion.Bottom('lineitemrows', newLine);
+
+    Behaviour.apply();
+  }
+
+  function populateLine(invoice_line_type_id, quantity, price, description) {
+    last_line_type_id = invoice_line_type_id == null ? get_last_line_type() : invoice_line_type_id;
+
+    addLine();
+
+    $('line_items_' + fieldCount + '_invoice_line_type_id').value = last_line_type_id;
+    $('line_items_' + fieldCount + '_quantity').value = quantity;
+    $('line_items_' + fieldCount + '_price').value = to_money(price);
+    $('line_items_' + fieldCount + '_description').value = description;
+    $('line_items_' + fieldCount + '_total').innerHTML = to_currency(quantity * price);
+  }
+
+  function set_currency_symbol(symbol) {
+    $('currency_symbol').innerHTML = symbol;
+    recalc();
+  }
+
+  function to_money(amount) {
+    return Number(amount).toFixed(2);
+  }
+
+  function to_currency(amount) {
+    return $('currency_symbol').innerHTML + " " + to_money(amount);
+  }
+
+  function stripCommas(str) {
+    return str.replace(/,/g, '');
+  }
+
+  function recalc(fmt) {
+    var fmt = (fmt == null) ? false : fmt;
+    lines = document.getElementsByClassName('lineitemrow');
+    var subtotal = 0;
+    for(var i = 0; i < lines.length; i++) {
+      var idx = lines[i].id;
+      var quantity = Number(stripCommas($('line_items_' + idx + '_quantity').value));
+      var price = Number(stripCommas($('line_items_' + idx + '_price').value));
+      var line_total = quantity * price;
+      subtotal += line_total;
+      
+      if (fmt) {
+        $('line_items_' + idx + '_quantity').value = quantity;
+        $('line_items_' + idx + '_price').value = to_money(price);
+      }
+      
+      $('line_items_' + idx + '_total').innerHTML = to_currency(line_total);
+    }
+
+    var tax = Number(stripCommas($('invoice_tax_percentage').value));
+    var shipping = Number(stripCommas($('invoice_shipping').value));
+    var tax_multiplier = $('invoice_use_tax').checked ? tax * 0.01 : 0;
+
+    if (fmt) {
+      $('invoice_tax_percentage').value = tax;
+      $('invoice_shipping').value = shipping;
+    }
+
+    $('subtotal').innerHTML = to_currency(subtotal);
+    $('tax').innerHTML = to_currency(subtotal * tax_multiplier);
+    $('total').innerHTML = to_currency((subtotal * (1 + tax_multiplier)) + shipping);
+  }
+
+  function applyCurrency(curr) {
+    $('currency_in_use').innerHTML = curr;
+  }
+  
+  function get_last_line_type() {
+    lines = document.getElementsByClassName('lineitemrow');
+    return lines.length > 0 ? $('line_items_' + lines[lines.length - 1].id + '_invoice_line_type_id').value : 1; /* 1=Hours */
+  }
+  
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+
+  // Would love to add onkeypress events to here as well,
+  // but not a sausage on how to pass the event to a function
+  // to analyze charCode ... so I have added it obtrusively
+
+  var myrules = {
+      'a.del_line_item' : function(el){
+        el.onclick = function(){
+          while (el.nodeName.toLowerCase() != 'tr' && el.nodeName.toLowerCase() != 'body')
+            el = el.parentNode;
+          Element.remove(el);
+          recalc();
+          return false;
+        }
+      },
+      'input.line_item_quantity' : function(el){
+        el.onkeyup = function(){
+          recalc();
+          return false;
+        }
+        el.onchange = function(){
+          recalc(true);
+          return true;
+        }
+      },
+      'input.line_item_price' : function(el){
+        el.onkeyup = function(){
+          recalc();
+          return false;
+        }
+        el.onchange = function(){
+          recalc(true);
+          return true;
+        }
+      },
+      'select#invoice_currency_id' : function(el){
+        doWork = function() {
+          new Effect.Fade('currencyPanel')
+          applyCurrency(el.value);
+          get_currency_symbol(el.value);
+          return false;
+        }
+        el.blur = doWork; // TODO: not working for some reason
+        el.onchange = doWork;
+      },
+      'input#invoice_tax_percentage' : function(el){
+        el.onkeyup = function() {
+          recalc();
+          return false;
+        }
+        el.onchange = function(){
+          recalc(true);
+          return true;
+        }
+      },
+      'input#invoice_shipping' : function(el){
+        el.onkeyup = function() {
+          recalc();
+          return false;
+        }
+        el.onchange = function(){
+          recalc(true);
+          return true;
+        }
+      },
+      'input#invoice_use_tax' : function(el){
+        el.onclick = function() {
+          recalc();
+          return true;
+        }
+      },
+      'select#invoice_terms' : function(el){
+        el.onchange = function() {
+          if (el.value == '')
+            new Effect.Appear('specific_date')
+          else
+            new Effect.Fade('specific_date')
+          return false;
+        }
+      }
+    };
+  Behaviour.register(myrules);
+//]]>
+</script>

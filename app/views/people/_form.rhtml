@@ -1,0 +1,20 @@
+<fieldset>
+<dl id="person_form">
+  <%= error_message_on :person, :firstname, "The firstname " %>
+  <dt><strong><label for="person_firstname">Firstname *</label></strong></dt><dd><%= text_field :person, :firstname, :maxlength => 30, :size => 30  %></dd>
+  <%= error_message_on :person, :lastname, "The lastname " %>
+  <dt><strong><label for="person_lastname">Lastname *</label></strong></dt><dd><%= text_field :person, :lastname, :maxlength => 30, :size => 30  %></dd>
+  <%= error_message_on :person, :email, "The email address " %>
+  <dt><strong><label for="person_email">Email *</label></strong></dt><dd><%= text_field :person, :email, :maxlength => 255, :size => 30  %></dd>
+  <%= error_message_on :person, :tel, "The phone number " %>
+  <dt><label for="person_tel">Tel</label></dt><dd><%= text_field :person, :tel, :maxlength => 30, :size => 30  %></dd>
+  <%= error_message_on :person, :mobile, "The mobile phone number " %>
+  <dt><label for="person_mobile">Mobile</label></dt><dd><%= text_field :person, :mobile, :maxlength => 30, :size => 30  %></dd>
+  <% if @person.user? %>
+    <%= error_message_on :person, :password, "The password " %>
+    <dt><strong><label for="person_password">Password *</label></strong></dt><dd><%= password_field :person, :password, :maxlength => 30, :size => 30 %></dd>
+    <%= error_message_on :person, :password_confirmation, "The password confirmation " %>
+    <dt><strong><label for="person_password_confirmation">Confirm Password *</label></strong></dt><dd><%= password_field :person, :password_confirmation, :maxlength => 30, :size => 30 %></dd>
+  <% end %>
+</dl>
+</fieldset>

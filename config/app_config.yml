@@ -1,0 +1,43 @@
+# top level domains ... .co.za=2
+
+za:
+  app_name: Fluttervoice
+  site: za
+  tld_length: 2
+  domain: fluttervoice-dev.co.za:3000
+  system_email: 'Fluttervoice <no-reply-i-am-robot@fluttervoice.co.za>'
+  priority_countries: ['South Africa', 'United Kingdom', 'Canada', 'United States', 'Australia']
+  priority_zones: ['Pretoria', 'London', 'Dublin', 'Alaska', 'Pacific Time (US &amp; Canada)', 'Arizona', 'Mountain Time (US &amp; Canada)', 'Central Time (US &amp; Canada)', 'Eastern Time (US &amp; Canada)', 'Indiana (East)']
+  default_currency: 'ZAR'
+  default_tax_system: 'VAT'
+  default_timezone: 'Pretoria'
+  currency_to_bill: 'ZAR'
+  _uacct: UA-55600-3
+
+com:
+  app_name: Fluttervoice
+  site: com
+  tld_length: 1
+  domain: fluttervoice-dev.com:3000
+  system_email: 'Fluttervoice <no-reply-i-am-robot@fluttervoice.com>'
+  priority_countries: ['United States', 'Canada', 'United Kingdom', 'Australia', 'South Africa']
+  priority_zones: ['Alaska', 'Pacific Time (US &amp; Canada)', 'Arizona', 'Mountain Time (US &amp; Canada)', 'Central Time (US &amp; Canada)', 'Eastern Time (US &amp; Canada)', 'Indiana (East)', 'London', 'Dublin', 'Pretoria']
+  default_currency: 'USD'
+  default_tax_system: 'Sales Tax'
+  default_timezone: 'Alaska'
+  currency_to_bill: 'USD'
+  _uacct: UA-55600-5
+  
+uk:
+  app_name: Fluttervoice
+  site: uk
+  tld_length: 1
+  domain: fluttervoice-dev.co.uk:3000
+  system_email: 'Fluttervoice <no-reply-i-am-robot@fluttervoice.co.uk>'
+  priority_countries: ['United Kingdom', 'United States', 'South Africa', 'Australia', 'Canada']
+  priority_zones: ['London', 'Dublin', 'Pretoria', 'Alaska', 'Pacific Time (US &amp; Canada)', 'Arizona', 'Mountain Time (US &amp; Canada)', 'Central Time (US &amp; Canada)', 'Eastern Time (US &amp; Canada)', 'Indiana (East)']
+  default_currency: 'GBP'
+  default_tax_system: 'VAT'
+  default_timezone: 'London'
+  currency_to_bill: 'GBP'
+  _uacct: UA-55600-6

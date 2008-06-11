@@ -1,0 +1,10 @@
+<li class="vcard">
+  <h3>
+    <span class="fn"><%=h contact.firstname %> <%=h contact.lastname %></span> | 
+    <span class="links">
+      <%= link_to "Edit", { :controller => 'people', :action => 'edit', :id => contact.id }, :title => 'Edit contact information' %> | 
+      <%= link_to "Delete", { :controller => "people", :action => "delete", :id => contact.id }, :post => true, :title => 'Delete this contact', :confirm => "Are you sure you want to delete this person forever?" %>
+    </span>
+  </h3>
+  <%= render :partial => "widgets/contact", :locals => { :person => contact } %>
+</li>

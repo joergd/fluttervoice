@@ -1,0 +1,34 @@
+
+<% @invoice.invoice_lines.each do |invoice_line| -%>
+QUANTITY: <%=h invoice_line.quantity %> @ PRICE: <%= @invoice.currency_symbol %><%=h number_to_currency(invoice_line.price, { :unit => '' }) %> TOTAL: <%= @invoice.currency_symbol %><%=h invoice_line.total %>
+-- <%=h invoice_line.description %>
+<% end -%>
+
+
+-----------------------------------------------------------------
+Subtotal: <%= @invoice.currency_symbol %><%=h number_to_currency(@invoice.subtotal, { :unit => '' }) %>
+<% if @invoice.use_tax? -%>
+<%=h @invoice.tax_system %> @ <%=h number_to_percentage(@invoice.tax_percentage, { :precision => 2 }) %>: <%=h @invoice.currency_symbol %><%=h number_to_currency(@invoice.tax, { :unit => '' }) %>
+<% end -%>
+<% if @invoice.shipping > 0 -%>
+Shipping: <%=h @invoice.currency_symbol %><%=h number_to_currency(@invoice.shipping, { :unit => '' }) %>
+<% end -%>
+<% if @invoice.apply_late_fee? -%>
+Late fee @ <%=h number_to_percentage(@invoice.late_fee_percentage, { :precision => 2 }) %>: <%=h @invoice.currency_symbol %><%=h number_to_currency(@invoice.late_fee, { :unit => '' }) %>
+<% end -%>
+
+TOTAL: <%=h @invoice.currency_symbol %><%=h number_to_currency(@invoice.total.to_f + @invoice.late_fee.to_f, { :unit => '' }) %>
+
+<% if @invoice.paid > 0 -%>
+Amount paid: (<%=h @invoice.currency_symbol %><%=h number_to_currency(@invoice.paid, { :unit => '' }) %>)
+<% end -%>
+
+AMOUNT DUE: <%=h @invoice.currency_symbol %><%=h number_to_currency(@invoice.amount_due, { :unit => '' }) %>
+-----------------------------------------------------------------
+
+Invoice Due: <%=h @invoice.due_date.strftime("%d %b %Y") %><% if !@invoice.terms.empty? %> (<%=h @invoice.terms %>)<% end %>
+All amounts are in <%= @invoice.currency.name %>
+
+<% if !@invoice.notes.blank? -%>
+Invoice notes: <%= @invoice.notes %>
+<% end -%>

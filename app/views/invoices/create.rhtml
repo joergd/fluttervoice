@@ -1,0 +1,31 @@
+<div id="sidebar"></div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <%= render_cancel_button %>
+
+  <h2>New invoice</h2>
+  
+  
+  <% form_tag :action => 'create' do -%>
+  
+      <h4>Who are you creating this invoice for?</h4>
+      <fieldset>
+        <dl id="create_invoice_form">
+          <dt><label for="client">Client</label></dt>
+          <dd>
+            <%= select_tag(:client, options_for_select([["Select an existing client", ""], ["-", ""]]) << options_from_collection_for_select(@account.clients, :id, :name)) %>&nbsp;&nbsp;&nbsp;&nbsp;<span class="huge">or, </span><%= text_field_tag :newclient, "Enter a new client", :maxlength => 100, :size => 30, :onclick => "clickclear(this, 'Enter a new client');" %>
+          </dd>
+        </dl>
+      </fieldset>
+        
+      <div class="submit_box">
+        <%= submit_tag 'Create invoice' %>
+      </div>
+  
+  <% end -%>
+
+</div>
