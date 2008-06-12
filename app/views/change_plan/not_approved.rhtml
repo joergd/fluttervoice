@@ -1,0 +1,38 @@
+<div id="sidebar">
+</div>
+
+<div id="content">
+
+  <h2>Declined!</h2>
+	<p>
+		For some reason, your credit card transaction has been declined.
+	</p>
+	<p>Reason from the bank: <strong><%= params[:p3] %></strong></p>
+	
+	<p>If you like, below are the numbers to the major South African banks:</p>
+
+	<table>
+		<tr>
+			<td>ABSA</td><td>012 317 3000</td>
+		</tr>
+		<tr>
+			<td>FNB</td><td>011 369 2898</td>
+		</tr>
+		<tr>
+			<td>Standard Bank</td><td>011 241 1000</td>
+		</tr>
+		<tr>
+			<td>Nedbank</td><td>011 710 4710</td>
+		</tr>
+		<tr>
+			<td>Mercantile</td><td>0861 502005</td>
+		</tr>
+		<tr>
+			<td>Investec</td><td>011 286 9663</td>
+		</tr>
+	</table>
+	
+	<% if @account -%>
+		<p>Take me to <%= link_to "My Account", "http://#{base_url(@account)}/account" %>.</p>
+	<% end -%>
+</div>

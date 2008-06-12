@@ -1,0 +1,13 @@
+<div id="sidebar">
+</div>
+
+<div id="content">
+
+  <h2>Thank you!</h2>
+	<p>Your credit card transaction of R<%= params[:p6] %>/month has been approved.</p>
+		<% if @plan -%><p>You are now on <%= @app_config['app_name']%> <%= @plan.name %>.</p><% end -%>
+
+	<% if @account -%>
+		<p>Take me to <%= link_to "My Account", "http://#{base_url(@account)}/account" %>.</p>
+	<% end -%>
+</div>
