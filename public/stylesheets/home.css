@@ -481,33 +481,6 @@ table#plans .price {
 
 
 /*-------------------------------------------------
-CHANGE ACCOUNT FORM
--------------------------------------------------*/
-ul#change_account {
-  list-style: none;
-  margin: 0px;
-  padding: 0px;
-  margin-top: 60px;
-}
-
-ul#change_account li {
-  margin-bottom: 40px;
-}
-
-ul#change_account li dt {
-	float: left;
-	clear: left;
-	text-align: right;
-	margin: 5px 10px;
-	width: 100px;
-}
-
-ul#change_account li dd {
-	margin-bottom: 5px;
-}
-
-
-/*-------------------------------------------------
 ERRORS
 -------------------------------------------------*/
 

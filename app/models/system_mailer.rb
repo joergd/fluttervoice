@@ -10,22 +10,6 @@ class SystemMailer < ActionMailer::Base
     setup(options)
   end
   
-  def welcome_paid(options)
-    account = options[:account]
-    options[:subject] = "Welcome to Fluttervoice #{account.plan.name}"
-    options[:recipients] = account.primary_user.email
-    options[:body] = { :account => account, :base_url => options[:base_url] }
-    setup(options)
-  end
-
-  def invoice(options)
-    account = options[:account]
-    options[:subject] = "Subscription confirmation to Fluttervoice #{account.plan.name}"
-    options[:recipients] = account.primary_user.email
-    options[:body] = { :account => account, :order_number => options[:order_number], :amount => options[:amount], :home_url => options[:home_url] }
-    setup(options)
-  end
-  
   def downgrade_to_free(options)
     account = options[:account]
     options[:subject] = "Subscription confirmation to Fluttervoice #{account.plan.name}"
@@ -33,6 +17,7 @@ class SystemMailer < ActionMailer::Base
     options[:body] = { :account => account, :home_url => options[:home_url] }
     setup(options)
   end
+
   
 private
 

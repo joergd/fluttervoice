@@ -11,8 +11,10 @@ za:
   default_currency: 'ZAR'
   default_tax_system: 'VAT'
   default_timezone: 'Pretoria'
-  currency_to_bill: 'ZAR'
-  _uacct: UA-55600-3
+  cc_currency: 'ZAR'
+  vcs_terminal_id: 4270
+  cc_form: 'https://www.vcs.co.za/vvonline/ccform.asp'
+  pam: y78evw4ny784ceny78
 
 com:
   app_name: Fluttervoice
@@ -25,8 +27,10 @@ com:
   default_currency: 'USD'
   default_tax_system: 'Sales Tax'
   default_timezone: 'Alaska'
-  currency_to_bill: 'USD'
-  _uacct: UA-55600-5
+  cc_currency: 'ZAR'
+  vcs_terminal_id: 4270
+  cc_form: 'https://www.vcs.co.za/vvonline/ccform.asp'
+  pam: y78evw4ny784ceny78
 
 uk:
   app_name: Fluttervoice
@@ -39,5 +43,7 @@ uk:
   default_currency: 'GBP'
   default_tax_system: 'VAT'
   default_timezone: 'London'
-  currency_to_bill: 'GBP'
-  _uacct: UA-55600-6
+  cc_currency: 'ZAR'
+  vcs_terminal_id: 4270
+  cc_form: 'https://www.vcs.co.za/vvonline/ccform.asp'
+  pam: y78evw4ny784ceny78

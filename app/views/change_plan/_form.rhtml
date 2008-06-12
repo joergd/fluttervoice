@@ -1,22 +1,16 @@
-<ul id="change_account">
-  <li>
-    <% if !flash[:cc_error].blank? -%>
-      <div class="formError"><span><%= flash[:cc_error] %></span></div>
-    <% end -%>
-    <% if !@account.cc_last_4_digits.blank? && !@account.vp_cross_reference.blank? -%>
-      <%= check_box_tag :cc_use_cross_reference, "1", true, :onclick => "if (this.checked) { Effect.Fade('cc_form') } else { Effect.Appear('cc_form') };" %> Use my <%= @account.cc_type %> card with credit card number xxxx-xxxx-xxxx-<%= @account.cc_last_4_digits %>.
-    <% end -%>
-    <div id="cc_form" style="display: <% if @account.cc_last_4_digits.blank? %>block<% else %>none<% end %>;">
-      <fieldset>
-        <legend>Your credit card details</legend>
-        <%= render :partial => "signup/credit_card_form" %>
-      </fieldset>
-    </div>
-  </li>
-  <li>
-    <fieldset>
-      <legend>Please review and accept</legend>
-      <%= render :partial => "review" %>
-    </fieldset>
-  </li>
-</ul>
+<form method="post" action="<%= @app_config['cc_form'] %>">
+	<%= hidden_field_tag :p1, @app_config['vcs_terminal_id'] %>
+	<%= hidden_field_tag :p2, PaymentGateway.generate_transaction_ref(@account.subdomain, @plan.id) %>
+	<%= hidden_field_tag :p3, "#{@app_config['app_name']} #{@plan.name}" %>
+	<%= hidden_field_tag :p4, @plan.cost(@app_config['site']) %>
+
+	<%= hidden_field_tag :p6, "U" %>
+	<%= hidden_field_tag :p7, "M" %>
+	<%= hidden_field_tag "NextOccurDate", (Time.now + 1.month).strftime("%Y/%m/%d") %>
+	<%= hidden_field_tag "Budget", "N" %>
+	<%= hidden_field_tag "CardholderEmail", current_user.email %>
+	<%= hidden_field_tag :m_1, @account.id %>
+	<%= hidden_field_tag :m_2, @plan.id %>
+	<%= hidden_field_tag :m_3, current_user.id %>
+	<%= submit_tag "Pay by credit card", :id => "change_plan", :disabled => true %>
+</form>

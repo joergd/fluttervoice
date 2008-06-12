@@ -3,14 +3,12 @@
 
 <div id="content">
 
-  <%= display_error %>
-  <%= display_notice %>
-
   <%= render_cancel_button %>
 
   <%= render :partial => "blurb" %>
-  <% form_tag :action => 'ultimate' do -%>
-    <%= render :partial => "form" %>
-  <% end -%>
+  <%= render :partial => "new_plan" %>
+
+  <%= render :partial => "review" %>
+  <%= render :partial => "form" %>
   
 </div>

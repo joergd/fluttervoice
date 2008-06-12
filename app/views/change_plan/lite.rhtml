@@ -3,19 +3,12 @@
 
 <div id="content">
 
-  <%= display_error %>
-  <%= display_notice %>
-
   <%= render_cancel_button %>
 
   <%= render :partial => "blurb" %>
+  <%= render :partial => "new_plan" %>
 
-  <% if !@account.errors.empty? || (@creditcard && !@creditcard.errors.empty?) || !flash[:cc_error].blank? -%>
-    <div class="formError"><span>Something went wrong with saving your form. Please look at the highlighted messages below to see if you can correct the problem.</span></div>
-  <% end -%>
-
-  <% form_tag :action => 'lite' do -%>
-    <%= render :partial => "form" %>
-  <% end -%>
+  <%= render :partial => "review" %>
+  <%= render :partial => "form" %>
   
 </div>

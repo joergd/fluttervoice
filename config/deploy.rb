@@ -112,6 +112,12 @@ namespace :deploy do
     EOF
 
     run <<-EOF
+      cd #{release_path}/public && 
+      mkdir account
+      chmod 777 account
+    EOF
+
+    run <<-EOF
       rm -rf #{release_path}/public/blog &&
       cd #{release_path}/public &&
       ln -s #{shared_path}/blog blog

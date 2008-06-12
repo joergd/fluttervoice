@@ -21,6 +21,11 @@ module ApplicationHelper
     @account.nil? || ['', 'www'].include?(@account.subdomain)
   end
 
+  def base_url(account = nil)
+    account ||= Account.find_by_subdomain("www") 
+    "#{account.subdomain.downcase}.#{@app_config["domain"]}"
+  end
+
   def display_notice
     if flash[:notice]
       return %*
@@ -83,4 +88,5 @@ module ApplicationHelper
     }
     concat('</div>', block.binding)
   end
+
 end

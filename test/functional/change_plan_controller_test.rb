@@ -10,7 +10,7 @@ class ChangePlanControllerTest < Test::Unit::TestCase
     @controller = ChangePlanController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    @request.host = "www.fluttervoice.com"
+    @request.host = "#{@woodstock_account.subdomain}.fluttervoice.co.za"
     @request.session[:account_id] = @woodstock_account.id
     @request.session[:user] = @joerg
 
@@ -18,13 +18,6 @@ class ChangePlanControllerTest < Test::Unit::TestCase
     @emails.clear
   end
 
-  def test_jump_csncel
-    %w{ jump cancel }.each do |page|
-      get page
-      assert_response :redirect
-    end
-  end
-  
   # Replace this with your real tests.
   def test_basic_pages
     %w{ free lite hardcore ultimate }.each do |page|
@@ -32,25 +25,35 @@ class ChangePlanControllerTest < Test::Unit::TestCase
       assert_response :success
     end
   end
-
-  def test_use_current_cc_checkbox
-    @woodstock_account.update_attribute(:vp_cross_reference, nil)
-    %w{ lite hardcore ultimate }.each do |page|
-      get page
-      assert_response :success
-      assert_no_tag :tag => "input", :attributes => { :id => "cc_use_cross_reference" }
-      assert_tag :tag => "input", :attributes => { :id => "account_cc_number" }
-    end
-
-    @woodstock_account.update_attribute(:vp_cross_reference, "aswedrrf45rt34ewqscd")
-    %w{ lite hardcore ultimate }.each do |page|
-      get page
-      assert_response :success
-      assert_tag :tag => "input", :attributes => { :id => "cc_use_cross_reference" }
-      assert_tag :tag => "input", :attributes => { :id => "account_cc_number" }
-    end
+  
+  def test_lite_form_fields
+    get :lite
+    assert_select "#p1[value=?]", "4270"
+    assert_select "#p2"
+    assert_select "#p3[value=?]", "Fluttervoice Lite"
+    assert_select "#p4[value=?]", "45"
+    assert_select "#p6[value=?]", "U"
+    assert_select "#p7[value=?]", "M"
+    assert_select "#NextOccurDate[value=?]", (Time.now + 1.month).strftime("%Y/%m/%d")
+    assert_select "#Budget[value=?]", "N"
+    assert_select "#CardholderEmail[value=?]", @joerg.email
+    assert_select "#m_1[value=?]", @woodstock_account.id
+    assert_select "#m_2[value=?]", Plan.find(Plan::LITE).id
+    assert_select "#m_3[value=?]", @joerg.id
   end
 
+  def test_approved
+    post :approved, :p6 => 45, :m_1 => @woodstock_account.id, :m_2 => Plan.find_by_id(Plan::LITE)
+    assert_response :success
+    assert_select "p", { :text => "Your credit card transaction of R45/month has been approved." }
+  end
+  
+  def test_not_approved
+    post :not_approved, :p6 => 45, :p3 => "Because", :m_1 => @woodstock_account.id, :m_2 => Plan.find_by_id(Plan::LITE)
+    assert_response :success
+    assert_select "strong", { :text => "Because" }
+  end
+  
   def test_downgrade_to_free
     num_accounts = Account.count
     num_preferences = Preference.count
@@ -74,8 +77,6 @@ class ChangePlanControllerTest < Test::Unit::TestCase
     assert audit_account.is_a?(AuditChangePlan)
     assert_equal account.subdomain, audit_account.subdomain
     assert_equal "Free", audit_account.plan
-    assert_nil audit_account.cc_name
-    assert_nil audit_account.order_number
 
     assert_equal(1, @emails.size)
     email = @emails.first

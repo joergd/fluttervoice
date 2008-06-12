@@ -62,21 +62,8 @@ class Account < ActiveRecord::Base
   validates_length_of      :tel, :maximum => 30
   validates_length_of      :fax, :maximum => 30
   
-  validates_presence_of   :cc_name, :cc_address1, :cc_city, :cc_number, :cc_postalcode, :cc_code, :cc_expiry, :if => :require_cc_validation
-  validates_length_of     :cc_name, :cc_address1, :cc_city, :maximum => 100, :if => :require_cc_validation
-  validates_length_of     :cc_number, :minimum => 16, :if => :require_cc_validation
-  validates_length_of     :cc_code, :within => 3..3, :if => :require_cc_validation
-  
   before_save :strip_whitespaces
   before_create :set_effective_date
-
-  attr_accessor :cc_amount, :cc_number, :cc_code # we don't store these on the DB
-
-  # if true, then we validate the cc fields. If it is false,
-  # it could mean that there is no cc sutff happening,
-  # or that we are using the vp_cross_reference for payment,
-  # and therefore don't need to validate cc fields
-  attr_accessor :validate_cc 
 
   def open_invoices
     Invoice.find( :all,
@@ -201,13 +188,6 @@ protected
     Date.new(y, m, round_day_down(y, m, d))
   end
 
-  # to figure out whether we're signing up to a paid account, and therefore whether we need to validate
-  # cc fields, is to look for the presence of cc_type. Because cc_type is not present on the free signup.
-  # also - if we're upgrading/downgrading/repeating then we use the cross_reference
-  def require_cc_validation
-    cc_type && validate_cc
-  end
-  
 private
 
   def web_not_nil?

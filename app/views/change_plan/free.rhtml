@@ -10,10 +10,8 @@
 
   <%= render :partial => "blurb" %>
   <% form_tag :action => 'free' do -%>
-    <fieldset>
-      <legend>Please review and accept</legend>
-      <%= render :partial => "review" %>
-    </fieldset>
+		<%= render :partial => "review" %>
+		<%= submit_tag "Downgrade to Free", :id => "change_plan", :disabled => true  %>
   <% end -%>
   
 </div>
