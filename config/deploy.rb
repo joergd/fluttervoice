@@ -113,7 +113,7 @@ namespace :deploy do
 
     run <<-EOF
       cd #{release_path}/public && 
-      mkdir account
+      mkdir account &&
       chmod 777 account
     EOF
 

@@ -14,7 +14,8 @@ class CcController < ApplicationController
                                     :amount => params[:p6],
                                     :cc_type => params[:p7],
                                     :description => params[:p8],
-                                    :cc_email => params[:p9])
+                                    :cc_email => params[:p9],
+                                    :cc_expiry => params[:p11])
       if account.plan != plan
         account.plan = plan
         account.save!

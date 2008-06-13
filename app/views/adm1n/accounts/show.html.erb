@@ -20,6 +20,7 @@
 		<th>Response</th>
 		<th>Description</th>
 		<th>CC Name</th>
+		<th>CC Expiry</th>
 		<th>CC Email</th>
 		<th>CC Type</th>
 	</tr>
@@ -28,10 +29,11 @@
 		<td><%= cc.created_on %></td>
 		<td><%=h cc.reference %></td>
 		<td><%= cc.amount %></td>
-		<td><%=h cc.plan.name %></td>
+		<td><%=h cc.plan.name if cc.plan %></td>
 		<td><%=h cc.response %></td>
 		<td><%=h cc.description  %></td>
 		<td><%=h cc.cc_name %></td>
+		<td><%=h cc.cc_expiry %></td>
 		<td><%=h cc.cc_email %></td>
 		<td><%=h cc.cc_type %></td>
 	</tr>

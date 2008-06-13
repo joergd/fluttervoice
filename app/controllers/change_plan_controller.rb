@@ -1,15 +1,6 @@
 class ChangePlanController < ApplicationController
   before_filter :login_required, :except => [:approved, :not_approved]
 
-  # return-to accounts on own site
-  # have to implement it here as opposed to a direct /login/jump url,
-  # as the security token for the jump expires after 15seconds
-  # so generate it here, and redirect to the jump
-  def cancel
-    account = Account.find_by_id_and_primary_person_id(session[:account_id], current_user.id)
-    redirect_to "http://#{base_url(account)}/login/jump_to_account?id=#{current_user.id}&key=#{current_user.generate_security_token(15)}"  
-  end
-  
   def free
     @nonav = true # don't show nav menu
     @plan = Plan.find(Plan::FREE)

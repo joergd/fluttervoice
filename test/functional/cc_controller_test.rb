@@ -30,6 +30,7 @@ class CcControllerTest < ActionController::TestCase
     assert_response :success
     @woodstock_account.reload
     assert_equal @light_plan, @woodstock_account.plan
+    assert_equal @light_plan, @woodstock_account.credit_card_transactions.last.plan
   end
 
   def test_callback_not_approved
