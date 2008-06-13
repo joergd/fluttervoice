@@ -23,6 +23,8 @@
 		<th>CC Expiry</th>
 		<th>CC Email</th>
 		<th>CC Type</th>
+		<th>CC No</th>
+		<th>CC IP</th>
 	</tr>
 	<% @account.credit_card_transactions.each do |cc| -%>
 	<tr>
@@ -36,6 +38,8 @@
 		<td><%=h cc.cc_expiry %></td>
 		<td><%=h cc.cc_email %></td>
 		<td><%=h cc.cc_type %></td>
+		<td><%=h cc.cc_masked_number %></td>
+		<td><%=h cc.cc_card_holder_ip_addr %></td>
 	</tr>
 	<% end -%>
 </table>

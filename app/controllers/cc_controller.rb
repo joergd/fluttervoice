@@ -15,7 +15,10 @@ class CcController < ApplicationController
                                     :cc_type => params[:p7],
                                     :description => params[:p8],
                                     :cc_email => params[:p9],
-                                    :cc_expiry => params[:p11])
+                                    :cc_expiry => params[:p11],
+                                    :cc_masked_number => params["MaskedCardNumber"],
+                                    :cc_card_holder_ip_addr => params["CardHolderIpAddr"]
+                                    )
       if account.plan != plan
         account.plan = plan
         account.save!
