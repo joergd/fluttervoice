@@ -22,11 +22,25 @@ class CcControllerTest < ActionController::TestCase
     assert_not_equal @light_plan, @woodstock_account.plan
     assert_difference('CreditCardTransaction.count') do
       assert_difference('AuditChangePlan.count') do
-        post :callback_approved, :pam => "y78evw4ny784ceny78", :m_1 => @woodstock_account.id, :m_2 => @light_plan.id
+        assert_difference('ManualIntervention.count') do
+          post :callback_approved, :pam => "y78evw4ny784ceny78", :m_1 => @woodstock_account.id, :m_2 => @light_plan.id
+        end
       end
     end
     assert_response :success
     @woodstock_account.reload
     assert_equal @light_plan, @woodstock_account.plan
+  end
+
+  def test_callback_not_approved
+    assert_not_equal @light_plan, @woodstock_account.plan
+    assert_difference('CreditCardTransaction.count') do
+      assert_difference('ManualIntervention.count') do
+        post :callback_not_approved, :pam => "y78evw4ny784ceny78", :m_1 => @woodstock_account.id, :m_2 => @light_plan.id
+      end
+    end
+    assert_response :success
+    @woodstock_account.reload
+    assert_not_equal @light_plan, @woodstock_account.plan
   end
 end

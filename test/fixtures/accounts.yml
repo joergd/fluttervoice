@@ -10,14 +10,6 @@ woodstock_account:
   name: Woodstock Freelancers, but should be main site
   subdomain: woodstock
   web: www.woodstock.org
-  cc_name: Joerg Diekmann
-  cc_address1: 61 Roberts Road
-  cc_city: Cape Town
-  cc_postalcode: 7925
-  cc_country: South Africa
-  cc_last_4_digits: 4453
-  cc_expiry: <%= Date.today + 100 %>
-  currency: ZAR
 painting_account:
   id: 2
   primary_person_id: 3
@@ -29,4 +21,3 @@ velocity_pay:
   primary_person_id: 1
   name: Velocity Pay Test Account
   subdomain: velocity
-  cc_name: Can Be Anything

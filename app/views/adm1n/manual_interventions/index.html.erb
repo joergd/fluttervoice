@@ -1,0 +1,16 @@
+<h1>Listing manual interventions</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for manual_intervention in @manual_interventions %>
+  <tr>
+		<td><%= link_to(manual_intervention.account.name, adm1n_account_path(manual_intervention.account)) if manual_intervention.account %></td>
+		<td><%= button_to "Complete", complete_adm1n_manual_intervention_path(manual_intervention), :method => :post %></td>
+    <td><%= link_to 'Show', adm1n_manual_intervention_path(manual_intervention) %></td>
+    <td><%= link_to 'Edit', edit_adm1n_manual_intervention_path(manual_intervention) %></td>
+    <td><%= link_to 'Destroy', adm1n_manual_intervention_path(manual_intervention), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

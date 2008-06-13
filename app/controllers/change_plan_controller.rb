@@ -16,7 +16,6 @@ class ChangePlanController < ApplicationController
     if request.post?
       @account.plan = @plan
       if @account.save
-        audit_free_change_plan(account, current_user)
         send_downgrade_to_free(account)
         flash[:notice] = "You have successfully downgraded your account."
         redirect_to :controller => "account", :action => ""
@@ -65,16 +64,6 @@ class ChangePlanController < ApplicationController
   end
 
 private
-
-  def audit_free_change_plan(account, user)
-    begin
-      AuditChangePlan.record_free(account.subdomain, user.email, @app_config['site'], request.remote_ip)
-    rescue
-      logger.error("Error auditing free change plan")
-      logger.error($!)
-      ExceptionNotifier.deliver_exception_notification($!, self, request)
-    end
-  end
 
   def send_downgrade_to_free(account)
     begin

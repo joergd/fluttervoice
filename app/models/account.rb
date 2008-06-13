@@ -17,11 +17,19 @@ class Account < ActiveRecord::Base
               :include => [ :client ],
               :order => "invoices.date desc" 
 
-  has_many    :credit_card_transactions, :order => "id desc"  do
+  has_many    :manual_interventions, :order => "created_at ASC" do
+    def last
+      find(:last)
+    end
+  end
+  
+  has_many    :credit_card_transactions, :order => "created_on DESC" do
     def last
       find(:first)
     end
   end
+
+  has_many    :audit_logins
   
   composed_of :address,
               :mapping => [
@@ -63,8 +71,10 @@ class Account < ActiveRecord::Base
   validates_length_of      :fax, :maximum => 30
   
   before_save :strip_whitespaces
+  before_save :deal_with_change_of_plan
   before_create :set_effective_date
-
+  after_destroy :set_mandatory_intervention
+  
   def open_invoices
     Invoice.find( :all,
                   :include => [ :client ],
@@ -201,5 +211,21 @@ private
       return false
     end
   end
+
+  # When we change the plan - we will have to cancel a recurring cc payment
+  def deal_with_change_of_plan
+    if plan_id_changed?
+      if plan_id_was != Plan::FREE
+        manual_interventions.create(:description => "Change of plan from #{Plan.find(plan_id_was).name} to #{Plan.find(plan_id).name}. Check CC payment details.")
+      end
+      AuditChangePlan.create(:subdomain => subdomain, :plan => plan.name)
+    end
+  end
   
+  # If we cancel an account (destroy it), we need to create a mandatory intervention
+  # in case we had a recurring cc payment. Alway create one, though, and check manually
+  # whether there are any cc payments that need deleting.
+  def set_mandatory_intervention
+    manual_interventions.create(:description => "Account cancelled. Check CC payment details.")
+  end
 end

@@ -33,6 +33,13 @@ ActionController::Routing::Routes.draw do |map|
 
   # /^([Aa]ll|[Oo]pen|[Oo]verdue|[Cc]losed).*/ .... used to be that 
 
+  map.namespace(:adm1n) do |adm1n|
+    adm1n.home "/", :controller => "home", :action => "index"
+    adm1n.resources :manual_interventions, :member => { :complete => :post }
+    adm1n.resources :accounts
+  end
+    
+
   # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id'
 

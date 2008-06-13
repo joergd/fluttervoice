@@ -1,0 +1,39 @@
+<h1><%= @account.name %></h1>
+
+<strong>Subdomain</strong>: <%= @account.subdomain %><br/>
+<strong>Plan</strong>: <%= @account.plan.name %><br/>
+<strong>Effective</strong>: <%= @account.effective_date %><br/>
+<strong>Contact</strong>: <%= @account.primary_user.name %> | <%= @account.primary_user.email %><br/>
+<strong>City</strong>: <%= @account.city %><br/>
+<strong>Clients</strong>: <%= @account.clients.count %><br/>
+<strong>Invoices</strong>: <%= @account.invoices.count %><br/>
+<strong>Logins</strong>: <%= @account.audit_logins.count %><br/>
+<strong>Created</strong>: <%= @account.created_on %><br/>
+
+<h2>Credit Card Transactions</h2>
+<table>
+	<tr>
+		<th>DateTime</th>
+		<th>Reference</th>
+		<th>Amount</th>
+		<th>Plan</th>
+		<th>Response</th>
+		<th>Description</th>
+		<th>CC Name</th>
+		<th>CC Email</th>
+		<th>CC Type</th>
+	</tr>
+	<% @account.credit_card_transactions.each do |cc| -%>
+	<tr>
+		<td><%= cc.created_on %></td>
+		<td><%=h cc.reference %></td>
+		<td><%= cc.amount %></td>
+		<td><%=h cc.plan.name %></td>
+		<td><%=h cc.response %></td>
+		<td><%=h cc.description  %></td>
+		<td><%=h cc.cc_name %></td>
+		<td><%=h cc.cc_email %></td>
+		<td><%=h cc.cc_type %></td>
+	</tr>
+	<% end -%>
+</table>

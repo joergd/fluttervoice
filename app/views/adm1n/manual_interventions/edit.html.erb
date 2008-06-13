@@ -1,0 +1,14 @@
+<h1>Editing manual intervention for <%=h @manual_intervention.account.name %></h1>
+
+<% form_for :manual_intervention, :url => adm1n_manual_intervention_path(@manual_intervention), :html => { :method => :put }  do |f| %>
+  <%= f.error_messages %>
+
+	<%= render :partial => "form", :locals => { :f => f } %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', adm1n_manual_intervention_path(@manual_intervention) %> |
+<%= link_to 'Back', adm1n_manual_interventions_path %>

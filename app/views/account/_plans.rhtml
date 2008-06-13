@@ -4,7 +4,9 @@
       <th class="description">&nbsp;</th>
       <% @plans.each do |plan| -%>
         <th class="<%=h plan.name.downcase %>"><%=h plan.name %><br/><span class="cost"><%= plan.display_cost(@app_config['site']) %></span><br/>
+					<!-->
           <% if @account.plan.seq > plan.seq %><%= link_to "Downgrade", :controller => 'change_plan', :action => "jump", :id => plan.id %><% elsif @account.plan.seq < plan.seq %><%= link_to "Upgrade", :controller => 'change_plan', :action => plan.name.downcase %><% end %>
+				-->
         </th>
       <% end -%>
     </tr>

@@ -172,4 +172,26 @@ class AccountTest < Test::Unit::TestCase
     assert !@woodstock_account.invoice_limit_reached?
   end
 
+  def test_plan_change
+    assert @woodstock_account.update_attribute(:plan_id, Plan::FREE)
+      assert_difference('ManualIntervention.count', 0) do
+        assert_difference('AuditChangePlan.count') do
+        @woodstock_account.plan = Plan.find(Plan::LITE)
+        @woodstock_account.save
+      end
+    end
+    assert_difference('ManualIntervention.count') do
+      assert_difference('AuditChangePlan.count') do
+        @woodstock_account.plan = Plan.find(Plan::HARDCORE)
+        @woodstock_account.save
+      end
+    end
+  end
+  
+  def test_destroy_account
+    assert_difference('ManualIntervention.count') do
+      @woodstock_account.destroy
+    end
+  end
+  
 end
