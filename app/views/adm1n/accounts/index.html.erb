@@ -1,0 +1,25 @@
+<h1>Accounts</h1>
+
+<div id="search">
+	<% form_tag( adm1n_accounts_path, { :id => "search_form", :method => :get } ) do -%>
+
+	  <%= text_field_tag :q, params[:q], :size => 15, :maxlength => 50 %>
+	  <%= submit_tag "Search", :class => "search_button" %>
+
+	<% end -%>
+</div>
+
+<hr/>
+
+<table>
+	<tr>
+		<th>ID</th>
+		<th>URL</th>
+	</tr>
+	<% @accounts.each do |account| -%>
+		<tr>
+			<td><%= account[:id] %></td>
+			<td><%= link_to account.subdomain, adm1n_account_path(account) %></td>
+		</tr>
+	<% end -%>
+</table>

@@ -2,7 +2,7 @@ class Adm1n::ManualInterventionsController < Adm1n::ApplicationController
   # GET /manual_interventions
   # GET /manual_interventions.xml
   def index
-    @manual_interventions = ManualIntervention.find(:all)
+    @manual_interventions = ManualIntervention.todos.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
