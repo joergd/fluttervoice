@@ -78,7 +78,7 @@ private
   end
 
   def extract_account_from_url
-    @account = Account.find_by_subdomain_and_deleted(request.subdomains(@app_config["tld_length"]).first || 'www', 0, :include => [ :preference, :plan ])
+    @account = Account.find_by_subdomain(request.subdomains(@app_config["tld_length"]).first || 'www', :include => [ :preference, :plan ])
   end
 
   def country_domain
@@ -94,7 +94,7 @@ private
 
   def display_msg_if_non_existent_account
     if @account.nil?
-      render("available")
+      render "/available"
       return false
     end
   end

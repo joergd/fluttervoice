@@ -1,5 +1,6 @@
 <h1><%= @account.name %></h1>
 
+<strong>ID</strong>: <%= @account[:id] %><br/>
 <strong>Subdomain</strong>: <%= @account.subdomain %><br/>
 <strong>Plan</strong>: <%= @account.plan.name %><br/>
 <strong>Effective</strong>: <%= @account.effective_date %><br/>
@@ -9,6 +10,7 @@
 <strong>Invoices</strong>: <%= @account.invoices.count %><br/>
 <strong>Logins</strong>: <%= @account.audit_logins.count %><br/>
 <strong>Created</strong>: <%= @account.created_on %><br/>
+<% if @account.deleted? -%><strong style="color: red;">DELETED</strong><% end -%>
 
 <h2>Credit Card Transactions</h2>
 <table>

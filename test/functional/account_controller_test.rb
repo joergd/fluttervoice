@@ -69,11 +69,10 @@ class AccountControllerTest < Test::Unit::TestCase
   end
 
   def test_destroy
-    post :destroy, :id => @woodstock_account.id 
-    assert_response :redirect
-
-    @woodstock_account.reload
-    assert_equal @woodstock_account.id, @woodstock_account.deleted 
+    assert_difference('Account.count', -1) do
+      post :destroy, :id => @woodstock_account.id 
+      assert_response :redirect
+    end
   end
 
 end

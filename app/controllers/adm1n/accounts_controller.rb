@@ -5,6 +5,6 @@ class Adm1n::AccountsController < Adm1n::ApplicationController
   end
   
   def show
-    @account = Account.find(params[:id])
+    @account = Account.find_with_deleted(params[:id])
   end
 end

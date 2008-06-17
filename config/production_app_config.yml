@@ -12,7 +12,7 @@ za:
   default_tax_system: 'VAT'
   default_timezone: 'Pretoria'
   cc_currency: 'ZAR'
-  vcs_terminal_id: 9027
+  vcs_terminal_id: 4270
   vcs_test_terminal_id: 9027
   vcs_live_terminal_id: 4270
   cc_form: 'https://www.vcs.co.za/vvonline/ccform.asp'
@@ -30,7 +30,7 @@ com:
   default_tax_system: 'Sales Tax'
   default_timezone: 'Alaska'
   cc_currency: 'ZAR'
-  vcs_terminal_id: 9027
+  vcs_terminal_id: 4270
   vcs_test_terminal_id: 9027
   vcs_live_terminal_id: 4270
   cc_form: 'https://www.vcs.co.za/vvonline/ccform.asp'
@@ -48,7 +48,7 @@ uk:
   default_tax_system: 'VAT'
   default_timezone: 'London'
   cc_currency: 'ZAR'
-  vcs_terminal_id: 9027
+  vcs_terminal_id: 4270
   vcs_test_terminal_id: 9027
   vcs_live_terminal_id: 4270
   cc_form: 'https://www.vcs.co.za/vvonline/ccform.asp'

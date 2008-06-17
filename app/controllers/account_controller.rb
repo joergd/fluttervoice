@@ -58,7 +58,7 @@ class AccountController < ApplicationController
       redirect_to :action => "cancel"
       return
     end
-    @account.update_attribute(:deleted, @account.id)
+    @account.destroy
     reset_session
     redirect_to "http://www.#{@app_config['domain']}/cancelled"
   end

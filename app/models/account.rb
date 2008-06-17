@@ -1,4 +1,6 @@
 class Account < ActiveRecord::Base
+  acts_as_paranoid
+  
   belongs_to  :plan
 
   belongs_to  :primary_user,
@@ -30,6 +32,8 @@ class Account < ActiveRecord::Base
   end
 
   has_many    :audit_logins
+
+  named_scope :paying, :conditions => ["plan_id IN (?)", [Plan::LITE, Plan::HARDCORE, Plan::ULTIMATE]]
   
   composed_of :address,
               :mapping => [
@@ -56,8 +60,7 @@ class Account < ActiveRecord::Base
                           :if => :web_not_nil?
   validates_uniqueness_of :subdomain,
                           :message => 'already taken',
-                          :allow_nil => true,
-                          :scope => :deleted
+                          :allow_nil => true
 
   validates_length_of      :name, :maximum => 100
   validates_length_of      :address1, :maximum => 100
@@ -73,7 +76,7 @@ class Account < ActiveRecord::Base
   before_save :strip_whitespaces
   before_save :deal_with_change_of_plan
   before_create :set_effective_date
-  after_destroy :set_mandatory_intervention
+  after_destroy :set_manual_intervention_for_cancelled_account
   
   def open_invoices
     Invoice.find( :all,
@@ -225,7 +228,7 @@ private
   # If we cancel an account (destroy it), we need to create a mandatory intervention
   # in case we had a recurring cc payment. Alway create one, though, and check manually
   # whether there are any cc payments that need deleting.
-  def set_mandatory_intervention
+  def set_manual_intervention_for_cancelled_account
     manual_interventions.create(:description => "Account cancelled. Check CC payment details.")
   end
 end

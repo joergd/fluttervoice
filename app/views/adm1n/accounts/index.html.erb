@@ -15,11 +15,13 @@
 	<tr>
 		<th>ID</th>
 		<th>URL</th>
+		<th></th>
 	</tr>
 	<% @accounts.each do |account| -%>
 		<tr>
 			<td><%= account[:id] %></td>
 			<td><%= link_to account.subdomain, adm1n_account_path(account) %></td>
+			<td><% if account.deleted? -%>DELETED<% end -%></td>
 		</tr>
 	<% end -%>
 </table>
