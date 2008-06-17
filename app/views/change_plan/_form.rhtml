@@ -1,3 +1,6 @@
+<% if @app_config['vcs_terminal_id'] == @app_config['vcs_test_terminal_id'] -%>
+	<p style="color: red;">Test Environment</p>
+<% end -%>
 <form method="post" action="<%= @app_config['cc_form'] %>">
 	<%= hidden_field_tag :p1, @app_config['vcs_terminal_id'] %>
 	<%= hidden_field_tag :p2, PaymentGateway.generate_transaction_ref(@account.subdomain, @plan.id) %>

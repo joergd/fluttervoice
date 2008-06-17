@@ -13,6 +13,7 @@
 <h2>Credit Card Transactions</h2>
 <table>
 	<tr>
+		<th>Enviro</th>
 		<th>ID</th>
 		<th>DateTime</th>
 		<th>Reference</th>
@@ -29,6 +30,7 @@
 	</tr>
 	<% @account.credit_card_transactions.each do |cc| -%>
 	<tr>
+		<td><%= cc.environment %></td>
 		<td><%= cc[:id] %></td>
 		<td><%= cc.created_on %></td>
 		<td><%=h cc.reference %></td>
