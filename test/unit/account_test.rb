@@ -160,8 +160,9 @@ class AccountTest < Test::Unit::TestCase
   end
 
   def test_invoice_limits_free
-    @woodstock_account.plan_id = 1
+    @woodstock_account.plan_id = 1    
     @woodstock_account.save
+    @woodstock_account.update_attribute :effective_date, Date.today - 10 # As in fixtures
     assert_equal 4, @woodstock_account.invoices_sent_in_current_cycle
     assert @woodstock_account.invoice_limit_reached?
   end
@@ -180,12 +181,16 @@ class AccountTest < Test::Unit::TestCase
         @woodstock_account.save
       end
     end
+    @woodstock_account.reload
+    assert_equal Date.today, @woodstock_account.effective_date
     assert_difference('ManualIntervention.count') do
       assert_difference('AuditChangePlan.count') do
         @woodstock_account.plan = Plan.find(Plan::HARDCORE)
         @woodstock_account.save
       end
     end
+    @woodstock_account.reload
+    assert_equal Date.today, @woodstock_account.effective_date
   end
   
   def test_destroy_account

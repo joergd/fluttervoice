@@ -70,8 +70,10 @@ class AccountControllerTest < Test::Unit::TestCase
 
   def test_destroy
     assert_difference('Account.count', -1) do
-      post :destroy, :id => @woodstock_account.id 
-      assert_response :redirect
+      assert_difference('ManualIntervention.count') do
+        post :destroy, :id => @woodstock_account.id 
+        assert_response :redirect
+      end
     end
   end
 

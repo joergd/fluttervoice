@@ -221,6 +221,7 @@ private
       if plan_id_was != Plan::FREE
         manual_interventions.create(:description => "Change of plan from #{Plan.find(plan_id_was).name} to #{Plan.find(plan_id).name}. Check CC payment details.")
       end
+      set_effective_date
       AuditChangePlan.create(:subdomain => subdomain, :plan => plan.name)
     end
   end
