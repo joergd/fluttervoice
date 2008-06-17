@@ -28,7 +28,7 @@ class ChangePlanControllerTest < Test::Unit::TestCase
   
   def test_lite_form_fields
     get :lite
-    assert_select "#p1[value=?]", "4270"
+    assert_select "#p1[value=?]", "9027"
     assert_select "#p2"
     assert_select "#p3[value=?]", "Fluttervoice Lite"
     assert_select "#p4[value=?]", "45"

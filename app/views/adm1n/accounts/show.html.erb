@@ -13,6 +13,7 @@
 <h2>Credit Card Transactions</h2>
 <table>
 	<tr>
+		<th>ID</th>
 		<th>DateTime</th>
 		<th>Reference</th>
 		<th>Amount</th>
@@ -28,9 +29,10 @@
 	</tr>
 	<% @account.credit_card_transactions.each do |cc| -%>
 	<tr>
+		<td><%= cc[:id] %></td>
 		<td><%= cc.created_on %></td>
 		<td><%=h cc.reference %></td>
-		<td><%= cc.amount %></td>
+		<td>R<%= cc.amount %></td>
 		<td><%=h cc.plan.name if cc.plan %></td>
 		<td><%=h cc.response %></td>
 		<td><%=h cc.description  %></td>

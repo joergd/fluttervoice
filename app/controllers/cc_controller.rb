@@ -4,6 +4,7 @@ class CcController < ApplicationController
       account = Account.find(params[:m_1])
       plan = Plan.find(params[:m_2])
       user = User.find_by_id(params[:m_3])
+      expiry = params[:p11].blank? ? "" : params[:p11][2..3] + params[:p11][0..1]
       CreditCardTransaction.create!(:account => account,
                                     :plan => plan,
                                     :user => user,
@@ -15,9 +16,10 @@ class CcController < ApplicationController
                                     :cc_type => params[:p7],
                                     :description => params[:p8],
                                     :cc_email => params[:p9],
-                                    :cc_expiry => params[:p11],
+                                    :cc_expiry => expiry,
                                     :cc_masked_number => params["MaskedCardNumber"],
-                                    :cc_card_holder_ip_addr => params["CardHolderIpAddr"]
+                                    :cc_card_holder_ip_addr => params["CardHolderIpAddr"],
+                                    :environment => params[:p1] == @app_config['vcs_live_terminal_id'] ? "LIVE" : "TEST"
                                     )
       if account.plan != plan
         account.plan = plan
@@ -34,6 +36,7 @@ class CcController < ApplicationController
       account = Account.find(params[:m_1])
       plan = Plan.find(params[:m_2])
       user = User.find_by_id(params[:m_3])
+      expiry = params[:p11].blank? ? "" : params[:p11][2..3] + params[:p11][0..1]
       CreditCardTransaction.create!(:account => account,
                                     :plan => plan,
                                     :user => user,
@@ -44,7 +47,10 @@ class CcController < ApplicationController
                                     :amount => params[:p6],
                                     :cc_type => params[:p7],
                                     :description => params[:p8],
-                                    :cc_email => params[:p9])
+                                    :cc_email => params[:p9],
+                                    :cc_expiry => expiry,
+                                    :environment => params[:p1] == @app_config['vcs_live_terminal_id'] ? "LIVE" : "TEST"
+                                    )
       ManualIntervention.create(:account => account,
                                 :description => "Credit card payment not approved. Investigate?")
       render :text => "Not approved", :status => 200
