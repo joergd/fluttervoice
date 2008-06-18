@@ -1,3 +1,4 @@
+require 'mongrel_cluster/recipes'
 # =============================================================================
 # ROLES
 # =============================================================================
@@ -127,49 +128,3 @@ namespace :deploy do
 
 end
 
-namespace :deploy do
-  namespace :mongrel do
-    [ :stop, :start, :restart ].each do |t|
-      desc "#{t.to_s.capitalize} the mongrel appserver"
-      task t, :roles => :app do
-        run "mongrel_rails cluster::#{t.to_s} --clean -C #{mongrel_config}"
-      end
-    end
-  end
-  
-  namespace :apache do
-    desc "Start Apache"
-    task :start, :roles => :web do
-      sudo "/etc/init.d/httpd start > /dev/null"
-    end
-
-    desc "Stop Apache"
-    task :stop, :roles => :web do
-      sudo "/etc/init.d/httpd stop > /dev/null"
-    end
-
-    desc "Restart Apache"
-    task :restart, :roles => :web do
-      sudo "/etc/init.d/httpd restart > /dev/null"
-    end
-  end
-
-  desc "Custom restart task for mongrel cluster"
-  task :restart do
-    deploy.mongrel.restart
-    deploy.apache.restart
-  end
-
-  desc "Custom start task for mongrel cluster"
-  task :start, :roles => :app do
-    deploy.mongrel.start
-    deploy.apache.start
-  end
-
-  desc "Custom stop task for mongrel cluster"
-  task :stop, :roles => :app do
-    deploy.apache.stop
-    deploy.mongrel.stop
-  end
-
-end
