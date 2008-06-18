@@ -17,4 +17,20 @@ class Adm1n::AccountsControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal 1, assigns(:accounts).size
   end
+
+  def test_should_paying
+    get :paying
+    assert_response :success
+    assert_equal 2, assigns(:accounts).size
+    
+    get :paying, :q => "wo"
+    assert_response :success
+    assert_equal 1, assigns(:accounts).size
+  end
+
+  def test_should_latest
+    get :latest
+    assert_response :success
+    assert_equal 4, assigns(:accounts).size
+  end
 end

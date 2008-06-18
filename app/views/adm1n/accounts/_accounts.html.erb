@@ -1,0 +1,18 @@
+<table>
+	<tr>
+		<th>ID</th>
+		<th>URL</th>
+		<th>Plan</th>
+		<th>Effective At</th>
+		<th>Created On</th>
+	</tr>
+	<% accounts.each do |account| -%>
+		<tr>
+			<td><%= account[:id] %></td>
+			<td><%= link_to account.subdomain, adm1n_account_path(account) %></td>
+			<td><%=h account.plan.name %></td>
+			<td><%= account.effective_date %></td>
+			<td><%= account.created_on %></td>
+		</tr>
+	<% end -%>
+</table>

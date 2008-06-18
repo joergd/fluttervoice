@@ -33,7 +33,7 @@ class Account < ActiveRecord::Base
 
   has_many    :audit_logins
 
-  named_scope :paying, :conditions => ["plan_id IN (?)", [Plan::LITE, Plan::HARDCORE, Plan::ULTIMATE]]
+  named_scope :paying, :conditions => ["plan_id IN (?)", [Plan::LITE, Plan::HARDCORE, Plan::ULTIMATE]], :order => "subdomain ASC"
   
   composed_of :address,
               :mapping => [

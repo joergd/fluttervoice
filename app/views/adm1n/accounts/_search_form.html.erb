@@ -1,0 +1,11 @@
+<div id="search">
+	<% form_tag( search_path, { :id => "search_form", :method => :get } ) do -%>
+
+	  <%= text_field_tag :q, params[:q], :size => 15, :maxlength => 50 %>
+	  <%= submit_tag "Search", :class => "search_button" %>
+
+	<% end -%>
+</div>
+
+<hr/>
+

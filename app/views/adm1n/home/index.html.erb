@@ -1,5 +1,9 @@
-<strong>Paying Accounts: </strong><%= Account.paying.count %><br/>
-<strong>Accounts: </strong><%= Account.count %><br/>
+<strong>Paying Accounts: </strong><%= link_to Account.paying.count, paying_adm1n_accounts_path %><br/>
+<strong>Accounts: </strong><%= link_to Account.count, adm1n_accounts_path %><br/>
 <strong>Clients: </strong><%= Client.count %><br/>
 <strong>Contacts: </strong><%= Contact.count %><br/>
 <strong>Invoices: </strong><%= Invoice.count %><br/>
+
+<br/>
+<%= link_to "Latest", latest_adm1n_accounts_path %><br/>
+<%= link_to "Credit Card Transactions", adm1n_credit_card_transactions_path %>

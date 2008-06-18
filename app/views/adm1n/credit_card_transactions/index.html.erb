@@ -1,0 +1,51 @@
+<h1>Credit Card Transactions</h1>
+
+<div id="search">
+	<% form_tag( adm1n_credit_card_transactions_path, { :id => "search_form", :method => :get } ) do -%>
+
+	  Reference: <%= text_field_tag :q, params[:q], :size => 15, :maxlength => 50 %>
+	  <%= submit_tag "Search", :class => "search_button" %>
+
+	<% end -%>
+</div>
+
+<hr/>
+
+<table>
+	<tr>
+		<th>Enviro</th>
+		<th>ID</th>
+		<th>Subdomain</th>
+		<th>DateTime</th>
+		<th>Reference</th>
+		<th>Amount</th>
+		<th>Plan</th>
+		<th>Response</th>
+		<th>Description</th>
+		<th>CC Name</th>
+		<th>CC Expiry</th>
+		<th>CC Email</th>
+		<th>CC Type</th>
+		<th>CC No</th>
+		<th>CC IP</th>
+	</tr>
+	<% @credit_card_transactions.each do |cc| -%>
+	<tr>
+		<td><%= cc.environment %></td>
+		<td><%= cc[:id] %></td>
+		<td><%= link_to cc.subdomain, adm1n_account_path(cc.account) %></td>
+		<td><%= cc.created_on %></td>
+		<td><%=h cc.reference %></td>
+		<td>R<%= cc.amount %></td>
+		<td><%=h cc.plan.name if cc.plan %></td>
+		<td><%=h cc.response %></td>
+		<td><%=h cc.description  %></td>
+		<td><%=h cc.cc_name %></td>
+		<td><%=h cc.cc_expiry %></td>
+		<td><%=h cc.cc_email %></td>
+		<td><%=h cc.cc_type %></td>
+		<td><%=h cc.cc_masked_number %></td>
+		<td><%=h cc.cc_card_holder_ip_addr %></td>
+	</tr>
+	<% end -%>
+</table>
