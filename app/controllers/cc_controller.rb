@@ -19,7 +19,7 @@ class CcController < ApplicationController
                                     :cc_expiry => expiry,
                                     :cc_masked_number => params["MaskedCardNumber"],
                                     :cc_card_holder_ip_addr => params["CardHolderIpAddr"],
-                                    :environment => params[:p1] == @app_config['vcs_live_terminal_id'] ? "LIVE" : "TEST"
+                                    :terminal => params[:p1]
                                     )
       if account.plan != plan
         account.plan = plan
@@ -49,7 +49,7 @@ class CcController < ApplicationController
                                     :description => params[:p8],
                                     :cc_email => params[:p9],
                                     :cc_expiry => expiry,
-                                    :environment => params[:p1] == @app_config['vcs_live_terminal_id'] ? "LIVE" : "TEST"
+                                    :terminal => params[:p1]
                                     )
       ManualIntervention.create(:account => account,
                                 :description => "Credit card payment not approved. Investigate?")

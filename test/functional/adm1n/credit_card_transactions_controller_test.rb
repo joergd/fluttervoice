@@ -16,7 +16,7 @@ class Adm1n::CreditCardTransactionsControllerTest < ActionController::TestCase
                                   :description => "Fluttervoice Something",
                                   :cc_email => "",
                                   :cc_expiry => "",
-                                  :environment => "TEST"
+                                  :terminal => "9012"
                                   )
     get :index
     assert_response :success

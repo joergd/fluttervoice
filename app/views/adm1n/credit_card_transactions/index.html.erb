@@ -13,7 +13,7 @@
 
 <table>
 	<tr>
-		<th>Enviro</th>
+		<th>Terminal</th>
 		<th>ID</th>
 		<th>Subdomain</th>
 		<th>DateTime</th>
@@ -31,7 +31,7 @@
 	</tr>
 	<% @credit_card_transactions.each do |cc| -%>
 	<tr>
-		<td><%= cc.environment %></td>
+		<td><%= cc.terminal %></td>
 		<td><%= cc[:id] %></td>
 		<td><%= link_to cc.subdomain, adm1n_account_path(cc.account) %></td>
 		<td><%= cc.created_on %></td>
