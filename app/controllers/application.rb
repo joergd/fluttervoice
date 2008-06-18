@@ -94,7 +94,7 @@ private
 
   def display_msg_if_non_existent_account
     if @account.nil?
-      render "/available"
+      render :template => "available"
       return false
     end
   end
