@@ -16,9 +16,9 @@ xml.invoice("xmlns:xlink" => "http://www.w3.org/1999/xlink", "xmlns" => "http://
   xml.paid(@invoice.paid)
   xml.amount_due(@invoice.amount_due)
   xml.lines do
-    @invoice.invoice_lines.each do |il|
+    @invoice.line_items.each do |il|
       xml.line do
-        xml.type(il.invoice_line_type.name.downcase)
+        xml.type(il.line_item_type.name.downcase)
         xml.type(il.quantity)
         xml.type(il.description)
         xml.type(il.price)

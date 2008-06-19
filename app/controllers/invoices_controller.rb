@@ -92,8 +92,8 @@ class InvoicesController < ApplicationController
       @invoice.setup_defaults
 
       # and set up an invoice lines collection with one invoice line, to prep the form with
-      # @invoice.invoice_lines = []
-      @invoice.invoice_lines << InvoiceLine.new({ :invoice_line_type_id => 1, :quantity => 1, :price => 0.00, :description => "" })
+      # @invoice.line_items = []
+      @invoice.line_items << LineItem.new({ :line_item_type_id => 1, :quantity => 1, :price => 0.00, :description => "" })
 
     else
 
@@ -229,20 +229,20 @@ private
   def get_lookups
     @currencies = Currency.find(:all, :order => 'name')
     @terms = Term.find(:all, :order => 'days')
-    @invoice_line_types = InvoiceLineType.find(:all, :order => 'position')
+    @line_item_types = LineItemType.find(:all, :order => 'position')
     @last_invoice_number_used = Invoice.last_number_used(@account.id)
   end
 
   def extract_lines_from_params
-    invoice_lines = Array.new
+    line_items = Array.new
     if !params[:line_items].nil?
       params[:line_items].each do |line_no, attr|
-        invoice_line = InvoiceLine.new(attr.merge(audit_create_trail))
+        invoice_line = LineItem.new(attr.merge(audit_create_trail))
         invoice_line.account_id = @account.id
-        invoice_lines << invoice_line
+        line_items << invoice_line
       end
     end
-    return invoice_lines
+    return line_items
   end
 
   def session_variables_present?
@@ -254,20 +254,20 @@ private
     return true
   end
 
-  def save_invoice(invoice, invoice_lines)
+  def save_invoice(invoice, line_items)
     # need this check here, else we clear the invoice lines, never to see them again.
-    if invoice_lines.size == 0
-      invoice.errors.add(:invoice_lines, "not there. You need at least one invoice line")
+    if line_items.size == 0
+      invoice.errors.add(:line_items, "not there. You need at least one invoice line")
       return false
     end
     begin
-      InvoiceLine.transaction do
+      LineItem.transaction do
         Invoice.transaction do
-          invoice.invoice_lines.clear
-          invoice.invoice_lines = invoice_lines
-          invoice.invoice_lines.each do |invoice_line|
+          invoice.line_items.clear
+          invoice.line_items = line_items
+          invoice.line_items.each do |invoice_line|
             if !invoice_line.valid?
-              invoice.errors.add(:invoice_lines, invoice_line_messages(invoice_line.errors).join(", "))
+              invoice.errors.add(:line_items, invoice_line_messages(invoice_line.errors).join(", "))
               return false
             end
           end
@@ -290,7 +290,7 @@ private
 
   def log_email(email_type, invoice, to, amount_due=nil)
     begin
-      email_log = EmailLog.new({ :account_id => invoice.account_id, :invoice_id => invoice.id, :client_id => invoice.client_id })
+      email_log = EmailLog.new({ :account_id => invoice.account_id, :document_id => invoice.id, :client_id => invoice.client_id })
       email_log.email_type = email_type
       email_log.to = to
       email_log.from = "#{current_user.firstname} #{current_user.lastname} <#{current_user.email}>"

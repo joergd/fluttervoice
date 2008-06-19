@@ -1,6 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 diageo_invoice:
   id: 1
+  type: Invoice
   account_id: 1
   client_id: 1
   number: 0001
@@ -17,6 +18,7 @@ diageo_invoice:
   
 dbsa_invoice:
   id: 2
+  type: Invoice
   account_id: 2
   client_id: 3
   number: 0002
@@ -33,6 +35,7 @@ dbsa_invoice:
 
 open_invoice:
   id: 3
+  type: Invoice
   account_id: 1
   client_id: 1
   number: 0003
@@ -49,6 +52,7 @@ open_invoice:
 
 closed_invoice:
   id: 4
+  type: Invoice
   account_id: 1
   client_id: 1
   number: 0004
@@ -66,6 +70,7 @@ closed_invoice:
 
 pastdue_invoice:
   id: 54
+  type: Invoice
   account_id: 1
   client_id: 1
   number: 0005
@@ -83,6 +88,7 @@ pastdue_invoice:
 
 draft_invoice:
   id: 55
+  type: Invoice
   account_id: 1
   client_id: 1
   number: 0006

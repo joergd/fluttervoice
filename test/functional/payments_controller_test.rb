@@ -5,7 +5,7 @@ require 'payments_controller'
 class PaymentsController; def rescue_action(e) raise e end; end
 
 class PaymentsControllerTest < Test::Unit::TestCase
-  fixtures :payments, :people, :accounts, :invoices, :clients
+  fixtures :payments, :people, :accounts, :documents, :clients
 
   def setup
     @controller = PaymentsController.new

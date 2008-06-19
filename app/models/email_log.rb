@@ -1,3 +1,3 @@
 class EmailLog < ActiveRecord::Base
-  belongs_to  :invoice
+  belongs_to  :document
 end

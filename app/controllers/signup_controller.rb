@@ -42,6 +42,7 @@ private
     @preference.thankyou_message = ""
     @preference.reminder_message = ""
     @preference.invoice_notes = ""
+    @preference.document_template_id = DocumentTemplate::DEFAULT
   end
 
   def get_objects_from_params

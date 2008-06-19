@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 require 'system_mailer'
 
 class SystemMailerTest < Test::Unit::TestCase
-  fixtures :invoices, :accounts, :clients, :invoice_lines, :preferences, :plans, :people
+  fixtures :documents, :accounts, :clients, :line_items, :preferences, :plans, :people
 
   def setup
     @account = Account.find(@woodstock_account.id)

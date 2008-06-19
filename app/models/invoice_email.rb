@@ -1,2 +1,0 @@
-class InvoiceEmail < Email
-end

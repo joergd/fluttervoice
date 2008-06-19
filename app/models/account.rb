@@ -17,7 +17,7 @@ class Account < ActiveRecord::Base
 
   has_many    :invoices,
               :include => [ :client ],
-              :order => "invoices.date desc" 
+              :order => "documents.date desc" 
 
   has_many    :manual_interventions, :order => "created_at ASC" do
     def last
@@ -81,24 +81,24 @@ class Account < ActiveRecord::Base
   def open_invoices
     Invoice.find( :all,
                   :include => [ :client ],
-                  :conditions => "invoices.account_id = #{id} and status_id = 1 and '#{today_timezone_date}' <= due_date",
-                  :order => "invoices.date desc" 
+                  :conditions => "documents.account_id = #{id} and status_id = 1 and '#{today_timezone_date}' <= due_date",
+                  :order => "documents.date desc" 
     )
   end
 
   def overdue_invoices
     Invoice.find( :all,
                   :include => [ :client ],
-                  :conditions => "invoices.account_id = #{id} and status_id = 1 and '#{today_timezone_date}' > due_date",
-                  :order => "invoices.date desc" 
+                  :conditions => "documents.account_id = #{id} and status_id = 1 and '#{today_timezone_date}' > due_date",
+                  :order => "documents.date desc" 
     )
   end
 
   def closed_invoices
     Invoice.find( :all,
                   :include => [ :client ],
-                  :conditions => "invoices.account_id = #{id} and status_id = 2",
-                  :order => "invoices.date desc" 
+                  :conditions => "documents.account_id = #{id} and status_id = 2",
+                  :order => "documents.date desc" 
     )
   end
 

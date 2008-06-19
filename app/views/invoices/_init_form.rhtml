@@ -2,8 +2,8 @@
 //<![CDATA[
   <%= render :partial => "invoice_line_item" %>
 
-  <% @invoice.invoice_lines.each do |il| -%>
-    populateLine(<%= il.invoice_line_type_id %>, <%= il.quantity %>, <%= il.price %>, "<%=h il.description %>");
+  <% @invoice.line_items.each do |il| -%>
+    populateLine(<%= il.line_item_type_id %>, <%= il.quantity %>, <%= il.price %>, "<%=h il.description %>");
   <% end -%>
 
   recalc();

@@ -5,7 +5,7 @@ require 'preferences_controller'
 class PreferencesController; def rescue_action(e) raise e end; end
 
 class PreferencesControllerTest < Test::Unit::TestCase
-  fixtures :preferences, :accounts, :people, :invoice_templates
+  fixtures :preferences, :accounts, :people, :document_templates
 
   def setup
     @controller = PreferencesController.new
@@ -69,7 +69,7 @@ class PreferencesControllerTest < Test::Unit::TestCase
 
   def test_templates_with_success
     post   :templates,
-          :preference => { :invoice_template_id => @classic_template.id }
+          :preference => { :document_template_id => @classic_template.id }
     assert_response :success
     assert_not_nil assigns(:preference)
     assert assigns(:preference).valid?
@@ -77,10 +77,10 @@ class PreferencesControllerTest < Test::Unit::TestCase
 
   def test_templates_with_failure
     post   :templates,
-          :preference => { :invoice_template_id => "" }
+          :preference => { :document_template_id => "" }
     assert_response :success
     assert_not_nil assigns(:preference)
-    assert_equal "can't be blank", assigns(:preference).errors.on(:invoice_template_id)
+    assert_equal "can't be blank", assigns(:preference).errors.on(:document_template_id)
   end
 
   def test_thankyous

@@ -1,2 +1,0 @@
-class SystemInvoiceTemplate < InvoiceTemplate
-end

@@ -5,7 +5,7 @@ require 'invoices_controller'
 class InvoicesController; def rescue_action(e) raise e end; end
 
 class InvoicesControllerTest < Test::Unit::TestCase
-  fixtures :accounts, :preferences, :people, :invoices, :invoice_lines, :invoice_line_types, :clients, :currencies
+  fixtures :accounts, :preferences, :people, :documents, :line_items, :line_item_types, :clients, :currencies
 
   def setup
     @controller = InvoicesController.new
@@ -140,7 +140,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
 
   def test_create_with_new_client
     post   :create,
-          :invoice_type => "TimeInvoiceLine",
+          :invoice_type => "TimeLineItem",
           :client => "",
           :newclient => "My new client"
     assert_redirected_to :controller => "clients", :action => "new"
@@ -193,7 +193,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
                             :use_tax => "0",
                             :po_number => '',
                             :currency_id => "ZAR" },
-            :line_items => { "0" => { :invoice_line_type_id => "1",
+            :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "1",
                                       :price => "20.00",
                                       :description => "My line" } } },
@@ -219,12 +219,12 @@ class InvoicesControllerTest < Test::Unit::TestCase
           {  :user => { :id => 1 }, # need to add login, else gets overwritten
             :client_id => 1 }
     assert_response :success
-    assert_equal "not there. You need at least one invoice line", assigns(:invoice).errors.on(:invoice_lines)
+    assert_equal "not there. You need at least one invoice line", assigns(:invoice).errors.on(:line_items)
   end
 
   def test_new_with_wrong_invoice_line
     num_invoices = Invoice.count
-    num_invoice_lines = InvoiceLine.count
+    num_line_items = LineItem.count
 
     post   :new,
           {  :invoice => {   :date => Date.today,
@@ -237,7 +237,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
                             :use_tax => "0",
                             :po_number => '',
                             :currency_id => "ZAR" },
-            :line_items => { "0" => { :invoice_line_type_id => "1",
+            :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "-1",
                                       :price => "0aa",
                                       :description => "" } } },
@@ -245,16 +245,16 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :client_id => 1 }
 
     assert_response :success
-    assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:invoice).errors.on(:invoice_lines)
+    assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:invoice).errors.on(:line_items)
 
     assert_equal num_invoices, Invoice.count
-    assert_equal num_invoice_lines, InvoiceLine.count
+    assert_equal num_line_items, LineItem.count
   end
 
   def test_new_with_valid_invoice
     @woodstock_account.update_attribute(:plan_id, Plan::HARDCORE)
     num_invoices = Invoice.count
-    num_invoice_lines = InvoiceLine.count
+    num_line_items = LineItem.count
 
     post   :new,
           {  :invoice => {   :date => Date.today,
@@ -268,7 +268,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
                             :po_number => '',
                             :currency_id => "ZAR",
                             :notes => "" },
-            :line_items => { "0" => { :invoice_line_type_id => "1",
+            :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "1",
                                       :price => "20.00",
                                       :description => "My line" } } },
@@ -279,7 +279,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
     assert_equal 20.00, assigns(:invoice).amount_due
     assert_equal Status::DRAFT, assigns(:invoice).status_id
     assert_equal num_invoices + 1, Invoice.count
-    assert_equal num_invoice_lines + 1, InvoiceLine.count
+    assert_equal num_line_items + 1, LineItem.count
   end
 
   def test_new_with_valid_invoice_free_account
@@ -298,7 +298,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
                             :po_number => '',
                             :currency_id => "ZAR",
                             :notes => "" },
-            :line_items => { "0" => { :invoice_line_type_id => "1",
+            :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "1",
                                       :price => "20.00",
                                       :description => "My line" } } },
@@ -347,7 +347,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
                             :use_tax => "0",
                             :po_number => '',
                             :currency_id => "ZAR" },
-            :line_items => { "0" => { :invoice_line_type_id => "1",
+            :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "-1",
                                       :price => "0aa",
                                       :description => "" } } },
@@ -355,11 +355,11 @@ class InvoicesControllerTest < Test::Unit::TestCase
              }
 
     assert_response :success
-    assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:invoice).errors.on(:invoice_lines)
+    assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:invoice).errors.on(:line_items)
   end
 
-  def test_edit_with_missing_invoice_lines
-    num_invoice_lines = @diageo_invoice.invoice_lines.size
+  def test_edit_with_missing_line_items
+    num_line_items = @diageo_invoice.line_items.size
     post   :edit,
           {  :id => @diageo_invoice.id,
             :invoice => {   :date => Date.today,
@@ -376,8 +376,8 @@ class InvoicesControllerTest < Test::Unit::TestCase
             }
 
     assert_response :success
-    assert_equal "not there. You need at least one invoice line", assigns(:invoice).errors.on(:invoice_lines)
-    assert_equal num_invoice_lines, @diageo_invoice.invoice_lines.size
+    assert_equal "not there. You need at least one invoice line", assigns(:invoice).errors.on(:line_items)
+    assert_equal num_line_items, @diageo_invoice.line_items.size
   end
 
   def test_edit_with_valid_invoice
@@ -396,7 +396,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
                             :po_number => '',
                             :currency_id => "ZAR",
                             :notes => "My banking details" },
-            :line_items => { "0" => { :invoice_line_type_id => "2",
+            :line_items => { "0" => { :line_item_type_id => "2",
                                       :quantity => "1",
                                       :price => "20.00",
                                       :description => "My line" } } },
@@ -405,12 +405,12 @@ class InvoicesControllerTest < Test::Unit::TestCase
 
     assert_redirected_to :action => "show"
     assert_equal num_invoices, Invoice.count
-    assert_equal 1, @diageo_invoice.invoice_lines.size
+    assert_equal 1, @diageo_invoice.line_items.size
   end
 
   def test_error_valid_edit_0_invoice_line
     test_edit_with_valid_invoice
-    assert_equal nil, InvoiceLine.find_by_invoice_id(0)
+    assert_equal nil, LineItem.find_by_document_id(0)
   end
 
   def test_get_currency_symbol
@@ -465,7 +465,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
       Invoice.find(@diageo_invoice.id)
     }
 
-    assert_nil InvoiceLine.find_by_invoice_id(@diageo_invoice.id)
+    assert_nil LineItem.find_by_document_id(@diageo_invoice.id)
   end
 
   def test_delete_from_other_account

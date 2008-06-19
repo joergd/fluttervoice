@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 require 'invoice_mailer'
 
 class InvoiceMailerTest < Test::Unit::TestCase
-  fixtures :invoices, :accounts, :clients, :invoice_lines, :preferences
+  fixtures :documents, :accounts, :clients, :line_items, :preferences
 
   def setup
     @invoice = Invoice.find(@diageo_invoice.id)

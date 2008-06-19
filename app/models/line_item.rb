@@ -1,6 +1,6 @@
-class InvoiceLine < ActiveRecord::Base
-  belongs_to   :invoice
-  belongs_to   :invoice_line_type
+class LineItem < ActiveRecord::Base
+  belongs_to   :document
+  belongs_to   :line_item_type
 
   validates_numericality_of    :price, :quantity
   validates_length_of          :description,
@@ -25,7 +25,7 @@ protected
 
   def validate_foreign_keys
     errors.add_to_base("Missing account_id") unless account_id > 0
-    errors.add_to_base("Missing invoice_id") unless invoice_id > 0
+    errors.add_to_base("Missing document_id") unless document_id > 0
     return false if !errors.empty?
   end
 end

@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class InvoiceLineTypeTest < Test::Unit::TestCase
-  fixtures :invoice_line_types
+class LineItemTypeTest < Test::Unit::TestCase
+  fixtures :line_item_types
 
   # Replace this with your real tests.
   def test_truth

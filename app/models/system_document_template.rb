@@ -1,0 +1,2 @@
+class SystemDocumentTemplate < DocumentTemplate
+end

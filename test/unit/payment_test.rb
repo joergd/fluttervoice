@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class PaymentTest < Test::Unit::TestCase
-  fixtures :payments, :accounts, :invoices
+  fixtures :payments, :accounts, :documents, :line_items, :line_item_types
 
   def setup
     @payment = Payment.find(@first_diageo_payment.id)
@@ -10,7 +10,7 @@ class PaymentTest < Test::Unit::TestCase
   def test_illegal_amount
     payment = Payment.new
     payment.account_id = @woodstock_account.id
-    payment.invoice_id = @diageo_invoice.id
+    payment.document_id = @diageo_invoice.id
     payment.amount = 'sadf'
     assert !payment.save
     assert_equal ["is not a number", "should really be more than zero"], payment.errors.on(:amount)
@@ -20,9 +20,9 @@ class PaymentTest < Test::Unit::TestCase
     payment = Payment.new
     payment.amount = 10
     payment.account_id = 0
-    payment.invoice_id = 0
+    payment.document_id = 0
     payment.save # TODO: should be (but doesn't work): assert !payment.save
-    assert_equal ["Missing account_id", "Missing invoice_id"], payment.errors.on(:base)
+    assert_equal ["Missing account_id", "Missing document_id"], payment.errors.on(:base)
   end
 
   def test_paid_save_trigger

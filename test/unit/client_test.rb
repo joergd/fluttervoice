@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class ClientTest < Test::Unit::TestCase
-  fixtures :clients, :accounts, :people, :invoices, :invoice_lines
+  fixtures :clients, :accounts, :people, :documents, :line_items
 
   def setup
     @client = Client.find(@edh.id)
@@ -42,13 +42,13 @@ class ClientTest < Test::Unit::TestCase
     assert_equal 5, @pathfinder.invoices.size
 
     invoice_id = @pathfinder.invoices.first.id
-    assert_equal 2, Invoice.find(invoice_id).invoice_lines.size
+    assert_equal 2, Invoice.find(invoice_id).line_items.size
     
     client.destroy
     
     assert_equal nil, Contact.find_by_client_id(@pathfinder.id)
     assert_equal nil, Invoice.find_by_client_id(@pathfinder.id)
-    assert_equal nil, InvoiceLine.find_by_invoice_id(invoice_id)
+    assert_equal nil, LineItem.find_by_document_id(invoice_id)
   end
 
 end

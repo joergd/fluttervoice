@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class AccountTest < Test::Unit::TestCase
-  fixtures :accounts, :clients, :plans, :invoices, :people, :preferences
+  fixtures :accounts, :clients, :plans, :documents, :people, :preferences
 
   def setup
     @account = Account.find(@woodstock_account.id)

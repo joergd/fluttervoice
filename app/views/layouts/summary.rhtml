@@ -12,11 +12,11 @@
   <link rel="shortcut icon" href="/favicon.ico" />
   <%= stylesheet_link_tag "main", :media => "all" %>
   
-  <% if @account.preference.invoice_template -%>
-    <%= stylesheet_link_tag "templates/#{@account.preference.invoice_template.css_filename}", :media => "all" %>
-  <% elsif !@account.plan.free? && !@account.preference.invoice_css.blank? -%>
+  <% if @account.preference.document_template -%>
+    <%= stylesheet_link_tag "templates/#{@account.preference.document_template.css_filename}", :media => "all" %>
+  <% elsif !@account.plan.free? && !@account.preference.document_css.blank? -%>
     <style type="text/css">
-      <%=h @account.preference.invoice_css %>
+      <%=h @account.preference.document_css %>
     </style>
   <% end -%>
   

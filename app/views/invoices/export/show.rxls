@@ -53,9 +53,9 @@
     <th>Description</th>    
     <th>Price</th>    
   </tr>
-  <% @invoice.invoice_lines.each do |il| -%>
+  <% @invoice.line_items.each do |il| -%>
     <tr>
-      <td><%=h il.invoice_line_type.name %></td>
+      <td><%=h il.line_item_type.name %></td>
       <td><%=h il.quantity %></td>
       <td><%=h il.description %></td>
       <td><%=h il.price %></td>

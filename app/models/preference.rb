@@ -6,9 +6,9 @@ class Preference < ActiveRecord::Base
               :foreign_key => "logo_image_id",
               :dependent => :delete
 
-  belongs_to  :invoice_template
+  belongs_to  :document_template
   
-  validates_presence_of         :currency_id, :timezone, :tax_system, :invoice_template_id, :terms
+  validates_presence_of         :currency_id, :timezone, :tax_system, :document_template_id, :terms
   validates_length_of            :currency_id, :maximum => 3
   validates_length_of            :timezone, :maximum => 50
   validates_length_of            :tax_system, :maximum => 30
@@ -20,7 +20,7 @@ class Preference < ActiveRecord::Base
 
   validates_length_of           :thankyou_message, :maximum => 2000, :allow_nil => true
   validates_length_of           :reminder_message, :maximum => 2000, :allow_nil => true
-  validates_length_of           :invoice_css, :maximum => 3000, :allow_nil => true
+  validates_length_of           :document_css, :maximum => 3000, :allow_nil => true
   
   before_save :update_timezone_on_invoices
   

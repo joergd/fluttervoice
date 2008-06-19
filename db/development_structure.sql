@@ -149,18 +149,18 @@ CREATE TABLE `images` (
   KEY `images_account_id_index` (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `invoice_line_types` (
+CREATE TABLE `line_item_types` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(255) default NULL,
   `position` int(11) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
-CREATE TABLE `invoice_lines` (
+CREATE TABLE `line_items` (
   `id` int(11) NOT NULL auto_increment,
   `account_id` int(11) NOT NULL default '0',
   `invoice_id` int(11) NOT NULL default '0',
-  `invoice_line_type_id` int(11) NOT NULL default '1',
+  `line_item_type_id` int(11) NOT NULL default '1',
   `price` decimal(10,0) NOT NULL default '0',
   `quantity` decimal(10,0) NOT NULL default '1',
   `description` varchar(255) NOT NULL default '',
@@ -169,7 +169,7 @@ CREATE TABLE `invoice_lines` (
   `updated_on` datetime default NULL,
   `created_on` datetime default NULL,
   PRIMARY KEY  (`id`),
-  KEY `invoice_lines_invoice_id_index` (`invoice_id`)
+  KEY `line_items_invoice_id_index` (`invoice_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `invoice_templates` (

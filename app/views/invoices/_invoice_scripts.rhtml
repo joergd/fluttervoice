@@ -18,12 +18,12 @@
     Behaviour.apply();
   }
 
-  function populateLine(invoice_line_type_id, quantity, price, description) {
-    last_line_type_id = invoice_line_type_id == null ? get_last_line_type() : invoice_line_type_id;
+  function populateLine(line_item_type_id, quantity, price, description) {
+    last_line_type_id = line_item_type_id == null ? get_last_line_type() : line_item_type_id;
 
     addLine();
 
-    $('line_items_' + fieldCount + '_invoice_line_type_id').value = last_line_type_id;
+    $('line_items_' + fieldCount + '_line_item_type_id').value = last_line_type_id;
     $('line_items_' + fieldCount + '_quantity').value = quantity;
     $('line_items_' + fieldCount + '_price').value = to_money(price);
     $('line_items_' + fieldCount + '_description').value = description;
@@ -86,7 +86,7 @@
   
   function get_last_line_type() {
     lines = document.getElementsByClassName('lineitemrow');
-    return lines.length > 0 ? $('line_items_' + lines[lines.length - 1].id + '_invoice_line_type_id').value : 1; /* 1=Hours */
+    return lines.length > 0 ? $('line_items_' + lines[lines.length - 1].id + '_line_item_type_id').value : 1; /* 1=Hours */
   }
   
 //]]>

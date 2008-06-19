@@ -1,2 +1,2 @@
-class UserInvoiceTemplate < InvoiceTemplate
+class UserDocumentTemplate < DocumentTemplate
 end

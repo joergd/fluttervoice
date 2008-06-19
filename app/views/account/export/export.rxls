@@ -96,9 +96,9 @@
             <th>Description</th>    
             <th>Price</th>    
           </tr>
-          <% i.invoice_lines.each do |il| -%>
+          <% i.line_items.each do |il| -%>
             <tr>
-              <td><%= il.invoice_line_type.name %></td>
+              <td><%= il.line_item_type.name %></td>
               <td><%= il.quantity %></td>
               <td><%= il.description %></td>
               <td><%= il.price %></td>

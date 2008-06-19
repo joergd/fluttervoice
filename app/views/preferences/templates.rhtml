@@ -21,8 +21,8 @@
       <%= render :partial => "template", :collection => @templates %>
       <% if !@account.plan.free? -%>
         <li>
-          <%= radio_button :preference, :invoice_template_id, 0 %> Your own CSS<br/>
-          <%= text_area :preference, :invoice_css, :cols => 65, :rows => 20 %>
+          <%= radio_button :preference, :document_template_id, 0 %> Your own CSS<br/>
+          <%= text_area :preference, :document_css, :cols => 65, :rows => 20 %>
         </li>
       <% end -%>
     </ul>

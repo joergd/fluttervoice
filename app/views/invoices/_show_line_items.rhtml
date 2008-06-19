@@ -2,6 +2,6 @@
 
 <table class="invoice_table" cellpadding="0" cellspacing="0" border="0">
   <tbody>
-    <%= render :partial => "/invoices/invoice_line", :collection => invoice.invoice_lines %>
+    <%= render :partial => "/invoices/invoice_line", :collection => invoice.line_items %>
   </tbody>
 </table>

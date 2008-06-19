@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class PreferenceTest < Test::Unit::TestCase
-  fixtures :preferences, :accounts, :invoices, :images
+  fixtures :preferences, :accounts, :documents, :images
 
   def setup
     @preference = Preference.find(@woodstock_preference.id)

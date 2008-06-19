@@ -365,8 +365,8 @@ CREATE TABLE `images` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `images` (`id`,`account_id`,`binary_id`,`width`,`height`,`content_type`,`original_filename`,`original_filesize`,`audit_created_by_person_id`,`audit_updated_by_person_id`,`updated_on`,`created_on`) VALUES (1,2,1,64,64,'image/jpeg\r','me.jpg',901,1,1,'2005-10-02 11:36:31','2005-10-02 11:36:31');
-DROP TABLE IF EXISTS `invoice_lines`;
-CREATE TABLE `invoice_lines` (
+DROP TABLE IF EXISTS `line_items`;
+CREATE TABLE `line_items` (
   `id` int(11) NOT NULL auto_increment,
   `type` varchar(20) NOT NULL default '',
   `account_id` int(11) NOT NULL default '0',
@@ -381,11 +381,11 @@ CREATE TABLE `invoice_lines` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `invoice_lines` (`id`,`type`,`account_id`,`invoice_id`,`unit_cost`,`quantity`,`description`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (40,'ProductInvoiceLine',2,11,1800,1,'Website',NULL,1,'2005-09-18 22:39:19','2005-09-18 22:39:19');
-INSERT INTO `invoice_lines` (`id`,`type`,`account_id`,`invoice_id`,`unit_cost`,`quantity`,`description`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (42,'TimeInvoiceLine',2,13,20,1,'fsdf',NULL,1,'2005-09-20 19:56:12','2005-09-20 19:56:12');
-INSERT INTO `invoice_lines` (`id`,`type`,`account_id`,`invoice_id`,`unit_cost`,`quantity`,`description`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (43,'TimeInvoiceLine',2,13,50,1,'sdf',NULL,1,'2005-09-20 19:56:12','2005-09-20 19:56:12');
-INSERT INTO `invoice_lines` (`id`,`type`,`account_id`,`invoice_id`,`unit_cost`,`quantity`,`description`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (51,'ServiceInvoiceLine',2,12,100,1,'Second brochure',NULL,1,'2005-10-01 14:21:27','2005-10-01 14:21:27');
-INSERT INTO `invoice_lines` (`id`,`type`,`account_id`,`invoice_id`,`unit_cost`,`quantity`,`description`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (52,'ServiceInvoiceLine',2,12,1900,1,'Brochure',NULL,1,'2005-10-01 14:21:27','2005-10-01 14:21:27');
+INSERT INTO `line_items` (`id`,`type`,`account_id`,`invoice_id`,`unit_cost`,`quantity`,`description`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (40,'ProductLineItem',2,11,1800,1,'Website',NULL,1,'2005-09-18 22:39:19','2005-09-18 22:39:19');
+INSERT INTO `line_items` (`id`,`type`,`account_id`,`invoice_id`,`unit_cost`,`quantity`,`description`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (42,'TimeLineItem',2,13,20,1,'fsdf',NULL,1,'2005-09-20 19:56:12','2005-09-20 19:56:12');
+INSERT INTO `line_items` (`id`,`type`,`account_id`,`invoice_id`,`unit_cost`,`quantity`,`description`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (43,'TimeLineItem',2,13,50,1,'sdf',NULL,1,'2005-09-20 19:56:12','2005-09-20 19:56:12');
+INSERT INTO `line_items` (`id`,`type`,`account_id`,`invoice_id`,`unit_cost`,`quantity`,`description`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (51,'ServiceLineItem',2,12,100,1,'Second brochure',NULL,1,'2005-10-01 14:21:27','2005-10-01 14:21:27');
+INSERT INTO `line_items` (`id`,`type`,`account_id`,`invoice_id`,`unit_cost`,`quantity`,`description`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (52,'ServiceLineItem',2,12,1900,1,'Brochure',NULL,1,'2005-10-01 14:21:27','2005-10-01 14:21:27');
 DROP TABLE IF EXISTS `invoice_templates`;
 CREATE TABLE `invoice_templates` (
   `id` int(11) NOT NULL auto_increment,
@@ -410,7 +410,7 @@ CREATE TABLE `invoices` (
   `date` date NOT NULL default '0000-00-00' COMMENT 'invoice date',
   `due_date` date NOT NULL default '0000-00-00',
   `status_id` int(11) NOT NULL default '1',
-  `invoice_lines_total` decimal(10,2) NOT NULL default '0.00' COMMENT 'calculated field',
+  `line_items_total` decimal(10,2) NOT NULL default '0.00' COMMENT 'calculated field',
   `payments_total` decimal(10,2) NOT NULL default '0.00' COMMENT 'calculated',
   `audit_updated_by_person_id` int(11) default NULL,
   `audit_created_by_person_id` int(11) default NULL,
@@ -419,9 +419,9 @@ CREATE TABLE `invoices` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `invoices` (`id`,`account_id`,`client_id`,`number`,`po_number`,`use_tax`,`tax`,`tax_percentage`,`shipping`,`late_fee_percentage`,`terms`,`currency_id`,`date`,`due_date`,`status_id`,`invoice_lines_total`,`payments_total`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (11,2,1,'1001','',1,'VAT',14,0,0,'30 days','ZAR','2005-09-18','2005-10-18',2,1800,2052,NULL,1,'2005-10-02 11:39:23','2005-09-18 22:39:19');
-INSERT INTO `invoices` (`id`,`account_id`,`client_id`,`number`,`po_number`,`use_tax`,`tax`,`tax_percentage`,`shipping`,`late_fee_percentage`,`terms`,`currency_id`,`date`,`due_date`,`status_id`,`invoice_lines_total`,`payments_total`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (12,2,2,'2001','',1,'VAT',14,0,3.5,'','ZAR','2005-09-18','2005-09-18',1,2000,950.75,1,1,'2005-10-01 14:21:27','2005-09-18 22:57:32');
-INSERT INTO `invoices` (`id`,`account_id`,`client_id`,`number`,`po_number`,`use_tax`,`tax`,`tax_percentage`,`shipping`,`late_fee_percentage`,`terms`,`currency_id`,`date`,`due_date`,`status_id`,`invoice_lines_total`,`payments_total`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (13,2,1,'sdf','',1,'VAT',0,20,3.5,'','ZAR','2005-09-20','2005-10-19',1,70,0,NULL,1,'2005-09-20 19:56:12','2005-09-20 19:56:12');
+INSERT INTO `invoices` (`id`,`account_id`,`client_id`,`number`,`po_number`,`use_tax`,`tax`,`tax_percentage`,`shipping`,`late_fee_percentage`,`terms`,`currency_id`,`date`,`due_date`,`status_id`,`line_items_total`,`payments_total`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (11,2,1,'1001','',1,'VAT',14,0,0,'30 days','ZAR','2005-09-18','2005-10-18',2,1800,2052,NULL,1,'2005-10-02 11:39:23','2005-09-18 22:39:19');
+INSERT INTO `invoices` (`id`,`account_id`,`client_id`,`number`,`po_number`,`use_tax`,`tax`,`tax_percentage`,`shipping`,`late_fee_percentage`,`terms`,`currency_id`,`date`,`due_date`,`status_id`,`line_items_total`,`payments_total`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (12,2,2,'2001','',1,'VAT',14,0,3.5,'','ZAR','2005-09-18','2005-09-18',1,2000,950.75,1,1,'2005-10-01 14:21:27','2005-09-18 22:57:32');
+INSERT INTO `invoices` (`id`,`account_id`,`client_id`,`number`,`po_number`,`use_tax`,`tax`,`tax_percentage`,`shipping`,`late_fee_percentage`,`terms`,`currency_id`,`date`,`due_date`,`status_id`,`line_items_total`,`payments_total`,`audit_updated_by_person_id`,`audit_created_by_person_id`,`updated_on`,`created_on`) VALUES (13,2,1,'sdf','',1,'VAT',0,20,3.5,'','ZAR','2005-09-20','2005-10-19',1,70,0,NULL,1,'2005-09-20 19:56:12','2005-09-20 19:56:12');
 DROP TABLE IF EXISTS `payments`;
 CREATE TABLE `payments` (
   `id` int(11) NOT NULL auto_increment,

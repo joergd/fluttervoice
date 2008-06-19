@@ -20,7 +20,7 @@ class PreferencesController < ApplicationController
   end
 
   def templates
-    @templates = SystemInvoiceTemplate.find(:all)
+    @templates = SystemDocumentTemplate.find(:all)
     
     if request.get?
       @preference = @account.preference

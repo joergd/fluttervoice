@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class InvoiceTest < Test::Unit::TestCase
-  fixtures :invoices, :accounts, :clients, :status, :invoice_lines, :preferences, :terms, :currencies
+  fixtures :documents, :accounts, :clients, :status, :line_items, :preferences, :terms, :currencies
 
   def setup
     @invoice = Invoice.find(@diageo_invoice.id)
@@ -23,10 +23,10 @@ class InvoiceTest < Test::Unit::TestCase
     assert_equal "Pretoria", @invoice.timezone
   end
   
-  def test_missing_invoice_lines
-    @invoice.invoice_lines.clear
+  def test_missing_line_items
+    @invoice.line_items.clear
     assert !@invoice.save
-    assert_equal "not there. You need at least one invoice line", @invoice.errors.on(:invoice_lines)
+    assert_equal "not there. You need at least one line item", @invoice.errors.on(:line_items)
   end
 
   def test_new_invoice
@@ -40,7 +40,7 @@ class InvoiceTest < Test::Unit::TestCase
     i.due_date = Time.now
     i.notes = ""
 
-    i.invoice_lines << InvoiceLine.new({ :quantity => 1, :price => 1, :description => "Test" })
+    i.line_items << LineItem.new({ :quantity => 1, :price => 1, :description => "Test" })
     assert i.save
   end
 
@@ -258,7 +258,7 @@ class InvoiceTest < Test::Unit::TestCase
 
   def test_set_to_closed_if_total_is_zero
     @invoice.status_id = Status::OPEN
-    @invoice.invoice_lines.each do |i|
+    @invoice.line_items.each do |i|
       i.price = 0.0
       i.save
     end
@@ -284,9 +284,9 @@ class InvoiceTest < Test::Unit::TestCase
 
   def test_destroy
     invoice = Invoice.find(@diageo_invoice.id)
-    assert_equal 2, @diageo_invoice.invoice_lines.size
+    assert_equal 2, @diageo_invoice.line_items.size
 
     invoice.destroy
-    assert_equal nil, InvoiceLine.find_by_invoice_id(@diageo_invoice.id)
+    assert_equal nil, LineItem.find_by_document_id(@diageo_invoice.id)
   end
 end

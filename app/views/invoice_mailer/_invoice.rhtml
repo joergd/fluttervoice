@@ -1,5 +1,5 @@
 
-<% @invoice.invoice_lines.each do |invoice_line| -%>
+<% @invoice.line_items.each do |invoice_line| -%>
 QUANTITY: <%=h invoice_line.quantity %> @ PRICE: <%= @invoice.currency_symbol %><%=h number_to_currency(invoice_line.price, { :unit => '' }) %> TOTAL: <%= @invoice.currency_symbol %><%=h invoice_line.total %>
 -- <%=h invoice_line.description %>
 <% end -%>

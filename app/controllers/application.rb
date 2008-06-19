@@ -166,11 +166,11 @@ private
   end
 
   def audit_create_trail
-    { :audit_created_by_person_id => current_user.id }
+    { :audit_created_by_person_id => current_user[:id] }
   end
 
   def audit_update_trail
-    { :audit_updated_by_person_id => current_user.id }
+    { :audit_updated_by_person_id => current_user[:id] }
   end
 
 end

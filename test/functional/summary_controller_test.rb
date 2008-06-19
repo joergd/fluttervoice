@@ -5,7 +5,7 @@ require 'summary_controller'
 class SummaryController; def rescue_action(e) raise e end; end
 
 class SummaryControllerTest < Test::Unit::TestCase
-  fixtures :accounts, :preferences, :invoices, :invoice_lines, :invoice_line_types, :clients, :currencies
+  fixtures :accounts, :preferences, :documents, :line_items, :line_item_types, :clients, :currencies
 
   def setup
     @controller = SummaryController.new

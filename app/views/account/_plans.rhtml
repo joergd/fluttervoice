@@ -57,7 +57,7 @@
     <tr>
       <td class="description">Selection of different invoice templates</td>
       <% @plans.each do |plan| -%>
-        <td class="<%=h plan.name.downcase %>"><% if plan.invoice_templates? %>Yes<% else %>No<% end %></td>
+        <td class="<%=h plan.name.downcase %>"><% if plan.document_templates? %>Yes<% else %>No<% end %></td>
       <% end -%>
     </tr>
     <tr>
