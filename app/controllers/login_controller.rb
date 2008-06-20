@@ -11,7 +11,11 @@ class LoginController < ApplicationController
       if !account.nil? && user = User.authenticate(account.id, params[:user][:email], params[:user][:password])
         session[:user] = user
         AuditLogin.record(user.id, params[:subdomain], params[:user][:email], account.id)
-        redirect_back_or_default "http://#{base_url(account)}/login/jump?id=#{user.id}&key=#{user.generate_security_token(15)}"
+        if @account.subdomain != "www"
+          redirect_back_or_default "http://#{base_url(account)}/login/jump?id=#{user.id}&key=#{user.generate_security_token(15)}"
+        else
+          redirect_to "http://#{base_url(account)}/login/jump?id=#{user.id}&key=#{user.generate_security_token(15)}"
+        end
       else
         AuditLogin.record_failure(params[:subdomain], params[:user][:email], (account.nil? ? nil : account.id))
         flash[:notice] = "Sorry, your log-in attempt was unsuccessful"
