@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 private
 
   def set_timezone
-    Time.zone = @account.preference.nil? ? @app_config["default_timezone"] : @account.preference.timezone
+    Time.zone = @account.preference.nil? ? 'Pretoria' : @account.preference.timezone
   end
   
   def local_request?

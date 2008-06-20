@@ -1,21 +1,21 @@
 <%= @message %>
 
 -----------------------------------------------------------------
-<%= render :partial => "invoice_mailer/summary_link" %>
+<%= render :partial => "document_mailer/summary_link" %>
 -----------------------------------------------------------------
 
 
 <%=h @invoice.name %>
 
 <%=h @account.name %>
-<%= render :partial => "invoice_mailer/address", :locals => { :address => @account.address, :tel => @account.tel, :fax => @account.fax, :web => @account.web } %>
+<%= render :partial => "document_mailer/address", :locals => { :address => @account.address, :tel => @account.tel, :fax => @account.fax, :web => @account.web } %>
 <% if !@account.vat_registration.blank? -%>
 VAT Registration: <%=h @account.vat_registration %>
 <% end -%>
 
 
 TO: <%=h @invoice.client.name %>
-<%= render :partial => "invoice_mailer/address", :locals => { :address => @invoice.client.address, :tel => @invoice.client.tel, :fax => @invoice.client.fax, :web => @invoice.client.web } %>
+<%= render :partial => "document_mailer/address", :locals => { :address => @invoice.client.address, :tel => @invoice.client.tel, :fax => @invoice.client.fax, :web => @invoice.client.web } %>
 <% if !@invoice.client.vat_registration.blank? -%>
 VAT Registration: <%=h @invoice.client.vat_registration %>
 <% end -%>
@@ -26,8 +26,8 @@ Date: <%=h @invoice.date.strftime("%d %b %Y") %>
 <% if !@invoice.po_number.blank? %>PO/Ref Number: <%=h @invoice.po_number %><% end -%>
 
 
-<%= render :partial => "invoice_mailer/invoice" %>
+<%= render :partial => "document_mailer/invoice" %>
 
 
 -----------------------------------------------------------------
-<% if @account.plan.free? %><%= render :partial => "invoice_mailer/fluttervoice_link" %><% end -%>
+<% if @account.plan.free? %><%= render :partial => "document_mailer/fluttervoice_link" %><% end -%>

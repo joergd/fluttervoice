@@ -29,14 +29,14 @@
 <!-- ***** invoice lines added through javascript ***** -->
 
   <%= error_message_on :invoice, :line_items, "A field " %>
-  <%= render :partial => "invoice_line_header" %>
+  <%= render :partial => "documents/line_item_header" %>
   <div id="lineitemrows"></div>
 
 <!-- ***** invoice lines added through javascript ***** -->
 
 
 <div class="add">
-  <%= link_to_function "Add new line", "populateLine(null, 1, 0.00, '')", :title => "Add new invoice line" %>
+  <%= link_to_function "Add new line", "populateLine(null, 1, 0.00, '')", :title => "Add new line item" %>
 </div>
 
 <table id="calcs_table_form" cellpadding="0" cellspacing="0" border="0">
@@ -115,5 +115,5 @@
 	</fieldset>
 <% end -%>
 
-<%= render(:partial => 'invoice_scripts') %>
-<%= render(:partial => "init_form") %>
+<%= render(:partial => 'documents/invoice_scripts') %>
+<%= render(:partial => "documents/init_form") %>

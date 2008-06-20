@@ -1,7 +1,7 @@
 <%= @message.gsub(/\n/, '<br/>') %>
 
 <hr />
-<%= render :partial => "invoice_mailer/html_summary_link" %>
+<%= render :partial => "document_mailer/html_summary_link" %>
 <hr />
 
 <h2><%=h @invoice.name %></h2>
@@ -10,7 +10,7 @@
   <tr>
     <td align="right" style="font-size: 12px;">
       <h3><%=h @account.name %></h3>
-      <%= render :partial => "invoice_mailer/html_address", :locals => { :address => @account.address, :tel => @account.tel, :fax => @account.fax, :web => @account.web } %>
+      <%= render :partial => "document_mailer/html_address", :locals => { :address => @account.address, :tel => @account.tel, :fax => @account.fax, :web => @account.web } %>
       <% if !@account.vat_registration.blank? -%>
         <p>VAT Registration: <%=h @account.vat_registration %></p>
       <% end -%>
@@ -19,7 +19,7 @@
 </table>
 
 <h3>TO: <%=h @invoice.client.name %></h3>
-<%= render(:partial => "invoice_mailer/html_address", :locals => { :address => @invoice.client.address, :tel => @invoice.client.tel, :fax => @invoice.client.fax, :web => @invoice.client.web }) %>
+<%= render(:partial => "document_mailer/html_address", :locals => { :address => @invoice.client.address, :tel => @invoice.client.tel, :fax => @invoice.client.fax, :web => @invoice.client.web }) %>
 <% if !@invoice.client.vat_registration.blank? -%>
   <p>VAT Registration: <%=h @invoice.client.vat_registration %></p>
 <% end -%>
@@ -34,7 +34,7 @@
 
 <br/><br/>
 <hr />
-<%= render :partial => "invoice_mailer/html_summary_link" %>
+<%= render :partial => "document_mailer/html_summary_link" %>
 <hr />
 
-<% if @account.plan.free? %><%= render :partial => 'invoice_mailer/html_fluttervoice_link' %><% end -%>
+<% if @account.plan.free? %><%= render :partial => "document_mailer/html_fluttervoice_link" %><% end -%>

@@ -38,7 +38,7 @@
   <% else -%>
   
     <div id="invoice">
-      <%= render :partial => "invoices/account_header", :locals => { :account => @account, :logo => @logo } %>
+      <%= render :partial => "documents/account_header", :locals => { :account => @account, :logo => @logo } %>
     
       <div id="invoice_state_indicator" class="<%= @invoice.state.downcase %>"><%= @invoice.state %></div>
     
@@ -55,7 +55,7 @@
     
       <div id="invoice_date"><%=h fmt_date(@invoice.date) %></div>
       
-      <%= render :partial => "invoices/show_invoice", :locals => { :invoice => @invoice } %>
+      <%= render :partial => "documents/show_invoice", :locals => { :invoice => @invoice } %>
 
     </div>
       

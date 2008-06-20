@@ -1,4 +1,4 @@
-class InvoiceMailer < ActionMailer::Base
+class DocumentMailer < ActionMailer::Base
 
   def invoice(to, from, cc, account, invoice, invoice_html, summary_url, message, app_config, sent_at = Time.now)
     @subject    = "Invoice #{invoice.number} from #{account.name}"

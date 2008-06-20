@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'invoice_mailer'
+require 'document_mailer'
 
-class InvoiceMailerTest < Test::Unit::TestCase
+class DocumentMailerTest < Test::Unit::TestCase
   fixtures :documents, :accounts, :clients, :line_items, :preferences
 
   def setup
@@ -10,7 +10,7 @@ class InvoiceMailerTest < Test::Unit::TestCase
 
   def test_invoice
     @invoice.due_date = Date.today + 1
-    email = InvoiceMailer.create_invoice(  'joergd@pobox.com',
+    email = DocumentMailer.create_invoice(  'joergd@pobox.com',
                                           'senor.j.onion@gmail.com',
                                           'me@pobox.com',
                                           @invoice.account,
@@ -31,7 +31,7 @@ class InvoiceMailerTest < Test::Unit::TestCase
 
   def test_reminder
     @invoice.due_date = Date.today + 1
-    email = InvoiceMailer.create_reminder(  'joergd@pobox.com',
+    email = DocumentMailer.create_reminder(  'joergd@pobox.com',
                                           'senor.j.onion@gmail.com',
                                           'me@pobox.com',
                                           @invoice.account,
@@ -52,7 +52,7 @@ class InvoiceMailerTest < Test::Unit::TestCase
 
   def test_thankyou
     @invoice.due_date = Date.today + 1
-    email = InvoiceMailer.create_thankyou(  'joergd@pobox.com',
+    email = DocumentMailer.create_thankyou(  'joergd@pobox.com',
                                           'senor.j.onion@gmail.com',
                                           'me@pobox.com',
                                           @invoice.account,

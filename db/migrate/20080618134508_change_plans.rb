@@ -5,7 +5,11 @@ class ChangePlans < ActiveRecord::Migration
     lite.save
     
     hardcore = Plan.find(Plan::HARDCORE)
-    hardcore.clients = 100
+    hardcore.clients = 300
+    hardcore.save
+
+    hardcore = Plan.find(Plan::ULTIMATE)
+    hardcore.clients = 500
     hardcore.save
   end
 

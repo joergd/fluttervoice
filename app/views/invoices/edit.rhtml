@@ -25,7 +25,7 @@
     <% end -%>
   </div>
   <% form_tag({ :action => 'edit' }, :id => "frmInvoice") do -%>
-    <%= render :partial => 'form', :locals => { :invoice => @invoice } %>
+    <%= render :partial => 'documents/form', :locals => { :invoice => @invoice } %>
 
     <div class="submit_box">
       <!-- this prevents the form from submitting on ENTER -->

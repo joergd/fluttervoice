@@ -11,7 +11,7 @@
   
   <div id="invoice">
     <div id="invoice_header_for_printing">
-      <%= render :partial => "account_header", :locals => { :account => @account, :logo => @account.preference.logo } %>
+      <%= render :partial => "documents/account_header", :locals => { :account => @account, :logo => @account.preference.logo } %>
     </div>
   
     <div id="invoice_state_indicator" class="<%= @invoice.state.downcase %>"><%= @invoice.state %><br/>
@@ -33,7 +33,7 @@
     <% end -%>
     <div id="invoice_date"><%=h fmt_date(@invoice.date) %></div>
     
-    <%= render(:partial => 'show_invoice', :locals => { :invoice => @invoice }) %>
+    <%= render(:partial => "documents/show_invoice", :locals => { :invoice => @invoice }) %>
 
   </div>
     

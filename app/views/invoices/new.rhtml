@@ -16,7 +16,7 @@
   <h3><%=h @invoice.client.name %></h3>
   <%= render :partial => 'widgets/address', :locals => { :address => @invoice.client.address, :tel => @invoice.client.tel, :fax => @invoice.client.fax, :web => @invoice.client.web } %>
   <% form_tag :action => 'new' do -%>
-    <%= render :partial => 'form', :locals => { :invoice => @invoice } %>
+    <%= render :partial => 'documents/form', :locals => { :invoice => @invoice } %>
 
     <div class="instructions">
       You can <strong>send</strong> the invoice once you have created it.

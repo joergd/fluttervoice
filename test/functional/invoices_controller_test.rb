@@ -219,7 +219,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
           {  :user => { :id => 1 }, # need to add login, else gets overwritten
             :client_id => 1 }
     assert_response :success
-    assert_equal "not there. You need at least one invoice line", assigns(:invoice).errors.on(:line_items)
+    assert_equal "not there. You need at least one line item", assigns(:invoice).errors.on(:line_items)
   end
 
   def test_new_with_wrong_invoice_line
@@ -376,7 +376,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
             }
 
     assert_response :success
-    assert_equal "not there. You need at least one invoice line", assigns(:invoice).errors.on(:line_items)
+    assert_equal "not there. You need at least one line item", assigns(:invoice).errors.on(:line_items)
     assert_equal num_line_items, @diageo_invoice.line_items.size
   end
 

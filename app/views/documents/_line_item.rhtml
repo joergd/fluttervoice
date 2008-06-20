@@ -1,0 +1,7 @@
+<tr>
+  <td class="type"><%=h line_item.line_item_type.name %></td>
+  <td class="quantity"><%=h line_item.quantity %></td>
+  <td class="description"><%=h line_item.description %></td>
+  <td class="price"><%=h @invoice.currency_symbol %><%=h fmt_currency(line_item.price) %></td>
+  <td class="total"><%=h @invoice.currency_symbol %><%=h fmt_currency(line_item.total) %></td>
+</tr>
