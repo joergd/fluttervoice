@@ -78,7 +78,7 @@ private
   end
 
   def extract_account_from_url
-    @account = Account.find_by_subdomain(request.subdomains(@app_config["tld_length"]).first || 'www', :include => [ :preference, :plan ])
+    @account = Account.find_by_subdomain(request.subdomains(@app_config["tld_length"]).first || 'www', :include => [ :preference, :plan ]) rescue Account.find_by_subdomain("www")
   end
 
   def country_domain
