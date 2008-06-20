@@ -74,7 +74,7 @@ private
   end
 
   def create_country_domain_specific_app_config
-    @app_config = APP_COUNTRIES_CONFIG[country_domain]
+    @app_config = APP_COUNTRIES_CONFIG[country_domain] || APP_COUNTRIES_CONFIG['za']
   end
 
   def extract_account_from_url

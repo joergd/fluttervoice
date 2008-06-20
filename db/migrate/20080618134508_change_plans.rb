@@ -1,7 +1,7 @@
 class ChangePlans < ActiveRecord::Migration
   def self.up
     lite = Plan.find(Plan::LITE)
-    lite.clients = 30
+    lite.clients = 100
     lite.save
     
     hardcore = Plan.find(Plan::HARDCORE)
