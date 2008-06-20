@@ -37,4 +37,4 @@
 <%= render :partial => "invoice_mailer/html_summary_link" %>
 <hr />
 
-<% if @account.plan.free? %><%= render :partial => './html_fluttervoice_link' %><% end -%>
+<% if @account.plan.free? %><%= render :partial => 'invoice_mailer/html_fluttervoice_link' %><% end -%>

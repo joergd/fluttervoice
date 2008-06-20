@@ -5,7 +5,7 @@ require 'invoices_controller'
 class InvoicesController; def rescue_action(e) raise e end; end
 
 class InvoicesControllerTest < Test::Unit::TestCase
-  fixtures :accounts, :preferences, :people, :documents, :line_items, :line_item_types, :clients, :currencies
+  fixtures :accounts, :plans, :preferences, :people, :documents, :line_items, :line_item_types, :clients, :currencies
 
   def setup
     @controller = InvoicesController.new
@@ -478,7 +478,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
     assert_not_nil Invoice.find(@dbsa_invoice.id)
   end
 
-  def test_emails_working
+  def test_emails_working_paid_plans
     assert_equal 0, EmailLog.find(:all).size
 
     %w{ deliver_invoice deliver_reminder deliver_thankyou }.each do |page|
@@ -502,6 +502,26 @@ class InvoicesControllerTest < Test::Unit::TestCase
       assert_match /High Their/, email.body
       assert_match "http:\/\/#{@woodstock_account.subdomain}\.#{assigns(:app_config)["domain"]}\/summary\/", email.body
       assert_equal 1, EmailLog.find(:all).size
+    end
+  end
+
+  def test_emails_working_free_plan
+    assert_equal 0, EmailLog.find(:all).size
+
+    @woodstock_account.plan = Plan.find(Plan::FREE)
+    assert @woodstock_account.save
+    
+    %w{ deliver_invoice deliver_reminder deliver_thankyou }.each do |page|
+      EmailLog.delete_all
+      @emails.clear
+      get page, :id => @diageo_invoice.id,
+        :invoiceto => { "#{@jonny.id}" => { :send => "1" }, "#{@leigh.id}" => { :send => "1" }, "999" => { :send => "0" } },
+        :reminderto => { "#{@jonny.id}" => { :send => "1" }, "#{@leigh.id}" => { :send => "1" }, "999" => { :send => "0" } },
+        :thankyouto => { "#{@jonny.id}" => { :send => "1" }, "#{@leigh.id}" => { :send => "1" }, "999" => { :send => "0" } },
+        :message => "High Their", :reminder_message => "High Their", :thankyou_message => "High Their"
+
+      assert_response :redirect
+      assert_equal "Your email was sent successfully", flash[:notice]
     end
   end
 
