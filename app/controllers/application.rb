@@ -122,17 +122,17 @@ private
     return payment
   end
 
-  def our_invoice(invoice_id)
-     invoice = Invoice.find_by_id_and_account_id(invoice_id, @account.id)
+  def our_document(document_id)
+     document = Document.find_by_id_and_account_id(document_id, @account.id)
 
     # make sure we exit gracefully if an illegal id gets passed in
-     if invoice.nil?
-      logger.error("Attempt to access invalid invoice #{invoice_id}")
-      flash[:error] = 'Invalid invoice'
+     if document.nil?
+      logger.error("Attempt to access invalid document #{document_id}")
+      flash[:error] = 'Invalid document'
       redirect_back_or_default url_for(:action => 'index')
       return nil
     end
-    return invoice
+    return document
   end
 
   def our_client(client_id)

@@ -28,7 +28,7 @@ class PaymentsControllerTest < Test::Unit::TestCase
     get :new, :id => @dbsa_invoice.id
 
     assert_response :redirect
-    assert_equal "Invalid invoice", flash[:error]
+    assert_equal "Invalid document", flash[:error]
   end
 
   def test_new_successful_post

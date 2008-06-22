@@ -6,9 +6,9 @@
     <th class="reference">Reference</th>
     <th class="amount">Amount</th>
   </tr>
-  <%= render :partial => "/payments/payment", :collection => @invoice.payments %>
+  <%= render :partial => "/payments/payment", :collection => invoice.payments, :locals => { :invoice => invoice} %>
   <tr>
     <td colspan="4" style="border: 0px">&nbsp;</td>
-    <td class="amount" style="border: 0px"><strong><%=h @invoice.currency_symbol %><%=h fmt_currency(@invoice.paid) %></strong></td>
+    <td class="amount" style="border: 0px"><strong><%=h invoice.currency_symbol %><%=h fmt_currency(invoice.paid) %></strong></td>
   </tr>
 </table>

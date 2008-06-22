@@ -1,0 +1,30 @@
+<div id="sidebar"></div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <%= render_cancel_button %>
+
+  <h2>Create new Quote</h2>
+  
+  <% if !@document.errors.empty? -%>
+    <div class="formError"><span>Something went wrong with saving your quote. Please look at the highlighted messages below to see if you can correct the problem.</span></div>
+  <% end -%>
+  
+  <h3><%=h @document.client.name %></h3>
+  <%= render :partial => 'widgets/address', :locals => { :address => @document.client.address, :tel => @document.client.tel, :fax => @document.client.fax, :web => @document.client.web } %>
+  <% form_tag :action => 'new' do -%>
+    <%= render :partial => 'documents/form', :locals => { :document => @document } %>
+
+    <div class="instructions">
+      You can <strong>send</strong> the quote once you have created it.
+    </div>
+  
+    <div class="submit_box">
+      <%= submit_tag 'Create quote' %>
+    </div>
+  <% end -%>
+
+</div>

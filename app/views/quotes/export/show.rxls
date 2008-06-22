@@ -1,0 +1,55 @@
+<table>
+  <tr>
+    <th>Client</th><td><%=h @document.client.name %></td>
+  </tr>
+  <tr>
+    <th>Number</th><td><%=h @document.number %></td>
+  </tr>
+  <tr>
+    <th>State</th><td><%=h @document.state %></td>
+  </tr>
+  <tr>
+    <th>Date</th><td><%=h @document.date %></td>
+  </tr>
+  <tr>
+    <th>Expiry Date</th><td><%=h @document.due_date %></td>
+  </tr>
+  <tr>
+    <th>PO Number</th><td><%=h @document.po_number %></td>
+  </tr>
+  <tr>
+    <th>Terms</th><td><%=h @document.terms %></td>
+  </tr>
+  <tr>
+    <th>Currency</th><td><%=h @document.currency_id %></td>
+  </tr>
+  <tr>
+    <th>Subtotal</th><td><%=h @document.subtotal %></td>
+  </tr>
+  <tr>
+    <th>Tax</th><td><%=h @document.tax %></td>
+  </tr>
+  <tr>
+    <th>Shipping</th><td><%=h @document.shipping %></td>
+  </tr>
+  <tr>
+    <th>Total</th><td><%=h @document.total %></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>Type</th>    
+    <th>Quantity</th>    
+    <th>Description</th>    
+    <th>Price</th>    
+  </tr>
+  <% @document.line_items.each do |il| -%>
+    <tr>
+      <td><%=h il.line_item_type.name %></td>
+      <td><%=h il.quantity %></td>
+      <td><%=h il.description %></td>
+      <td><%=h il.price %></td>
+    </tr>
+  <% end -%>
+</table>

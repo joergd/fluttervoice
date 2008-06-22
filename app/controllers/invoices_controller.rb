@@ -4,29 +4,29 @@ class InvoicesController < DocumentsController
 
   def index
     if params[:states]
-      @invoices = []
+      @documents = []
       states = prepare_states
       states.each do |state|
         case state
           when "all":
             @all = true
-            @invoices = @account.invoices
+            @documents = @account.invoices
           when "open": 
             @open = true
-            @invoices += @account.open_invoices
+            @documents += @account.open_invoices
           when "overdue":
             @overdue = true
-            @invoices += @account.overdue_invoices
+            @documents += @account.overdue_invoices
           when "closed":
             @closed = true
-            @invoices += @account.closed_invoices
+            @documents += @account.closed_invoices
         end
       end
       @all = !@open && !@overdue && !@closed
-      @invoices.sort {|x,y| y.date <=> x.date }
+      @documents.sort {|x,y| y.date <=> x.date }
     else
       @all = true
-      @invoices = @account.invoices
+      @documents = @account.invoices
     end
 
     @blog_headline = BlogHeadline.get
@@ -36,16 +36,16 @@ class InvoicesController < DocumentsController
   end
 
   def show
-    @invoice = our_invoice(params[:id])
-    return if @invoice.nil?
+    @document = our_document(params[:id])
+    return if @document.nil?
     @payment = Payment.new
 
-    if @invoice.closed?
-      @thankyou_message = thankyou_message(@invoice)
+    if @document.closed?
+      @thankyou_message = thankyou_message(@document)
     end
 
-    if @invoice.past_due?
-      @reminder_message = reminder_message(@invoice)
+    if @document.past_due?
+      @reminder_message = reminder_message(@document)
     end
 
     render_different_formats
@@ -54,12 +54,12 @@ class InvoicesController < DocumentsController
   def create
     if request.get?
       session[:client_id] = nil
-      session[:invoice_client_name] = nil
+      session[:document_client_name] = nil
     else
       if !params[:newclient].blank? && params[:newclient] != "Enter a new client" 
         session[:original_return_to] = session[:return_to]
         store_location url_for(:action => 'new')
-        session[:invoice_client_name] = params[:newclient]
+        session[:document_client_name] = params[:newclient]
         redirect_to :controller => 'clients', :action => 'new'
         return
       elsif !params[:client].blank? && params[:client].to_i > 0
@@ -85,27 +85,27 @@ class InvoicesController < DocumentsController
       return if client.nil?
 
       # set client_id as well, as we need it for the view
-      @invoice = Invoice.new({   :account_id => @account.id,
+      @document = Invoice.new({   :account_id => @account.id,
                                 :client_id => session[:client_id] })
 
-      @invoice.setup_defaults
+      @document.setup_defaults
 
       # and set up an invoice lines collection with one invoice line, to prep the form with
-      # @invoice.line_items = []
-      @invoice.line_items << LineItem.new({ :line_item_type_id => 1, :quantity => 1, :price => 0.00, :description => "" })
+      # @document.line_items = []
+      @document.line_items << LineItem.new({ :line_item_type_id => 1, :quantity => 1, :price => 0.00, :description => "" })
 
     else
 
       return if !session_variables_present?
 
       # set all parameters and extra stuff we didn't get from the form
-      @invoice = Invoice.new(params[:invoice].merge(audit_create_trail))
-      @invoice.attributes = { :account_id => @account.id,
+      @document = Invoice.new(params[:document].merge(audit_create_trail))
+      @document.attributes = { :account_id => @account.id,
                               :client_id => session[:client_id],
                               :tax_system =>   @account.preference.tax_system,
                               :status_id => Status.get_new_status_id(@account) }
 
-      return if save_document(@invoice, extract_lines_from_params)
+      return if save_document(@document, extract_lines_from_params)
 
     end
 
@@ -113,8 +113,8 @@ class InvoicesController < DocumentsController
   end
 
   def edit
-     @invoice = our_invoice(params[:id])
-     return if @invoice.nil?
+     @document = our_document(params[:id])
+     return if @document.nil?
 
      get_lookups
 
@@ -122,83 +122,83 @@ class InvoicesController < DocumentsController
       return
     end
 
-    @invoice.attributes = params[:invoice].merge(audit_update_trail)
-    save_document(@invoice, extract_lines_from_params)
+    @document.attributes = params[:document].merge(audit_update_trail)
+    save_document(@document, extract_lines_from_params)
   end
 
   def make_live
     if !@account.plan.free?
-       @invoice = our_invoice(params[:id])
-       return if @invoice.nil?
-      @invoice.update_attribute(:status_id, Status::OPEN)
+       @document = our_document(params[:id])
+       return if @document.nil?
+      @document.update_attribute(:status_id, Status::OPEN)
     end
     redirect_to :action => "show", :id => params[:id] 
   end
 
   def make_draft
     if !@account.plan.free?
-       @invoice = our_invoice(params[:id])
-       return if @invoice.nil?
-      @invoice.update_attribute(:status_id, Status::DRAFT)
+       @document = our_document(params[:id])
+       return if @document.nil?
+      @document.update_attribute(:status_id, Status::DRAFT)
     end
      redirect_to :action => "show", :id => params[:id] 
   end
 
   def deliver_invoice
-    @invoice = our_invoice(params[:id])
-    return if @invoice.nil?
+    @document = our_document(params[:id])
+    return if @document.nil?
 
     to = extract_recipients_from_params(params[:invoiceto])
     return if to.nil?
 
     from = format_from
-    summary_url = get_summary_url(@invoice.id)
+    summary_url = get_summary_url(@document.id)
 
-    invoice_html = construct_email_html_for_document(@invoice)
+    invoice_html = construct_email_html_for_document(@document)
 
-    email = DocumentMailer.create_invoice(to, from, "", @account, @invoice, invoice_html, summary_url, params[:message], @app_config)
+    email = DocumentMailer.create_invoice(to, from, "", @account, @document, invoice_html, summary_url, params[:message], @app_config)
 
-    deliver("Invoice", email, @invoice)
+    deliver("Invoice", email, @document)
 
-    @invoice.update_attribute(:status_id, Status::OPEN) if @invoice.draft?
+    @document.update_attribute(:status_id, Status::OPEN) if @document.draft?
 
     redirect_back_or_default
   end
 
   def deliver_reminder
-    @invoice = our_invoice(params[:id])
-    return if @invoice.nil?
+    @document = our_document(params[:id])
+    return if @document.nil?
 
     to = extract_recipients_from_params(params[:reminderto])
     return if to.nil?
 
     from = format_from
-    summary_url = get_summary_url(@invoice.id)
+    summary_url = get_summary_url(@document.id)
 
-    invoice_html = construct_email_html_for_document(@invoice)
+    invoice_html = construct_email_html_for_document(@document)
 
-    email = DocumentMailer.create_reminder(to, from, "", @account, @invoice, invoice_html, summary_url, params[:reminder_message], @app_config)
-    deliver("Reminder", email, @invoice)
+    email = DocumentMailer.create_reminder(to, from, "", @account, @document, invoice_html, summary_url, params[:reminder_message], @app_config)
+    deliver("Reminder", email, @document)
     redirect_back_or_default
   end
 
   def deliver_thankyou
-     @invoice = our_invoice(params[:id])
-     return if @invoice.nil?
+     @document = our_document(params[:id])
+     return if @document.nil?
 
     to = extract_recipients_from_params(params[:thankyouto])
     return if to.nil?
 
      from = format_from
-    summary_url = get_summary_url(@invoice.id)
+    summary_url = get_summary_url(@document.id)
 
-    email = DocumentMailer.create_thankyou(to, from, "", @account, @invoice, summary_url, params[:thankyou_message], @app_config)
-    deliver("Thankyou", email, @invoice)
+    email = DocumentMailer.create_thankyou(to, from, "", @account, @document, summary_url, params[:thankyou_message], @app_config)
+    deliver("Thankyou", email, @document)
      redirect_back_or_default
   end
 
   def delete
-    invoice = our_invoice(params[:id])
+    invoice = our_document(params[:id])
     return if invoice.nil?
 
     invoice.destroy
@@ -226,5 +226,9 @@ private
     end
   end
 
+  def get_last_document_number_used
+    Invoice.last_number_used(@account.id)
+  end
+  
 
 end

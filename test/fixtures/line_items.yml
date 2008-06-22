@@ -55,3 +55,19 @@ pastdue_invoice_line:
   price: 1000.00
   quantity: 1
   description: pastdue invoice line
+make_brochure_quote:
+  id: 8
+  line_item_type_id: 2
+  account_id: 1
+  document_id: 100
+  price: 16000.00
+  quantity: 1
+  description: make a brochure website
+host_brochure_quote:
+  id: 9
+  line_item_type_id: 2
+  account_id: 1
+  document_id: 100
+  price: 500.00
+  quantity: 1
+  description: host brochure website

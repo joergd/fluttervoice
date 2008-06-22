@@ -10,6 +10,14 @@ protected
     end
   end
 
+  def quote_limit_reached?
+    if @account.quote_limit_reached?
+      @plans = find_plans
+      render :template => '/limit_reached/quotes'
+      return false
+    end
+  end
+
   def client_limit_reached?
     if @account.client_limit_reached?
       @plans = find_plans

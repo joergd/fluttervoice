@@ -14,26 +14,26 @@
       <%= render :partial => "documents/account_header", :locals => { :account => @account, :logo => @account.preference.logo } %>
     </div>
   
-    <div id="invoice_state_indicator" class="<%= @invoice.state.downcase %>"><%= @invoice.state %><br/>
+    <div id="invoice_state_indicator" class="<%= @document.state.downcase %>"><%= @document.state %><br/>
       <% if !@account.plan.free? -%>
         <span class="verysmall"><%= link_to_function "Change this", "new Effect.Appear('change_status_panel'); Element.hide('send_invoice_panel', 'send_reminder_panel', 'send_thankyou_panel')", :title => "Change to and from DRAFT status" %></span>
       <% end -%>
     </div>
     
-    <h2 id="preview"><%=h @invoice.name %>  <small>(<%= link_to "Preview", "/summary/#{'show'.obfuscate}/#{@invoice.id.to_s.obfuscate}", :title => "Preview what #{@invoice.client.name} would see", :popup => true %>)</small></h2>
-    <h3><%=h @invoice.client.name %></h3>
-    <%= render(:partial => '/widgets/address', :locals => { :address => @invoice.client.address, :tel => @invoice.client.tel, :fax => @invoice.client.fax, :web => @invoice.client.web }) %>
+    <h2 id="preview"><%=h @document.name %>  <small>(<%= link_to "Preview", "/summary/#{'show'.obfuscate}/#{@document.id.to_s.obfuscate}", :title => "Preview what #{@document.client.name} would see", :popup => true %>)</small></h2>
+    <h3><%=h @document.client.name %></h3>
+    <%= render(:partial => '/widgets/address', :locals => { :address => @document.client.address, :tel => @document.client.tel, :fax => @document.client.fax, :web => @document.client.web }) %>
     
-    <% if !@invoice.client.vat_registration.blank? -%>
-      <p class="client_vat_registration">VAT Registration: <%=h @invoice.client.vat_registration %></p>
+    <% if !@document.client.vat_registration.blank? -%>
+      <p class="client_vat_registration">VAT Registration: <%=h @document.client.vat_registration %></p>
     <% end -%>
   
-    <% if !@invoice.po_number.blank? -%>
-      <p class="invoice_po_number">PO/Ref Number: <%=h @invoice.po_number %></p>
+    <% if !@document.po_number.blank? -%>
+      <p class="invoice_po_number">PO/Ref Number: <%=h @document.po_number %></p>
     <% end -%>
-    <div id="invoice_date"><%=h fmt_date(@invoice.date) %></div>
+    <div id="invoice_date"><%=h fmt_date(@document.date) %></div>
     
-    <%= render(:partial => "documents/show_invoice", :locals => { :invoice => @invoice }) %>
+    <%= render(:partial => "documents/show", :locals => { :document => @document }) %>
 
   </div>
     
@@ -41,14 +41,14 @@
     Export this invoice to <%= link_to "xml", { :format => "xml" }, :title => "Export this invoice to xml" %>, or to <%= link_to "Excel", { :format => "xls" }, :title => "Export this invoice into Excel" %>.
   </div>
 
-  <% if !@invoice.payments.empty? %>
+  <% if !@document.payments.empty? %>
     <div id="payments_panel"> <!-- used to hide for printing -->
       <div class="panel">
         <%= link_to_function "Show payments received", "Effect.Appear('payments_received_panel'); Element.hide('show_payments_link')", :title => "Show payments received for this invoice", :id => "show_payments_link" %>
         <div id="payments_received_panel" style="display: none;">
           <%= link_to_function "Hide", "Effect.Fade('payments_received_panel'); Element.show('show_payments_link')", :title => "Hide payments received " %><br/><br/>
           <h3>Payments received for this invoice</h3>
-          <%= render :partial => "/payments/payments" %>
+          <%= render :partial => "/payments/payments", :locals => { :invoice => @document} %>
         </div>
       </div>
     </div>

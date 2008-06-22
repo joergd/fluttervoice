@@ -81,8 +81,8 @@ class ClientsController < ApplicationController
 private
 
   def populate_name_from_create_invoice
-    @client.name = session[:invoice_client_name].blank? ? "" : session[:invoice_client_name]
-    session[:invoice_client_name] = nil
+    @client.name = session[:document_client_name].blank? ? "" : session[:document_client_name]
+    session[:document_client_name] = nil
   end
 
   def apply_excel_header

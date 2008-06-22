@@ -1,0 +1,10 @@
+<fieldset>
+  <dl id="inv_terms_form">
+    <dt><strong>Expires</strong></dt>
+    <dd>
+      <%= select(:document, :terms, @terms.collect { |t| [t.description, t.description] } << ["Set specific date...", ""] ) %>
+      <span id="specific_date" style="display:none;"><%= date_select :document, :due_date, :order => [:day, :month, :year] %></span>
+    </dd>
+  </dl>
+</fieldset>
+

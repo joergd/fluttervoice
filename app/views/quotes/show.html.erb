@@ -1,0 +1,44 @@
+<div id="sidebar">
+  <%= render :partial =>  "action_menu_show" %>
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <%= render :partial => "action_panels" %>
+  
+  <div id="invoice">
+    <div id="invoice_header_for_printing">
+      <%= render :partial => "documents/account_header", :locals => { :account => @account, :logo => @account.preference.logo } %>
+    </div>
+  
+    <div id="invoice_state_indicator" class="<%= @document.state.downcase %>"><%= @document.state %><br/>
+      <% if !@account.plan.free? -%>
+        <span class="verysmall"><%= link_to_function "Change this", "new Effect.Appear('change_status_panel'); Element.hide('send_invoice_panel', 'send_reminder_panel', 'send_thankyou_panel')", :title => "Change to and from DRAFT status" %></span>
+      <% end -%>
+    </div>
+    
+    <h2 id="preview"><%=h @document.name %>  <small>(<%= link_to "Preview", "/summary/#{'show'.obfuscate}/#{@document.id.to_s.obfuscate}", :title => "Preview what #{@document.client.name} would see", :popup => true %>)</small></h2>
+    <h3><%=h @document.client.name %></h3>
+    <%= render(:partial => '/widgets/address', :locals => { :address => @document.client.address, :tel => @document.client.tel, :fax => @document.client.fax, :web => @document.client.web }) %>
+    
+    <% if !@document.client.vat_registration.blank? -%>
+      <p class="client_vat_registration">VAT Registration: <%=h @document.client.vat_registration %></p>
+    <% end -%>
+  
+    <% if !@document.po_number.blank? -%>
+      <p class="invoice_po_number">PO/Ref Number: <%=h @document.po_number %></p>
+    <% end -%>
+    <div id="invoice_date"><%=h fmt_date(@document.date) %></div>
+    
+    <%= render(:partial => "documents/show", :locals => { :document => @document }) %>
+
+  </div>
+    
+  <div class="export">
+    Export this quote to <%= link_to "xml", { :format => "xml" }, :title => "Export this quote to xml" %>, or to <%= link_to "Excel", { :format => "xls" }, :title => "Export this quote into Excel" %>.
+  </div>
+
+</div>

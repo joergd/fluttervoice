@@ -3,7 +3,7 @@
   var fieldCount = -1;
 
   function get_currency_symbol(currency) {
-    new Ajax.Request('/invoices/get_currency_symbol?currency=' + currency,
+    new Ajax.Request('get_currency_symbol?currency=' + currency,
       {asynchronous:true,
         evalScripts:true,
         onComplete:function(request){set_currency_symbol(request.responseText)}
@@ -12,7 +12,7 @@
 
   function addLine() {
     fieldCount++
-    var newLine = invoice_line_html.replace(/IDX/g, fieldCount);
+    var newLine = line_item_html.replace(/IDX/g, fieldCount);
     new Insertion.Bottom('lineitemrows', newLine);
 
     Behaviour.apply();
@@ -66,13 +66,13 @@
       $('line_items_' + idx + '_total').innerHTML = to_currency(line_total);
     }
 
-    var tax = Number(stripCommas($('invoice_tax_percentage').value));
-    var shipping = Number(stripCommas($('invoice_shipping').value));
-    var tax_multiplier = $('invoice_use_tax').checked ? tax * 0.01 : 0;
+    var tax = Number(stripCommas($('document_tax_percentage').value));
+    var shipping = Number(stripCommas($('document_shipping').value));
+    var tax_multiplier = $('document_use_tax').checked ? tax * 0.01 : 0;
 
     if (fmt) {
-      $('invoice_tax_percentage').value = tax;
-      $('invoice_shipping').value = shipping;
+      $('document_tax_percentage').value = tax;
+      $('document_shipping').value = shipping;
     }
 
     $('subtotal').innerHTML = to_currency(subtotal);
@@ -129,7 +129,7 @@
           return true;
         }
       },
-      'select#invoice_currency_id' : function(el){
+      'select#document_currency_id' : function(el){
         doWork = function() {
           new Effect.Fade('currencyPanel')
           applyCurrency(el.value);
@@ -139,7 +139,7 @@
         el.blur = doWork; // TODO: not working for some reason
         el.onchange = doWork;
       },
-      'input#invoice_tax_percentage' : function(el){
+      'input#document_tax_percentage' : function(el){
         el.onkeyup = function() {
           recalc();
           return false;
@@ -149,7 +149,7 @@
           return true;
         }
       },
-      'input#invoice_shipping' : function(el){
+      'input#document_shipping' : function(el){
         el.onkeyup = function() {
           recalc();
           return false;
@@ -159,13 +159,13 @@
           return true;
         }
       },
-      'input#invoice_use_tax' : function(el){
+      'input#document_use_tax' : function(el){
         el.onclick = function() {
           recalc();
           return true;
         }
       },
-      'select#invoice_terms' : function(el){
+      'select#document_terms' : function(el){
         el.onchange = function() {
           if (el.value == '')
             new Effect.Appear('specific_date')

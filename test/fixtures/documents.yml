@@ -103,3 +103,91 @@ draft_invoice:
   subtotal: 1000
   paid: 0
   timezone: Pretoria
+
+diageo_quote:
+  id: 100
+  type: Quote
+  account_id: 1
+  client_id: 1
+  number: Q0001
+  use_tax: 1
+  tax_percentage: 14.00
+  shipping: 20.00
+  late_fee_percentage: 5.00
+  currency_id: ZAR
+  date: <%= Date.today - 1%>
+  due_date: <%= Date.today + 1 %>
+  status_id: 1
+  subtotal: 16500
+  timezone: Pretoria
+
+dbsa_quote:
+  id: 101
+  type: Quote
+  account_id: 2
+  client_id: 3
+  number: Q0002
+  use_tax: 1
+  tax_percentage: 14.00
+  shipping: 30.00
+  late_fee_percentage: 3.00
+  currency_id: ZAR
+  date: <%= Date.today - 1%>
+  due_date: <%= Date.today + 1 %>
+  status_id: 1
+  subtotal: 1000
+  timezone: Pretoria
+
+open_quote:
+  id: 102
+  type: Quote
+  account_id: 1
+  client_id: 1
+  number: Q0003
+  use_tax: 1
+  tax_percentage: 14.00
+  shipping: 30.00
+  late_fee_percentage: 3.00
+  currency_id: ZAR
+  date: <%= Date.today - 1 %>
+  due_date: <%= Date.today + 1 %>
+  status_id: 1
+  subtotal: 1000
+  timezone: Pretoria
+
+draft_quote:
+  id: 103
+  type: Quote
+  account_id: 1
+  client_id: 1
+  number: Q0006
+  use_tax: 0
+  tax_percentage: 14.00
+  shipping: 0.00
+  late_fee_percentage: 0.00
+  currency_id: ZAR
+  date: <%= Date.today - 2 %>
+  due_date: <%= Date.today - 1 %>
+  status_id: 3
+  subtotal: 1000
+  paid: 0
+  timezone: Pretoria
+
+expired_quote:
+  id: 104
+  type: Quote
+  account_id: 1
+  client_id: 1
+  number: Q0005
+  use_tax: 0
+  tax_percentage: 14.00
+  shipping: 0.00
+  late_fee_percentage: 0.00
+  currency_id: ZAR
+  date: <%= Date.today - 2 %>
+  due_date: <%= Date.today - 1 %>
+  status_id: 1
+  subtotal: 1000
+  paid: 0
+  timezone: Pretoria
+

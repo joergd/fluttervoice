@@ -26,8 +26,8 @@ class SummaryController < ApplicationController
 private
 
   def show(id)
-    @invoice = Invoice.find_by_id_and_account_id(id, @account.id)
-    flash[:error] = 'Invalid invoice' if @invoice.nil?
+    @document = Document.find_by_id_and_account_id(id, @account.id)
+    flash[:error] = 'Invalid document' if @document.nil?
 
     @logo = @account.preference.logo if !@account.preference.nil?
     render :template => "summary/show"

@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
   def new
     # id represents the invoice id.
     # verify that invoice belongs to account
-    @invoice = our_invoice(params[:id])
+    @invoice = our_document(params[:id])
     return if @invoice.nil?
 
     @payment = Payment.new
@@ -26,7 +26,7 @@ class PaymentsController < ApplicationController
   def list
     # id represents the invoice id.
     # verify that invoice belongs to account
-    @invoice = our_invoice(params[:id])
+    @invoice = our_document(params[:id])
     return if @invoice.nil?
   end
 

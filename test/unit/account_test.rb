@@ -173,6 +173,20 @@ class AccountTest < Test::Unit::TestCase
     assert !@woodstock_account.invoice_limit_reached?
   end
 
+  def test_quote_limits_free
+    @woodstock_account.plan_id = 1    
+    @woodstock_account.save
+    @woodstock_account.update_attribute :effective_date, Date.today - 10 # As in fixtures
+    assert_equal 3, @woodstock_account.quotes_sent_in_current_cycle
+    assert @woodstock_account.quote_limit_reached?
+  end
+
+  def test_quote_limits_heavy
+    @woodstock_account.plan_id = 2
+    @woodstock_account.save
+    assert !@woodstock_account.quote_limit_reached?
+  end
+
   def test_plan_change
     assert @woodstock_account.update_attribute(:plan_id, Plan::FREE)
       assert_difference('ManualIntervention.count', 0) do

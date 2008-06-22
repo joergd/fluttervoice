@@ -1,7 +1,7 @@
 <fieldset>
   <dl class="payment_form">
     <%= error_message_on :payment, :amount, "The payment amount " %>
-    <dt><strong><label for="payment_amount">Payment amount *</label></strong></dt><dd><strong><%= @invoice.currency_symbol %></strong>&nbsp;<%= text_field :payment, :amount, :maxlength => 8, :size => 29, :onkeypress => "return onlynumbers(event);"  %></dd>
+    <dt><strong><label for="payment_amount">Payment amount *</label></strong></dt><dd><strong><%= invoice.currency_symbol %></strong>&nbsp;<%= text_field :payment, :amount, :maxlength => 8, :size => 29, :onkeypress => "return onlynumbers(event);"  %></dd>
     <dt>Date</dt><dd><%= date_select :payment, :date, :order => [:day, :month, :year] %></dd>
     <dt><label for="payment_means">Payment method</label></dt><dd><%= text_field :payment, :means, :maxlength => 30, :size => 30  %></dd>
     <dt><label for="payment_reference">Reference</label></dt><dd><%= text_field :payment, :reference, :maxlength => 30, :size => 30  %></dd>

@@ -17,7 +17,7 @@
     <th>Amount Due</th>
   </tr>
   
-  <% @invoices.each do |i| -%>
+  <% @documents.each do |i| -%>
 
     <tr>
       <td><%=h i.client.name %></td>

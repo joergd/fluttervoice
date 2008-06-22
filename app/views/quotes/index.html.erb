@@ -1,0 +1,26 @@
+<div id="sidebar">
+  <%= render :partial =>  "action_menu_index" %>
+</div>
+
+<div id="content">
+
+  <h2>Summary of your quotes</h2>
+  
+  <%= display_error %>
+  <%= display_notice %>
+  
+  <% if @account.quotes.empty? -%>
+	  <div class="firsttime">
+	    You have not yet created any quotes. You can do so by clicking on "New Quote", in the right sidebar.
+	  </div>
+  <% else -%>
+	  <%= render :partial =>  "filter" %>
+	  <% if !@documents.empty? -%>
+	    <%= render :partial => "quotes", :locals => { :quotes => @documents } %>
+    
+	    <div class="export">
+	      Export your filtered results to <%= link_to "xml", { :format => "xml" }, :title => "Export your quotes to xml" %>, or into <%= link_to "Excel", { :format => "xls" }, :title => "Export your quotes into Excel" %>.
+	    </div>
+	  <% end -%>  
+  <% end -%>  
+</div>

@@ -1,0 +1,35 @@
+<table>
+  <tr>
+    <th>Client</th>
+    <th>Number</th>
+    <th>State</th>
+    <th>Date</th>
+    <th>Expiry Date</th>
+    <th>PO Number</th>
+    <th>Terms</th>
+    <th>Currency</th>
+    <th>Subtotal</th>
+    <th>Tax</th>
+    <th>Shipping</th>
+    <th>Total</th>
+  </tr>
+  
+  <% @documents.each do |i| -%>
+
+    <tr>
+      <td><%=h i.client.name %></td>
+      <td><%=h i.number %></td>
+      <td><%=h i.state %></td>
+      <td><%=h i.date %></td>
+      <td><%=h i.due_date %></td>
+      <td><%=h i.po_number %></td>
+      <td><%=h i.terms %></td>
+      <td><%=h i.currency_id %></td>
+      <td><%=h i.subtotal %></td>
+      <td><%=h i.tax %></td>
+      <td><%=h i.shipping %></td>
+      <td><%=h i.total %></td>
+    </tr>
+    
+  <% end -%>
+</table>

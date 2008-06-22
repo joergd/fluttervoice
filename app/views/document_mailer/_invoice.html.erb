@@ -1,0 +1,34 @@
+
+<% document.line_items.each do |line_item| -%>
+QUANTITY: <%=h line_item.quantity %> @ PRICE: <%= document.currency_symbol %><%=h number_to_currency(line_item.price, { :unit => '' }) %> TOTAL: <%= document.currency_symbol %><%=h line_item.total %>
+-- <%=h line_item.description %>
+<% end -%>
+
+
+-----------------------------------------------------------------
+Subtotal: <%= document.currency_symbol %><%=h number_to_currency(document.subtotal, { :unit => '' }) %>
+<% if document.use_tax? -%>
+<%=h document.tax_system %> @ <%=h number_to_percentage(document.tax_percentage, { :precision => 2 }) %>: <%=h document.currency_symbol %><%=h number_to_currency(document.tax, { :unit => '' }) %>
+<% end -%>
+<% if document.shipping > 0 -%>
+Shipping: <%=h document.currency_symbol %><%=h number_to_currency(document.shipping, { :unit => '' }) %>
+<% end -%>
+<% if document.apply_late_fee? -%>
+Late fee @ <%=h number_to_percentage(document.late_fee_percentage, { :precision => 2 }) %>: <%=h document.currency_symbol %><%=h number_to_currency(document.late_fee, { :unit => '' }) %>
+<% end -%>
+
+TOTAL: <%=h document.currency_symbol %><%=h number_to_currency(document.total.to_f + document.late_fee.to_f, { :unit => '' }) %>
+
+<% if document.paid > 0 -%>
+Amount paid: (<%=h document.currency_symbol %><%=h number_to_currency(document.paid, { :unit => '' }) %>)
+<% end -%>
+
+AMOUNT DUE: <%=h document.currency_symbol %><%=h number_to_currency(document.amount_due, { :unit => '' }) %>
+-----------------------------------------------------------------
+
+Invoice Due: <%=h document.due_date.strftime("%d %b %Y") %><% if !document.terms.empty? %> (<%=h document.terms %>)<% end %>
+All amounts are in <%= document.currency.name %>
+
+<% if !document.notes.blank? -%>
+Invoice notes: <%= document.notes %>
+<% end -%>

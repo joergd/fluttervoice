@@ -1,48 +1,48 @@
 <table>
   <tr>
-    <th>Client</th><td><%=h @invoice.client.name %></td>
+    <th>Client</th><td><%=h @document.client.name %></td>
   </tr>
   <tr>
-    <th>Number</th><td><%=h @invoice.number %></td>
+    <th>Number</th><td><%=h @document.number %></td>
   </tr>
   <tr>
-    <th>State</th><td><%=h @invoice.state %></td>
+    <th>State</th><td><%=h @document.state %></td>
   </tr>
   <tr>
-    <th>Date</th><td><%=h @invoice.date %></td>
+    <th>Date</th><td><%=h @document.date %></td>
   </tr>
   <tr>
-    <th>Due Date</th><td><%=h @invoice.due_date %></td>
+    <th>Due Date</th><td><%=h @document.due_date %></td>
   </tr>
   <tr>
-    <th>PO Number</th><td><%=h @invoice.po_number %></td>
+    <th>PO Number</th><td><%=h @document.po_number %></td>
   </tr>
   <tr>
-    <th>Terms</th><td><%=h @invoice.terms %></td>
+    <th>Terms</th><td><%=h @document.terms %></td>
   </tr>
   <tr>
-    <th>Currency</th><td><%=h @invoice.currency_id %></td>
+    <th>Currency</th><td><%=h @document.currency_id %></td>
   </tr>
   <tr>
-    <th>Subtotal</th><td><%=h @invoice.subtotal %></td>
+    <th>Subtotal</th><td><%=h @document.subtotal %></td>
   </tr>
   <tr>
-    <th>Tax</th><td><%=h @invoice.tax %></td>
+    <th>Tax</th><td><%=h @document.tax %></td>
   </tr>
   <tr>
-    <th>Shipping</th><td><%=h @invoice.shipping %></td>
+    <th>Shipping</th><td><%=h @document.shipping %></td>
   </tr>
   <tr>
-    <th>Late Fee</th><td><%=h @invoice.late_fee %></td>
+    <th>Late Fee</th><td><%=h @document.late_fee %></td>
   </tr>
   <tr>
-    <th>Total</th><td><%=h @invoice.total %></td>
+    <th>Total</th><td><%=h @document.total %></td>
   </tr>
   <tr>
-    <th>Paid</th><td><%=h @invoice.paid %></td>
+    <th>Paid</th><td><%=h @document.paid %></td>
   </tr>
   <tr>
-    <th>Amount Due</th><td><%=h @invoice.amount_due %></td>
+    <th>Amount Due</th><td><%=h @document.amount_due %></td>
   </tr>
 </table>
 
@@ -53,7 +53,7 @@
     <th>Description</th>    
     <th>Price</th>    
   </tr>
-  <% @invoice.line_items.each do |il| -%>
+  <% @document.line_items.each do |il| -%>
     <tr>
       <td><%=h il.line_item_type.name %></td>
       <td><%=h il.quantity %></td>

@@ -1,0 +1,7 @@
+<ul id="actions">
+  <li><%= link_to_function "Send quote", "new Effect.Appear('send_invoice_panel'); Element.hide('change_status_panel')", :title => "Email this quote to your client" %></li>
+
+  <li><%= link_to "Edit quote", { :action => "edit", :id => @document.id }, :title => "Edit this quote" %></li>
+
+  <li><%= link_to "Delete quote", { :action => "delete", :id => @document.id }, :title => "Delete this quote forever", :confirm => "Are you sure you want to delete this quote forever? Continue with delete?" %></li>
+</ul>

@@ -1,5 +1,5 @@
 <div id="sidebar">
-  <% if @invoice && @invoice.client.invoices.size > 1 %>
+  <% if @document && @document.class == Invoice && @document.client.live_invoices.size > 1 -%>
     <h3>Summary of all invoices</h3>
     <table id="client_invoice_summary_table" class="ruler" cellpadding="0" cellspacing="0" border="0">
       <thead>
@@ -10,16 +10,38 @@
         </tr>
       </thead>
       <tbody>
-      <% @invoice.client.live_invoices.each do |invoice| %>
+      <% @document.client.live_invoices.each do |invoice| -%>
         <tr onclick="document.location = '/summary/<%= "show".obfuscate %>/<%= invoice.id.to_s.obfuscate %>';">
           <td class="state"><span class="<%=h invoice.state.downcase %>"><%=h invoice.state %></span></td>
           <td class="number"><%=h invoice.number %></td>
           <td class="date"><%=h fmt_date(invoice.date) %></td>
         </tr>
-      <% end %>
+      <% end -%>
       </tbody>
     </table>
-  <% end %>
+  <% end -%>
+
+  <% if @document && @document.class == Quote && @document.client.live_quotes.size > 1 -%>
+    <h3>Summary of all quotes</h3>
+    <table id="client_invoice_summary_table" class="ruler" cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th class="state">State</th>
+          <th class="number">Number</th>
+          <th class="date">Quote Date</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @document.client.live_quotes.each do |quote| -%>
+        <tr onclick="document.location = '/summary/<%= "show".obfuscate %>/<%= quote.id.to_s.obfuscate %>';">
+          <td class="state"><span class="<%=h quote.state.downcase %>"><%=h quote.state %></span></td>
+          <td class="number"><%=h quote.number %></td>
+          <td class="date"><%=h fmt_date(quote.date) %></td>
+        </tr>
+      <% end -%>
+      </tbody>
+    </table>
+  <% end -%>
     
   <div id="what_is_this">
     <%= link_to "What is this?", "http://www.#{@app_config['domain']}", :title => "Go to #{@app_config['app_name']} and find out more", :popup => true %>
@@ -31,31 +53,31 @@
   <%= display_error %>
   <%= display_notice %>
 
-  <% if @invoice.nil? -%>
-    <%= @account.name %> has deleted this invoice. Unfortunately you will no longer be able to view this invoice.
-  <% elsif @invoice.draft? -%>
-    <%= @account.name %> has changed the status of this invoice to a <strong>draft</strong> status. Unfortunately you won't be able to view this invoice.
+  <% if @document.nil? -%>
+    <%= @account.name %> has deleted this <%= @document.class.to_s.downcase %>. Unfortunately you will no longer be able to view it.
+  <% elsif @document.draft? -%>
+    <%= @account.name %> has changed the status of this <%= @document.class.to_s.downcase %> to a <strong>draft</strong> status. Unfortunately you won't be able to view it.
   <% else -%>
   
     <div id="invoice">
       <%= render :partial => "documents/account_header", :locals => { :account => @account, :logo => @logo } %>
     
-      <div id="invoice_state_indicator" class="<%= @invoice.state.downcase %>"><%= @invoice.state %></div>
+      <div id="invoice_state_indicator" class="<%= @document.state.downcase %>"><%= @document.state %></div>
     
-      <h2><%=h @invoice.name %></h2>
-      <h3><%=h @invoice.client.name %></h3>
-      <%= render(:partial => '/widgets/address', :locals => { :address => @invoice.client.address, :tel => @invoice.client.tel, :fax => @invoice.client.fax, :web => @invoice.client.web }) %>
-      <% if !@invoice.client.vat_registration.blank? -%>
-        <p class="client_vat_registration">VAT Registration: <%=h @invoice.client.vat_registration %></p>
+      <h2><%=h @document.name %></h2>
+      <h3><%=h @document.client.name %></h3>
+      <%= render(:partial => '/widgets/address', :locals => { :address => @document.client.address, :tel => @document.client.tel, :fax => @document.client.fax, :web => @document.client.web }) %>
+      <% if !@document.client.vat_registration.blank? -%>
+        <p class="client_vat_registration">VAT Registration: <%=h @document.client.vat_registration %></p>
       <% end -%>
     
-      <% if !@invoice.po_number.blank? -%>
-        <p class="invoice_po_number">PO/Ref Number: <%=h @invoice.po_number %></p>
+      <% if !@document.po_number.blank? -%>
+        <p class="invoice_po_number">PO/Ref Number: <%=h @document.po_number %></p>
       <% end -%>
     
-      <div id="invoice_date"><%=h fmt_date(@invoice.date) %></div>
+      <div id="invoice_date"><%=h fmt_date(@document.date) %></div>
       
-      <%= render :partial => "documents/show_invoice", :locals => { :invoice => @invoice } %>
+      <%= render :partial => "documents/show", :locals => { :document => @document } %>
 
     </div>
       

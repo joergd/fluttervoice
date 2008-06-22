@@ -18,8 +18,8 @@ class SummaryControllerTest < Test::Unit::TestCase
     get :index, :a => 'show'.obfuscate, :id => '1'.obfuscate
     assert_response :success
     assert_template 'summary/show'
-    assert_equal @diageo_invoice.id, assigns(:invoice).id
-    assert_select "h2", "Tax Invoice #{assigns(:invoice).number}"
+    assert_equal @diageo_invoice.id, assigns(:document).id
+    assert_select "h2", "Tax Invoice #{assigns(:document).number}"
   end
 
   def test_invalid_show_invoice
@@ -30,14 +30,14 @@ class SummaryControllerTest < Test::Unit::TestCase
   def test_invalid_show__wrong_invoice
     get :index, :a => 'show'.obfuscate, :id => '2'.obfuscate
     assert_response :success
-    assert_equal "Invalid invoice", flash[:error]
+    assert_equal "Invalid document", flash[:error]
   end
 
   def test_show_deleted_invoice
     @diageo_invoice.destroy
     get :index, :a => 'show'.obfuscate, :id => '1'.obfuscate
     assert_response :success
-    assert_equal "Invalid invoice", flash[:error]
+    assert_equal "Invalid document", flash[:error]
   end
 
   def test_invalid_show_command

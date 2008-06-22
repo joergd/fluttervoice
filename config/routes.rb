@@ -33,6 +33,11 @@ ActionController::Routing::Routes.draw do |map|
 
   # /^([Aa]ll|[Oo]pen|[Oo]verdue|[Cc]losed).*/ .... used to be that 
 
+  # handle quote filters
+  map.connect 'quotes/:states', :controller => 'quotes',
+                                  :action => 'index',
+                                  :requirements => { :states => /([Aa]ll|[Oo]pen|[Ee]xpired).*/ } 
+
   map.namespace(:adm1n) do |adm1n|
     adm1n.home "/", :controller => "home", :action => "index"
     adm1n.resources :manual_interventions, :member => { :complete => :post }

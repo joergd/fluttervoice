@@ -13,7 +13,7 @@
   <h3>For invoice <%=h @invoice.number %></h3>
   
   <% form_tag :action => 'new' do -%>
-    <%= render :partial => 'form' %>
+    <%= render :partial => 'form', :locals => { :invoice => @invoice } %>
     <div class="submit_box">
       <%= submit_tag "Receive payment" %>
     </div>

@@ -1,0 +1,40 @@
+<%= message.gsub(/\n/, '<br/>') %>
+
+<hr />
+<%= render :partial => "document_mailer/html_summary_link" %>
+<hr />
+
+<h2><%=h document.name %></h2>
+
+<table width="625" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td align="right" style="font-size: 12px;">
+      <h3><%=h account.name %></h3>
+      <%= render :partial => "document_mailer/html_address", :locals => { :address => account.address, :tel => account.tel, :fax => account.fax, :web => account.web } %>
+      <% if !account.vat_registration.blank? -%>
+        <p>VAT Registration: <%=h account.vat_registration %></p>
+      <% end -%>
+    </td>
+  </tr>
+</table>
+
+<h3>TO: <%=h document.client.name %></h3>
+<%= render(:partial => "document_mailer/html_address", :locals => { :address => document.client.address, :tel => document.client.tel, :fax => document.client.fax, :web => document.client.web }) %>
+<% if !document.client.vat_registration.blank? -%>
+  <p>VAT Registration: <%=h document.client.vat_registration %></p>
+<% end -%>
+
+<h4>Date: <%=h document.date.strftime("%d %b %Y") %></h4>
+
+<% if !document.po_number.blank? -%>
+  <p>PO/Ref Number: <%=h document.po_number %></p>
+<% end -%>
+
+<%= document_html %>
+
+<br/><br/>
+<hr />
+<%= render :partial => "document_mailer/html_summary_link" %>
+<hr />
+
+<% if account.plan.free? %><%= render :partial => "document_mailer/html_fluttervoice_link", :locals => { :document => document } %><% end -%>

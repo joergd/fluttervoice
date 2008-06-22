@@ -1,0 +1,28 @@
+<div class="panel">
+  <table id="filter_table" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td valign="top">
+        <div id="show_filter"><%= link_to_function "Show filter", "Filter.show()", :title => "Show invoice filter" %></div>
+        <div id="hide_filter" style="display: none;"><%= link_to_function "Hide filter", "Filter.hide()", :title => "Hide invoice filter" %></div>
+      </td>
+      <td valign="top">
+        <div id="filter" style="display: none;">
+          <ul>
+            <li><%= check_box_tag "filterbox", "all", @all, :onclick => "Filter.uncheck_boxes(true)" %><strong>all</strong></li>
+            <li><%= check_box_tag "filterbox", "open", @open, { :onclick => "Filter.uncheck_boxes()" } %>open</li>
+            <li><%= check_box_tag "filterbox", "expired", @expired, :onclick => "Filter.uncheck_boxes()" %>expired</li>
+          </ul>
+          <div class="submit_box">
+            <%= submit_tag "Filter", :onclick => "Filter.submit('#{ url_for(:action => '', :states => nil) }');" %>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script type="text/javascript" language="javascript" charset="utf-8">
+  // <![CDATA[
+    Filter.init();
+  // ]]>
+</script>

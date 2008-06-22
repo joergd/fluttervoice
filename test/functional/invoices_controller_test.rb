@@ -35,31 +35,31 @@ class InvoicesControllerTest < Test::Unit::TestCase
     end
     
     get :index, :states => "open"
-    assert_equal @woodstock_account.open_invoices.size, assigns(:invoices).size
+    assert_equal @woodstock_account.open_invoices.size, assigns(:documents).size
 
     get :index, :states => "closed"
-    assert_equal @woodstock_account.closed_invoices.size, assigns(:invoices).size
+    assert_equal @woodstock_account.closed_invoices.size, assigns(:documents).size
 
     get :index, :states => "open,closed"
-    assert_equal @woodstock_account.open_invoices.size + @woodstock_account.closed_invoices.size, assigns(:invoices).size
+    assert_equal @woodstock_account.open_invoices.size + @woodstock_account.closed_invoices.size, assigns(:documents).size
 
     get :index, :states => "open,closed,overdue"
-    assert_equal @woodstock_account.open_invoices.size + @woodstock_account.closed_invoices.size + @woodstock_account.overdue_invoices.size, assigns(:invoices).size
+    assert_equal @woodstock_account.open_invoices.size + @woodstock_account.closed_invoices.size + @woodstock_account.overdue_invoices.size, assigns(:documents).size
 
     get :index, :states => "all,all,open"
-    assert_equal @woodstock_account.invoices.size, assigns(:invoices).size
+    assert_equal @woodstock_account.invoices.size, assigns(:documents).size
   end
 
   def test_show
     get :show, :id => @diageo_invoice.id
     assert_response :success
-    assert_equal @diageo_invoice.id, assigns(:invoice).id
-    assert_equal "R", assigns(:invoice).currency_symbol
+    assert_equal @diageo_invoice.id, assigns(:document).id
+    assert_equal "R", assigns(:document).currency_symbol
     assert_not_nil assigns(:payment)
     %w{ xml xls }.each do |format|
       get :show, :id => @diageo_invoice.id, :format => "#{format}"
       assert_response :success
-      assert_equal @diageo_invoice.id, assigns(:invoice).id
+      assert_equal @diageo_invoice.id, assigns(:document).id
     end
   end
 
@@ -111,14 +111,14 @@ class InvoicesControllerTest < Test::Unit::TestCase
   def test_show_illegal_invoice
     get :show, :id => @dbsa_invoice.id
     assert_response :redirect
-    assert_equal "Invalid invoice", flash[:error]
+    assert_equal "Invalid document", flash[:error]
   end
 
   def test_create
     get :create
     assert_nil session[:client_id]
-    assert_nil session[:invoice_client_name]
-    assert_nil session[:invoice_type]
+    assert_nil session[:document_client_name]
+    assert_nil session[:document_type]
   end
 
   def test_create_over_limit
@@ -140,7 +140,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
 
   def test_create_with_new_client
     post   :create,
-          :invoice_type => "TimeLineItem",
+          :document_type => "TimeLineItem",
           :client => "",
           :newclient => "My new client"
     assert_redirected_to :controller => "clients", :action => "new"
@@ -157,7 +157,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
   end
 
   def test_new_with_no_session_variables_set
-    session[:invoice_type] = ""
+    session[:document_type] = ""
     session[:client_id] = nil
     get :new
     assert_redirected_to :action => "create"
@@ -167,8 +167,8 @@ class InvoicesControllerTest < Test::Unit::TestCase
     get :new, nil, { :user => { :id => 1 }, :client_id => 1 }
     assert_response :success
     assert_nil session[:original_return_to]
-    assert_kind_of Invoice, assigns(:invoice)
-    assert_equal @pathfinder.id, assigns(:invoice).client_id
+    assert_kind_of Invoice, assigns(:document)
+    assert_equal @pathfinder.id, assigns(:document).client_id
     assert_tag :tag => "div", :attributes => { :id => "lineitemrows" }
   end
 
@@ -183,7 +183,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
 
   def test_new_with_missing_invoice_number
     post   :new,
-          {  :invoice => {   :date => Date.today,
+          {  :document => {   :date => Date.today,
                             :due_date => Date.today,
                             :number => '',
                             :tax_percentage => "14.0",
@@ -201,12 +201,12 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :client_id => 1 }
 
     assert_response :success
-    assert_equal "is too short (minimum is 1 characters)", assigns(:invoice).errors.on(:number)
+    assert_equal "is too short (minimum is 1 characters)", assigns(:document).errors.on(:number)
   end
 
   def test_new_with_missing_lines
     post   :new,
-          {  :invoice => {   :date => Date.today,
+          {  :document => {   :date => Date.today,
                             :due_date => Date.today,
                             :number => 'Number1',
                             :tax_percentage => "14.0",
@@ -219,7 +219,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
           {  :user => { :id => 1 }, # need to add login, else gets overwritten
             :client_id => 1 }
     assert_response :success
-    assert_equal "not there. You need at least one line item", assigns(:invoice).errors.on(:line_items)
+    assert_equal "not there. You need at least one line item", assigns(:document).errors.on(:line_items)
   end
 
   def test_new_with_wrong_invoice_line
@@ -227,7 +227,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
     num_line_items = LineItem.count
 
     post   :new,
-          {  :invoice => {   :date => Date.today,
+          {  :document => {   :date => Date.today,
                             :due_date => Date.today,
                             :number => 'Numnber1',
                             :tax_percentage => "14.0",
@@ -245,7 +245,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :client_id => 1 }
 
     assert_response :success
-    assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:invoice).errors.on(:line_items)
+    assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:document).errors.on(:line_items)
 
     assert_equal num_invoices, Invoice.count
     assert_equal num_line_items, LineItem.count
@@ -257,7 +257,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
     num_line_items = LineItem.count
 
     post   :new,
-          {  :invoice => {   :date => Date.today,
+          {  :document => {   :date => Date.today,
                             :due_date => Date.today,
                             :number => 'Numnber1',
                             :tax_percentage => "14.0",
@@ -276,8 +276,8 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :client_id => 1 }
 
     assert_redirected_to :action => "show"
-    assert_equal 20.00, assigns(:invoice).amount_due
-    assert_equal Status::DRAFT, assigns(:invoice).status_id
+    assert_equal 20.00, assigns(:document).amount_due
+    assert_equal Status::DRAFT, assigns(:document).status_id
     assert_equal num_invoices + 1, Invoice.count
     assert_equal num_line_items + 1, LineItem.count
   end
@@ -287,7 +287,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
     Invoice.destroy_all("account_id = #{@woodstock_account.id}")
     
     post   :new,
-          {  :invoice => {   :date => Date.today,
+          {  :document => {   :date => Date.today,
                             :due_date => Date.today,
                             :number => 'Numnber1',
                             :tax_percentage => "14.0",
@@ -306,7 +306,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :client_id => 1 }
 
     assert_redirected_to :action => "show"
-    assert_equal Status::OPEN, assigns(:invoice).status_id
+    assert_equal Status::OPEN, assigns(:document).status_id
   end
 
   def test_edit
@@ -315,7 +315,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
           {  :id => invoice.id }
 
       assert_response :success
-      assert_not_nil assigns(:invoice)
+      assert_not_nil assigns(:document)
       # below causes a weird parsing error
       # assert_tag :tag => 'div', :attributes => { :id => 'lineitemrows' }
     end
@@ -328,7 +328,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
           {  :id => invoice.id }
 
       assert_response :success
-      assert_not_nil assigns(:invoice)
+      assert_not_nil assigns(:document)
       # below causes a weird parsing error
       # assert_tag :tag => 'div', :attributes => { :id => 'lineitemrows' }
     end
@@ -337,7 +337,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
   def test_edit_invalid
     post   :edit,
           {  :id => @diageo_invoice.id,
-            :invoice => {   :date => Date.today,
+            :document => {   :date => Date.today,
                             :due_date => Date.today,
                             :number => 'Numnber1',
                             :tax_percentage => "14.0",
@@ -355,14 +355,14 @@ class InvoicesControllerTest < Test::Unit::TestCase
              }
 
     assert_response :success
-    assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:invoice).errors.on(:line_items)
+    assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:document).errors.on(:line_items)
   end
 
   def test_edit_with_missing_line_items
     num_line_items = @diageo_invoice.line_items.size
     post   :edit,
           {  :id => @diageo_invoice.id,
-            :invoice => {   :date => Date.today,
+            :document => {   :date => Date.today,
                             :due_date => Date.today,
                             :number => 'Numnber1',
                             :tax_percentage => "14.0",
@@ -376,7 +376,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
             }
 
     assert_response :success
-    assert_equal "not there. You need at least one line item", assigns(:invoice).errors.on(:line_items)
+    assert_equal "not there. You need at least one line item", assigns(:document).errors.on(:line_items)
     assert_equal num_line_items, @diageo_invoice.line_items.size
   end
 
@@ -385,7 +385,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
 
     post   :edit,
           { :id => @diageo_invoice.id,
-            :invoice => {   :date => Date.today,
+            :document => {   :date => Date.today,
                             :due_date => Date.today,
                             :number => 'Numnber1',
                             :tax_percentage => "14.0",
@@ -473,7 +473,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
 
     get :delete, :id => @dbsa_invoice.id
     assert_response :redirect
-    assert_equal "Invalid invoice", flash[:error]
+    assert_equal "Invalid document", flash[:error]
 
     assert_not_nil Invoice.find(@dbsa_invoice.id)
   end
@@ -495,7 +495,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
       assert_equal 1, @emails.size
       email = @emails.first
       assert_equal "multipart/alternative", email.content_type
-      assert_match "Invoice #{@diageo_invoice.id} from #{@woodstock_account.name}", email.subject
+      assert_match "Invoice #{@diageo_invoice.number} from #{@woodstock_account.name}", email.subject
       assert_equal 2, email.to.size
       assert_equal @jonny.email, email.to[0]
       assert_equal @leigh.email, email.to[1]

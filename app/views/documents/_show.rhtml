@@ -1,0 +1,17 @@
+<%= render :partial => "/documents/line_items", :locals => { :document => document } %>
+<table id="invoice_calcs_terms" cellpadding="0" cellspacing="0" border="0">
+	<% if document.class == Invoice -%>
+	  <tr>
+	    <td class="terms" valign="bottom"><%= render :partial => "/invoices/terms", :locals => { :invoice => document } %></td>
+	    <td class="calcs" valign="bottom"><%= render :partial => "/invoices/calculations", :locals => { :invoice => document } %></td>
+	  </tr>
+	<% else -%>
+  <tr>
+    <td class="terms" valign="bottom"><%= render :partial => "/quotes/terms", :locals => { :quote => document } %></td>
+    <td class="calcs" valign="bottom"><%= render :partial => "/quotes/calculations", :locals => { :quote => document } %></td>
+  </tr>
+	<% end -%>
+</table>
+<% if !document.notes.blank? -%>
+	<%= render :partial => "documents/notes", :locals => { :notes => document.notes } %>
+<% end -%>

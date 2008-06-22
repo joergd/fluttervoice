@@ -16,6 +16,15 @@ class Client < ActiveRecord::Base
               :order => "date DESC",
               :conditions => "status_id <> #{Status::DRAFT}"
 
+  has_many    :quotes,
+              :order => "date DESC",
+              :dependent => :destroy
+
+  has_many    :live_quotes,
+               :class_name => "Quote",
+              :order => "date DESC",
+              :conditions => "status_id <> #{Status::DRAFT}"
+
   composed_of :address,
               :mapping => [
                             %w(address1 address1),

@@ -25,9 +25,13 @@ private
     @currencies = Currency.find(:all, :order => 'name')
     @terms = Term.find(:all, :order => 'days')
     @line_item_types = LineItemType.find(:all, :order => 'position')
-    @last_invoice_number_used = Invoice.last_number_used(@account.id)
+    @last_document_number_used = get_last_document_number_used
   end
 
+  # Abstract
+  def get_last_document_number_used
+  end
+  
   def extract_lines_from_params
     line_items = Array.new
     if !params[:line_items].nil?
@@ -42,7 +46,7 @@ private
 
   def session_variables_present?
     if session[:client_id].nil?
-      flash[:notice] = "Please select a client for your new invoice"
+      flash[:notice] = "Please select a client for your new #{self.controller_name.singularize.downcase}"
       redirect_to :action => 'create'
       return false
     end
@@ -190,11 +194,11 @@ private
   def render_different_formats
     case params[:format]
       when "xml":
-        render :template => "invoices/export/#{action_name}.rxml", :layout => false
+        render :template => "#{self.controller_name}/export/#{action_name}.rxml", :layout => false
         return true
       when "xls":
         apply_excel_header
-        render :template => "invoices/export/#{action_name}.rxls", :layout => false
+        render :template => "#{self.controller_name}/export/#{action_name}.rxls", :layout => false
         return true
     end
   end
@@ -202,7 +206,7 @@ private
   def construct_email_html_for_document(document)
     td_style = %Q(style="font-size: 12px; padding: 5px; border-bottom: 1px solid #E4E4D2;")
     th_style = %Q(style="font-size: 12px; padding: 5px;")
-    s = render_to_string(:partial => 'documents/show_invoice', :locals => { :invoice => document })
+    s = render_to_string(:partial => 'documents/show', :locals => { :document => document })
     s.gsub!(/class="type"/, %Q(width="75" align="left" valign="top"))
     s.gsub!(/class="quantity"/, %Q(width="45" align="left" valign="top"))
     s.gsub!(/class="description"/, %Q(width="255" align="left" valign="top"))

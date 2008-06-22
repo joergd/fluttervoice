@@ -3,4 +3,4 @@
 <hr />
 <%= render :partial => "document_mailer/html_summary_link" %>
 <hr />
-<% if @account.plan.free? %><%= render :partial => "document_mailer/html_fluttervoice_link" %><% end -%>
+<% if @account.plan.free? %><%= render :partial => "document_mailer/html_fluttervoice_link", :locals => { :document => @document } %><% end -%>

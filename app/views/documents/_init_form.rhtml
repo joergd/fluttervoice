@@ -2,13 +2,13 @@
 //<![CDATA[
   <%= render :partial => "documents/edit_line_item" %>
 
-  <% @invoice.line_items.each do |il| -%>
+  <% document.line_items.each do |il| -%>
     populateLine(<%= il.line_item_type_id %>, <%= il.quantity %>, <%= il.price %>, "<%=h il.description %>");
   <% end -%>
 
   recalc();
 
-  <% if @invoice.terms.length == 0 -%>
+  <% if document.terms.length == 0 -%>
     Element.show('specific_date')
   <% end -%>
 //]]>

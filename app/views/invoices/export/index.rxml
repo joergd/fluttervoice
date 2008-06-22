@@ -1,6 +1,6 @@
 xml.instruct!
 xml.invoices("xmlns:xlink" => "http://www.w3.org/1999/xlink", "xmlns" => "http://www.#{@app_config['domain']}/api") do
-  for i in @invoices
+  for i in @documents
     xml.invoice("xlink:href" => url_for({ :action => "show", :id => i.id, :only_path => false }), "id" => "#{i.id}") do
       xml.client(i.client.name, "xlink:href" => url_for({ :controller => "clients", :action => "show", :id => i.client.id, :only_path => false }), "id" => "#{i.client.id}")
       xml.number(i.number)

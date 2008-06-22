@@ -1,0 +1,25 @@
+xml.instruct!
+xml.quote("xmlns:xlink" => "http://www.w3.org/1999/xlink", "xmlns" => "http://www.#{@app_config['domain']}/api", "xlink:href" => url_for({ :action => "show", :id => @document.id, :only_path => false }), "id" => "#{@document.id}") do
+  xml.client(@document.client.name, "xlink:href" => url_for({ :controller => "clients", :action => "show", :id => @document.client.id, :only_path => false }), "id" => "#{@document.client.id}")
+  xml.number(@document.number)
+  xml.state(@document.state.downcase)
+  xml.date(@document.date)
+  xml.due_date(@document.due_date)
+  xml.po_number(@document.po_number)
+  xml.terms(@document.terms)
+  xml.currency(@document.currency_id)
+  xml.subtotal(@document.subtotal)
+  xml.tax(@document.tax)
+  xml.shipping(@document.shipping)
+  xml.total(@document.total)
+  xml.lines do
+    @document.line_items.each do |il|
+      xml.line do
+        xml.type(il.line_item_type.name.downcase)
+        xml.type(il.quantity)
+        xml.type(il.description)
+        xml.type(il.price)
+      end
+    end
+  end
+end

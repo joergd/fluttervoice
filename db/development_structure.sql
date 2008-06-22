@@ -47,7 +47,7 @@ CREATE TABLE `audit_logins` (
   `failed` tinyint(1) NOT NULL default '0',
   `created_on` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `binaries` (
   `id` int(11) NOT NULL auto_increment,
@@ -148,7 +148,7 @@ CREATE TABLE `documents` (
   PRIMARY KEY  (`id`),
   KEY `invoices_account_id_index` (`account_id`),
   KEY `invoices_client_id_index` (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `email_logs` (
   `id` int(11) NOT NULL auto_increment,
@@ -164,7 +164,7 @@ CREATE TABLE `email_logs` (
   `updated_on` datetime default NULL,
   `created_on` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `images` (
   `id` int(11) NOT NULL auto_increment,
@@ -204,7 +204,7 @@ CREATE TABLE `line_items` (
   `created_on` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `invoice_lines_invoice_id_index` (`document_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `manual_interventions` (
   `id` int(11) NOT NULL auto_increment,
@@ -278,6 +278,7 @@ CREATE TABLE `plans` (
   `display_cost_for_uk` varchar(11) NOT NULL default '',
   `display_currency_cost_for_uk` varchar(11) NOT NULL default '',
   `seq` int(11) NOT NULL default '0',
+  `quotes` int(11) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
@@ -302,6 +303,13 @@ CREATE TABLE `preferences` (
   KEY `preferences_account_id_index` (`account_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+CREATE TABLE `quotes` (
+  `id` int(11) NOT NULL auto_increment,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `schema_migrations` (
   `version` varchar(255) NOT NULL,
   UNIQUE KEY `unique_schema_migrations` (`version`)
@@ -314,7 +322,7 @@ CREATE TABLE `sessions` (
   `updated_at` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `sessions_session_id_index` (`session_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `status` (
   `id` int(11) NOT NULL auto_increment,
@@ -378,6 +386,10 @@ INSERT INTO schema_migrations (version) VALUES ('20080619105139');
 INSERT INTO schema_migrations (version) VALUES ('20080619110238');
 
 INSERT INTO schema_migrations (version) VALUES ('20080619140047');
+
+INSERT INTO schema_migrations (version) VALUES ('20080620143331');
+
+INSERT INTO schema_migrations (version) VALUES ('20080620143356');
 
 INSERT INTO schema_migrations (version) VALUES ('3');
 

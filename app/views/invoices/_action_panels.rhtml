@@ -1,10 +1,10 @@
 <div id="send_invoice_panel" class="panel" style="display: none;">
   <div class="panel_cancel"><%= link_to_function "Cancel", "Element.hide('send_invoice_panel')" %></div>
-  <h4>Send invoice to <%=h @invoice.client.name %></h4>
-  <% form_tag :action => 'deliver_invoice', :id => @invoice.id do -%>
+  <h4>Send invoice to <%=h @document.client.name %></h4>
+  <% form_tag :action => 'deliver_invoice', :id => @document.id do -%>
     <fieldset>
       <%= render :partial => 'email_invoice_checkboxes' %>
-      <p>Your mesage will appear first in the email body to <%=h @invoice.client.name %>,<br/>followed by this invoice.</p>
+      <p>Your message will appear first in the email body to <%=h @document.client.name %>,<br/>followed by this invoice.</p>
       <dl class="send_emails_form">
         <dt><label for="message">Message</label></dt><dd><%= text_area_tag :message, @message, { :cols => 40, :rows => 8 } %></dd>
       </dl>
@@ -15,12 +15,12 @@
   <% end -%>
 </div>
 
-<% if !@invoice.closed? -%>
+<% if !@document.closed? -%>
   <div id="receive_payment_panel" class="panel" style="display: none;">
     <div class="panel_cancel"><%= link_to_function "Cancel", "Element.hide('receive_payment_panel')" %></div>
-    <h4>Receive payment from <%=h @invoice.client.name %></h4>
-    <% form_tag :controller => 'payments', :action => 'new', :id => @invoice.id do -%>
-      <%= render :partial => '/payments/form' %>
+    <h4>Receive payment from <%=h @document.client.name %></h4>
+    <% form_tag :controller => 'payments', :action => 'new', :id => @document.id do -%>
+      <%= render :partial => '/payments/form', :locals => { :invoice => @document } %>
       <div class="submit_box">
         <%= submit_tag "Receive payment" %>
       </div>
@@ -28,11 +28,11 @@
   </div>
 <% end -%>
 
-<% if @invoice.closed? -%>
+<% if @document.closed? -%>
   <div id="send_thankyou_panel" class="panel" style="display: none;">
     <div class="panel_cancel"><%= link_to_function "Cancel", "Element.hide('send_thankyou_panel')" %></div>
-    <h4>Send thank you message to <%=h @invoice.client.name %></h4>
-    <% form_tag :action => 'deliver_thankyou', :id => @invoice.id do -%>
+    <h4>Send thank you message to <%=h @document.client.name %></h4>
+    <% form_tag :action => 'deliver_thankyou', :id => @document.id do -%>
       <fieldset>
         <%= render :partial => 'email_thankyou_checkboxes' %>
         <dl class="send_emails_form">
@@ -46,11 +46,11 @@
   </div>
 <% end -%>
 
-<% if @invoice.past_due? -%>
+<% if @document.past_due? -%>
   <div id="send_reminder_panel" class="panel" style="display: none;">
     <div class="panel_cancel"><%= link_to_function "Cancel", "Element.hide('send_reminder_panel')" %></div>
-    <h4>Send a reminder to <%=h @invoice.client.name %></h4>
-    <% form_tag :action => 'deliver_reminder', :id => @invoice.id do -%>
+    <h4>Send a reminder to <%=h @document.client.name %></h4>
+    <% form_tag :action => 'deliver_reminder', :id => @document.id do -%>
       <fieldset>
         <%= render :partial => 'email_reminder_checkboxes' %>
         <dl class="send_emails_form">
@@ -68,16 +68,16 @@
   <div id="change_status_panel" class="panel" style="display: none;">
     <div class="panel_cancel"><%= link_to_function "Cancel", "Element.hide('change_status_panel')" %></div>
     <h4>Change this invoice status</h4>
-    <% if @invoice.draft? -%>
+    <% if @document.draft? -%>
       <p>This invoice is currently in a <strong>draft</strong> status. That means it will be excluded from any Totals calculations, and your clients will not be able to see it in their client area.</p>
-      <% form_tag :action => 'make_live', :id => @invoice.id do -%>
+      <% form_tag :action => 'make_live', :id => @document.id do -%>
         <div class="submit_box">
           <%= submit_tag "Make live" %>
         </div>
       <% end -%>
     <% else -%>
-      <p>This invoice is currently <%= @invoice.state %>. You could give it a <strong>draft</strong> status - which means that your clients will no longer be able to see it in their client summary area.</p>
-      <% form_tag :action => 'make_draft', :id => @invoice.id do -%>
+      <p>This invoice is currently <%= @document.state %>. You could give it a <strong>draft</strong> status - which means that your clients will no longer be able to see it in their client summary area.</p>
+      <% form_tag :action => 'make_draft', :id => @document.id do -%>
         <div class="submit_box">
           <%= submit_tag "Revert to draft" %>
         </div>

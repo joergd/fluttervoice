@@ -9,14 +9,14 @@
 
   <h2>Create new Invoice</h2>
   
-  <% if !@invoice.errors.empty? -%>
+  <% if !@document.errors.empty? -%>
     <div class="formError"><span>Something went wrong with saving your invoice. Please look at the highlighted messages below to see if you can correct the problem.</span></div>
   <% end -%>
   
-  <h3><%=h @invoice.client.name %></h3>
-  <%= render :partial => 'widgets/address', :locals => { :address => @invoice.client.address, :tel => @invoice.client.tel, :fax => @invoice.client.fax, :web => @invoice.client.web } %>
+  <h3><%=h @document.client.name %></h3>
+  <%= render :partial => 'widgets/address', :locals => { :address => @document.client.address, :tel => @document.client.tel, :fax => @document.client.fax, :web => @document.client.web } %>
   <% form_tag :action => 'new' do -%>
-    <%= render :partial => 'documents/form', :locals => { :invoice => @invoice } %>
+    <%= render :partial => 'documents/form', :locals => { :document => @document } %>
 
     <div class="instructions">
       You can <strong>send</strong> the invoice once you have created it.

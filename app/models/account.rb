@@ -19,6 +19,10 @@ class Account < ActiveRecord::Base
               :include => [ :client ],
               :order => "documents.date desc" 
 
+  has_many    :quotes,
+              :include => [ :client ],
+              :order => "documents.date desc" 
+
   has_many    :manual_interventions, :order => "created_at ASC" do
     def last
       find(:last)
@@ -102,6 +106,22 @@ class Account < ActiveRecord::Base
     )
   end
 
+  def open_quotes
+    Quote.find( :all,
+                  :include => [ :client ],
+                  :conditions => "documents.account_id = #{id} and status_id = 1 and '#{today_timezone_date}' <= due_date",
+                  :order => "documents.date desc" 
+    )
+  end
+
+  def expired_quotes
+    Quote.find( :all,
+                  :include => [ :client ],
+                  :conditions => "documents.account_id = #{id} and status_id = 1 and '#{today_timezone_date}' > due_date",
+                  :order => "documents.date desc" 
+    )
+  end
+
   def days_left_in_cycle
     next_cycle_date - today_timezone_date
   end
@@ -142,14 +162,29 @@ class Account < ActiveRecord::Base
     @invoices_sent ||= Invoice.count :conditions => ["account_id = ? AND status_id <> ? AND date >= ? AND date < ?", self.id, Status::DRAFT, current_cycle_date, next_cycle_date]
   end
 
+  # the instance variable implement 'caching' functionality for one http request
+  def quotes_sent_in_current_cycle
+    @quotes_sent ||= Quote.count :conditions => ["account_id = ? AND status_id <> ? AND date >= ? AND date < ?", self.id, Status::DRAFT, current_cycle_date, next_cycle_date]
+  end
+
   # the instance variables implement 'caching' functionality for one http request
   def invoice_countdown
     @invoices_allowed = self.plan.invoices if @invoices_allowed.blank?
     @invoices_allowed - invoices_sent_in_current_cycle
   end
 
+  # the instance variables implement 'caching' functionality for one http request
+  def quote_countdown
+    @quotes_allowed = self.plan.quotes if @quotes_allowed.blank?
+    @quotes_allowed - quotes_sent_in_current_cycle
+  end
+
   def invoice_limit_reached?
     invoice_countdown == 0
+  end
+
+  def quote_limit_reached?
+    quote_countdown == 0
   end
 
   def client_limit_reached?

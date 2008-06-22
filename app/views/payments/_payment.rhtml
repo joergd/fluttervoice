@@ -3,5 +3,5 @@
   <td class="date"><%=h fmt_date(payment.date) %></td>
   <td class="method"><%=h payment.means %></td>
   <td class="reference"><%=h payment.reference %></td>
-  <td class="amount"><%=h @invoice.currency_symbol %><%=h fmt_currency(payment.amount) %></td>
+  <td class="amount"><%=h invoice.currency_symbol %><%=h fmt_currency(payment.amount) %></td>
 </tr>

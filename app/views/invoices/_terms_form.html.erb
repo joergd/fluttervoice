@@ -1,0 +1,25 @@
+<%= error_message_on :document, :late_fee_percentage, "The late fee percentage amount " %>
+<fieldset>
+  <dl id="inv_terms_form">
+    <dt><strong>Payment is due</strong></dt>
+    <dd>
+      <%= select(:document, :terms, @terms.collect { |t| [t.description, t.description] } << ["Set specific date...", ""] ) %>
+      <span id="specific_date" style="display:none;"><%= date_select :document, :due_date, :order => [:day, :month, :year] %></span>
+    </dd>
+    <dt><strong>Late fee</strong></dt>
+    <dd>
+      <span id="default_late_fee">
+        <% if document.late_fee_percentage || 0 > 0 -%>
+          <%= document.late_fee_percentage %>% per month
+        <% else -%>
+          No late fee
+        <% end -%>
+        &nbsp;<%= link_to_function "Change it", "Element.toggle('default_late_fee', 'new_late_fee')" -%>
+      </span>
+      <span id="new_late_fee" style="display: none;">
+        <%= text_field :document, :late_fee_percentage, :maxlength => 5, :size => 3, :onkeypress => "return onlynumbers(event);"  %>% per month
+      </span>
+    </dd>
+  </dl>
+</fieldset>
+

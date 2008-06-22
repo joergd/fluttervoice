@@ -3,6 +3,7 @@ free_plan:
   id: 1
   name: Free
   invoices: 4
+  quotes: 3
   users: 1
   clients: 2
   allow_custom_css: 0
@@ -19,6 +20,7 @@ light_plan:
   id: 2
   name: Lite
   invoices: 20
+  quotes: 30
   users: 3
   clients: 10
   allow_custom_css: 1
@@ -35,6 +37,7 @@ heavy_plan:
   id: 3
   name: Hardcore
   invoices: 100
+  quotes: 30
   users: 10
   clients: 0
   allow_custom_css: 1
@@ -51,6 +54,7 @@ ultimate_plan:
   id: 4
   name: Ultimate
   invoices: 400
+  quotes: 30
   users: 0
   clients: 0
   allow_custom_css: 1

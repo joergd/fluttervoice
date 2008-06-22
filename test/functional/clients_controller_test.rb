@@ -45,7 +45,7 @@ class ClientsControllerTest < Test::Unit::TestCase
   end
 
   def test_new_with_client_name_in_session
-    session[:invoice_client_name] = "My new client"
+    session[:document_client_name] = "My new client"
     get :new
 
     assert_response :success
@@ -53,7 +53,7 @@ class ClientsControllerTest < Test::Unit::TestCase
     assert_not_nil assigns(:contact)
     assert_kind_of Contact, assigns(:contact)
     assert_equal assigns(:client).name, "My new client"
-    assert_nil session[:invoice_client_name]
+    assert_nil session[:document_client_name]
     assert_nil session[:new_client_id]
   end
 

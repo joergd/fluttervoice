@@ -1,0 +1,7 @@
+<tr onclick="document.location = '/quotes/show/<%= quote.id %>';">
+  <td class="state"><span class="<%= quote.state.downcase %>"><%=h quote.state %></span></td>
+  <td class="date"><span class="<%= quote.state.downcase %>"><%=h fmt_date(quote.date) %></span></td>
+  <td class="number"><span class="<%= quote.state.downcase %>"><%=h quote.number %></span></td>
+  <td class="client"><span class="<%= quote.state.downcase %>"><%=h quote.client.name %></span></td>
+  <td class="total"><span class="<%= quote.state.downcase %>"><%=h quote.currency.symbol if quote.currency %><%=h fmt_currency(quote.total) %></span></td>
+</tr>

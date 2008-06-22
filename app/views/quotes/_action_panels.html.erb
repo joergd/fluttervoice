@@ -1,0 +1,38 @@
+<div id="send_invoice_panel" class="panel" style="display: none;">
+  <div class="panel_cancel"><%= link_to_function "Cancel", "Element.hide('send_invoice_panel')" %></div>
+  <h4>Send quote to <%=h @document.client.name %></h4>
+  <% form_tag :action => 'deliver_quote', :id => @document.id do -%>
+    <fieldset>
+      <%= render :partial => 'email_quote_checkboxes' %>
+      <p>Your message will appear first in the email body to <%=h @document.client.name %>,<br/>followed by this quote.</p>
+      <dl class="send_emails_form">
+        <dt><label for="message">Message</label></dt><dd><%= text_area_tag :message, @message, { :cols => 40, :rows => 8 } %></dd>
+      </dl>
+    </fieldset>
+    <div class="submit_box">
+      <%= submit_tag "Send quote" %>
+    </div>
+  <% end -%>
+</div>
+
+<% if !@account.plan.free? -%>
+  <div id="change_status_panel" class="panel" style="display: none;">
+    <div class="panel_cancel"><%= link_to_function "Cancel", "Element.hide('change_status_panel')" %></div>
+    <h4>Change this quote status</h4>
+    <% if @document.draft? -%>
+      <p>This quote is currently in a <strong>draft</strong> status. That means it will be excluded from any Totals calculations, and your clients will not be able to see it in their client area.</p>
+      <% form_tag :action => 'make_live', :id => @document.id do -%>
+        <div class="submit_box">
+          <%= submit_tag "Make live" %>
+        </div>
+      <% end -%>
+    <% else -%>
+      <p>This quote is currently <%= @document.state %>. You could give it a <strong>draft</strong> status - which means that your clients will no longer be able to see it in their client summary area.</p>
+      <% form_tag :action => 'make_draft', :id => @document.id do -%>
+        <div class="submit_box">
+          <%= submit_tag "Revert to draft" %>
+        </div>
+      <% end -%>
+    <% end -%>
+  </div>
+<% end -%>
