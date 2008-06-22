@@ -52,7 +52,7 @@
     lines = document.getElementsByClassName('lineitemrow');
     var subtotal = 0;
     for(var i = 0; i < lines.length; i++) {
-      var idx = lines[i].id;
+      var idx = lines[i].id.split('_')[1];
       var quantity = Number(stripCommas($('line_items_' + idx + '_quantity').value));
       var price = Number(stripCommas($('line_items_' + idx + '_price').value));
       var line_total = quantity * price;
@@ -86,7 +86,7 @@
   
   function get_last_line_type() {
     lines = document.getElementsByClassName('lineitemrow');
-    return lines.length > 0 ? $('line_items_' + lines[lines.length - 1].id + '_line_item_type_id').value : 1; /* 1=Hours */
+    return lines.length > 0 ? $('line_items_' + lines[lines.length - 1].id.split('_')[1] + '_line_item_type_id').value : 1; /* 1=Hours */
   }
   
 //]]>

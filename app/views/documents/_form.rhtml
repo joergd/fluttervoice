@@ -2,7 +2,7 @@
   <dl id="inv_preamble_form">
     <dt><strong><label for="invoice_date">Date</label></strong></dt><dd><%= date_select :document, :date, :order => [:day, :month, :year] %></dd>
     <%= error_message_on document, :number, "The invoice number " %>
-    <dt><strong><label for="invoice_number"><%= document.class.to_s %> number *</label></strong></dt>
+    <dt><strong><label for="document_number"><%= document.class.to_s %> number *</label></strong></dt>
     <dd>
       <%= text_field :document, :number, :maxlength => 10, :size => 30  %>
       <% if document.new_record? && @last_document_number_used -%>
@@ -10,7 +10,7 @@
       <% end -%>
     </dd>
     <%= error_message_on :document, :po_number, "Purchase order number " %>
-    <dt><label for="invoice_po_number">PO/ref number</label></dt><dd><%= text_field :document, :po_number, :maxlength => 10, :size => 30  %></dd>
+    <dt><label for="document_po_number">PO/ref number</label></dt><dd><%= text_field :document, :po_number, :maxlength => 10, :size => 30  %></dd>
   </dl>
 </fieldset>
 
@@ -81,13 +81,13 @@
 	<fieldset id="inv_notes_panel" style="display: none;">
 		<div class="instructions">These could be anything you like, from payment details, such as your banking details, or notes like salesperson information. Any notes you enter here will appear at the bottom of your <%= document.class.to_s.downcase %>.</div>
 	  <dl id="inv_notes_form">
-	    <dt><label for="invoice_notes">Notes</label></dt><dd><%= text_area :document, :notes, :cols => 45, :rows => 5 %></dd>
+	    <dt><label for="document_notes">Notes</label></dt><dd><%= text_area :document, :notes, :cols => 45, :rows => 5 %></dd>
 	  </dl>
 	</fieldset>
 <% else -%>
 	<fieldset>
 	  <dl id="inv_notes_form">
-	    <dt><label for="invoice_notes">Notes</label></dt><dd><%= text_area :document, :notes, :cols => 45, :rows => 5 %></dd>
+	    <dt><label for="document_notes">Notes</label></dt><dd><%= text_area :document, :notes, :cols => 45, :rows => 5 %></dd>
 	  </dl>
 	</fieldset>
 <% end -%>
