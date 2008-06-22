@@ -1,5 +1,5 @@
 <%=
-  %$  line_item_html =   '<table class="inv"><tr class="lineitemrow" id="row_IDX">';
+  %$  line_item_html =   '<table class="invoice_table"><tr class="lineitemrow" id="row_IDX">';
       line_item_html +=  '<td class="type"><a class="del_line_item" href="#" title="Delete this line"><img src="/images/delete.gif" width="14" height="14" alt="Del" title="Delete this line"/></a><select class="line_item_type" id="line_items_IDX_line_item_type_id" name="line_items[IDX][line_item_type_id]">#{html_options_for_line_item_types(@line_item_types)}</select></td>';
       line_item_html +=  '<td class="quantity"><input class="line_item_quantity" id="line_items_IDX_quantity" maxlength="4" name="line_items[IDX][quantity]" size="3" type="text" onkeypress="return onlynumbers(event);" /></td>';
       line_item_html +=  '<td class="description"><textarea class="line_item_description" id="line_items_IDX_description" name="line_items[IDX][description]" cols="25" rows="2"></textarea></td>';
