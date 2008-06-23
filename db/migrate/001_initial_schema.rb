@@ -161,7 +161,7 @@ class InitialSchema < ActiveRecord::Migration
       t.column "position", :integer
     end
 
-    create_table "line_items" do |t|
+    create_table "invoice_lines" do |t|
       t.column "account_id",                 :integer,                                  :default => 0,   :null => false
       t.column "invoice_id",                 :integer,                                  :default => 0,   :null => false
       t.column "line_item_type_id",       :integer,                                  :default => 1,   :null => false
@@ -174,7 +174,7 @@ class InitialSchema < ActiveRecord::Migration
       t.column "created_on",                 :timestamp
     end
 
-    add_index "line_items", ["invoice_id"], :name => "line_items_invoice_id_index"
+    add_index "invoice_lines", ["invoice_id"], :name => "invoice_lines_invoice_id_index"
 
     create_table "invoice_templates" do |t|
       t.column "name",             :string,   :limit => 50, :default => "", :null => false
