@@ -189,14 +189,14 @@ class Account < ActiveRecord::Base
 
   def client_limit_reached?
     @clients_allowed = self.plan.clients if @clients_allowed.blank?
-    return false if @clients_allowed == 0 # 0=unlimited
+    return false if @clients_allowed == -1 # -1=unlimited
     cnt = Client.count :conditions => { :account_id => self.id }
     cnt >= @clients_allowed
   end
 
   def user_limit_reached?
     @users_allowed = self.plan.users if @users_allowed.blank?
-    return false if @users_allowed == 0 # 0=unlimited
+    return false if @users_allowed == -1 # -1=unlimited
     cnt = Person.count :conditions => { :account_id => self.id, :type => "User" }
     cnt >= @users_allowed
   end

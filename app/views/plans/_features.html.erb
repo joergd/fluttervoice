@@ -1,0 +1,68 @@
+<tbody>
+	<tr>
+	  <td class="feature">Invoices you can send during each monthly interval</td>
+	  <% plans.each do |plan| -%>
+	    <td class=""><% if plan.invoices == 0 %>Unlimited<% else %><%=h plan.invoices %><% end %></td>
+	  <% end -%>
+	</tr>
+	<tr>
+	  <td class="feature">Quotes you can send during each monthly interval</td>
+	  <% plans.each do |plan| -%>
+	    <td class=""><% if plan.quotes == 0 %>None<% else %><%=h plan.quotes %><% end %></td>
+	  <% end -%>
+	</tr>
+	<tr>
+	  <td class="feature">Users that can send invoices</td>
+	  <% plans.each do |plan| -%>
+	    <td class=""><% if plan.users == -1 %>Unlimited<% else %><%=h plan.users %><% end %></td>
+	  <% end -%>
+	</tr>
+	<tr>
+	  <td class="feature">Clients you can create</td>
+	  <% plans.each do |plan| -%>
+	    <td class=""><% if plan.clients == -1 %>Unlimited<% else %><%=h plan.clients %><% end %></td>
+	  <% end -%>
+	</tr>
+	<tr>
+	  <td class="feature">Payment reminders</td>
+	  <% plans.each do |plan| -%>
+	    <td class="">Yes</td>
+	  <% end -%>
+	</tr>
+	<tr>
+	  <td class="feature">Thankyou emails</td>
+	  <% plans.each do |plan| -%>
+	    <td class="">Yes</td>
+	  <% end -%>
+	</tr>
+	<tr>
+	  <td class="feature">Unbranded emails</td>
+	  <% plans.each do |plan| -%>
+	    <td class=""><% if plan.unbranded_emails? %>Yes<% else %>No<strong>*</strong><% end %></td>
+	  <% end -%>
+	</tr>
+	<tr>
+	  <td class="feature">Draft invoices</td>
+	  <% plans.each do |plan| -%>
+	    <td class=""><% if plan.draft_invoices? %>Yes<% else %>No<% end %></td>
+	  <% end -%>
+	</tr>
+	<tr>
+	  <td class="description">Selection of different invoice templates</td>
+	  <% plans.each do |plan| -%>
+	    <td class="<%=h plan.name.downcase %>"><% if plan.document_templates? %>Yes<% else %>No<% end %></td>
+	  <% end -%>
+	</tr>
+	<tr>
+	  <td class="feature">Customize look &amp; feel of invoices</td>
+	  <% plans.each do |plan| -%>
+	    <td class=""><% if plan.allow_custom_css? %>Yes<% else %>No<% end %></td>
+	  <% end -%>
+	</tr>
+	<tr>
+	  <td class="feature">Includes stylesheets for easy printing</td>
+	  <% plans.each do |plan| -%>
+	    <td class=""><% if plan.print_css? %>Yes<% else %>No<% end %></td>
+	  <% end -%>
+	</tr>
+</tbody>

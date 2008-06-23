@@ -21,6 +21,17 @@ class AccountControllerTest < Test::Unit::TestCase
     assert_match 'Lite<br/><span class="cost">R45', @response.body
   end
 
+  def test_navigation
+    get :index
+    assert_response :success
+    assert_select "div#nav li a", :text => "Quotes"
+
+    @woodstock_account.update_attribute :plan_id, Plan::FREE
+    get :index
+    assert_response :success
+    assert_select "div#nav li a", :text => "Quotes", :count => 0
+  end
+  
   def test_edit
     get :edit
     assert_response :success

@@ -15,7 +15,7 @@
     </div>
   
     <div id="invoice_state_indicator" class="<%= @document.state.downcase %>"><%= @document.state %><br/>
-      <% if !@account.plan.free? -%>
+      <% if can_have_drafts? -%>
         <span class="verysmall"><%= link_to_function "Change this", "new Effect.Appear('change_status_panel'); Element.hide('send_invoice_panel', 'send_reminder_panel', 'send_thankyou_panel')", :title => "Change to and from DRAFT status" %></span>
       <% end -%>
     </div>

@@ -1,3 +1,19 @@
+module ActionView
+  module Helpers
+    module PlanSystemHelper
+      def can_have_drafts?
+        @account.plan.draft_invoices?
+      end
+
+      def can_have_quotes?
+        @account.plan.quotes?
+      end
+    end
+  end
+end
+
+include ActionView::Helpers::PlanSystemHelper
+
 module PlanSystem
 
 protected
@@ -35,4 +51,13 @@ protected
       return false
     end
   end
+    
+  def can_have_quotes?
+    if !@account.plan.quotes?
+      @plans = find_plans
+      render :template => '/limit_reached/quotes'
+      return false
+    end
+  end
 end
+

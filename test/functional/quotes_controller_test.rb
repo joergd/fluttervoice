@@ -23,7 +23,16 @@ class QuotesControllerTest < Test::Unit::TestCase
     get :index
     assert_response :success
   end
-
+  
+  def free_account_not_allowed
+    @woodstock_account.update_attribute :plan_id, Plan::FREE
+    %w{ index new edit create delete show deliver_quote make_live make_draft }.each do |page|
+      get page
+      assert_response :success
+      assert_template "limit_reached/quotes"
+    end
+  end
+  
   def test_filter_types
     %w{ all open expired rubbish expired,open }.each do |filter|
       get :index, :states => "#{filter}"
@@ -248,33 +257,6 @@ class QuotesControllerTest < Test::Unit::TestCase
     assert_equal num_line_items + 1, LineItem.count
   end
 
-  def test_new_with_valid_quote_free_account
-    @woodstock_account.update_attribute(:plan_id, Plan::FREE)
-    Quote.destroy_all("account_id = #{@woodstock_account.id}")
-    
-    post   :new,
-          {  :document => {   :date => Date.today,
-                            :due_date => Date.today,
-                            :number => 'Numnber1',
-                            :tax_percentage => "14.0",
-                            :late_fee_percentage => "0.00",
-                            :shipping => "0.00",
-                            :terms => "Immediate",
-                            :use_tax => "0",
-                            :po_number => '',
-                            :currency_id => "ZAR",
-                            :notes => "" },
-            :line_items => { "0" => { :line_item_type_id => "1",
-                                      :quantity => "1",
-                                      :price => "20.00",
-                                      :description => "My line" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            :client_id => 1 }
-
-    assert_redirected_to :action => "show"
-    assert_equal Status::OPEN, assigns(:document).status_id
-  end
-
   def test_edit
     [@open_quote, @expired_quote].each do |quote|
       get :edit,
@@ -380,7 +362,6 @@ class QuotesControllerTest < Test::Unit::TestCase
           :contact =>   {  :firstname => "Bob",
                         :lastname => "Jones",
                         :email => "bob@test.com" }
-
     assert_redirected_to "http://#{@request.host}/quotes/new"
   end
 
@@ -399,15 +380,6 @@ class QuotesControllerTest < Test::Unit::TestCase
     assert_equal Status::DRAFT, @diageo_quote.status_id
   end
   
-  def test_make_draft_free_account
-    status_id = @diageo_quote.status_id
-    assert @diageo_quote.status_id != Status::DRAFT
-    @diageo_quote.account.update_attribute(:plan_id, Plan::FREE)
-    get :make_draft, :id => @diageo_quote.id
-    @diageo_quote.reload
-    assert_equal status_id, @diageo_quote.status_id
-  end
-
   def test_delete
     assert_not_nil Quote.find(@diageo_quote.id)
 
@@ -453,24 +425,6 @@ class QuotesControllerTest < Test::Unit::TestCase
       assert_match /High Their/, email.body
       assert_match "http:\/\/#{@woodstock_account.subdomain}\.#{assigns(:app_config)["domain"]}\/summary\/", email.body
       assert_equal 1, EmailLog.find(:all).size
-    end
-  end
-
-  def test_emails_working_free_plan
-    assert_equal 0, EmailLog.find(:all).size
-
-    @woodstock_account.plan = Plan.find(Plan::FREE)
-    assert @woodstock_account.save
-    
-    %w{ deliver_quote }.each do |page|
-      EmailLog.delete_all
-      @emails.clear
-      get page, :id => @diageo_quote.id,
-        :quoteto => { "#{@jonny.id}" => { :send => "1" }, "#{@leigh.id}" => { :send => "1" }, "999" => { :send => "0" } },
-        :message => "High Their"
-
-      assert_response :redirect
-      assert_equal "Your email was sent successfully", flash[:notice]
     end
   end
 

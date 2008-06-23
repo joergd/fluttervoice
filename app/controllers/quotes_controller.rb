@@ -1,5 +1,6 @@
 class QuotesController < DocumentsController
-  before_filter :quote_limit_reached?, :only => [:create, :new]
+  before_filter :quote_limit_reached?
+  before_filter :can_have_quotes?, :only => [:index, :create, :new, :edit]
   after_filter :store_location, :except => [:create, :new, :edit, :delete]
 
   def index

@@ -173,8 +173,8 @@ class AccountTest < Test::Unit::TestCase
     assert !@woodstock_account.invoice_limit_reached?
   end
 
-  def test_quote_limits_free
-    @woodstock_account.plan_id = 1    
+  def test_quote_limits_light
+    @woodstock_account.plan_id = 2    
     @woodstock_account.save
     @woodstock_account.update_attribute :effective_date, Date.today - 10 # As in fixtures
     assert_equal 3, @woodstock_account.quotes_sent_in_current_cycle

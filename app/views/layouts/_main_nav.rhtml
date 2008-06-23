@@ -2,6 +2,11 @@
   <ul>
     <li><%= link_to 'Invoices', { :controller => '/invoices', :action => 'index' }, :title => 'A summary view of your invoices' %></li>
     <li><%= link_to 'Clients', { :controller => '/clients', :action => 'index' }, :title => 'View or setup your clients'  %></li>
-    <li class="new_invoice"><a href="<%= url_for :controller => '/invoices', :action => 'create' %>" title="Create a new invoice"><span class="hilite">+</span> Create New Invoice</a></li>
+		<% if can_have_quotes? -%>
+	    <li><%= link_to 'Quotes', { :controller => '/quotes', :action => 'index' }, :title => 'A summary of your quotes'  %></li>
+	    <li class="new_invoice" style="width: 472px;"><a style="padding-left: 200px;" href="<%= url_for :controller => '/invoices', :action => 'create' %>" title="Create a new invoice"><span class="hilite">+</span> Create New Invoice</a></li>
+		<% else -%>
+	    <li class="new_invoice"><a href="<%= url_for :controller => '/invoices', :action => 'create' %>" title="Create a new invoice"><span class="hilite">+</span> Create New Invoice</a></li>
+		<% end -%>
   </ul>
 <% end %>
