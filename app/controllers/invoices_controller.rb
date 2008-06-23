@@ -1,5 +1,5 @@
 class InvoicesController < DocumentsController
-  before_filter :invoice_limit_reached?, :only => [:create, :new]
+  before_filter :invoice_limit_reached?, :only => [:create, :new, :new_from_quote]
   after_filter :store_location, :except => [:create, :new, :edit, :delete]
 
   def index
@@ -112,6 +112,24 @@ class InvoicesController < DocumentsController
     get_lookups
   end
 
+  def new_from_quote
+    quote = our_document(params[:quote_id])
+    return if quote.nil?
+    
+    @document = Invoice.new(quote.attributes)
+    @document.number = nil
+    
+    quote.line_items.each do |line_item|
+      @document.line_items << LineItem.new(line_item.attributes)
+    end
+
+    session[:client_id] = quote.client_id
+    
+    get_lookups
+    
+    render :action => "new"
+  end
+  
   def edit
      @document = our_document(params[:id])
      return if @document.nil?

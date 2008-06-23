@@ -60,14 +60,18 @@ class QuotesControllerTest < Test::Unit::TestCase
     get :show, :id => @open_quote.id
     assert_response :success
     assert_tag :tag => 'a', :content => 'Send quote'
-    assert_tag :tag => 'div', :attributes => { :id => 'send_invoice_panel' }
+    assert_tag :tag => 'div', :attributes => { :id => 'send_quote_panel' }
+    assert_tag :tag => 'a', :content => 'Convert to invoice'
+    assert_tag :tag => 'div', :attributes => { :id => 'convert_to_invoice_panel' }
   end
 
   def test_show_menu_expired_quote
     get :show, :id => @expired_quote.id
     assert_response :success
     assert_tag :tag => 'a', :content => 'Send quote'
-    assert_tag :tag => 'div', :attributes => { :id => 'send_invoice_panel' }
+    assert_tag :tag => 'div', :attributes => { :id => 'send_quote_panel' }
+    assert_tag :tag => 'a', :content => 'Convert to invoice'
+    assert_tag :tag => 'div', :attributes => { :id => 'convert_to_invoice_panel' }
   end
 
   def test_show_illegal_quote

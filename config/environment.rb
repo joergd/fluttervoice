@@ -18,6 +18,9 @@ Rails::Initializer.run do |config|
   # (by default production uses :info, the others :debug)
   # config.log_level = :debug
 
+  require 'hodel_3000_compliant_logger'
+  config.logger = Hodel3000CompliantLogger.new(config.log_path)# Be sure to restart your web server when you modify this file.
+
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
   config.action_controller.session = {

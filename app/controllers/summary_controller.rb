@@ -8,7 +8,7 @@ class SummaryController < ApplicationController
       id = Obfuscator::decrypt(params[:id])
     rescue
       logger.error("Error handling obfuscation")
-      logger.error($!)
+      #logger.error($!) # Messes with Hodel 3000
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
       return
     end
@@ -17,7 +17,7 @@ class SummaryController < ApplicationController
       self.method(action).call(id)
     else
       logger.error("Unknown command for summary. Intrusion??")
-      logger.error($!)
+      #logger.error($!) # Messes with Hodel 3000
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
       return
     end

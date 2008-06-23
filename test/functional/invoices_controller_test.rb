@@ -309,6 +309,23 @@ class InvoicesControllerTest < Test::Unit::TestCase
     assert_equal Status::OPEN, assigns(:document).status_id
   end
 
+  def test_new_from_quote
+    post :new_from_quote, { :quote_id => @diageo_quote.id }
+    assert_response :success
+    assert_kind_of Invoice, assigns(:document)
+    assert_equal @pathfinder.id, assigns(:document).client_id
+    assert_tag :tag => "div", :attributes => { :id => "lineitemrows" }
+  end
+
+  def test_new_from_quote_over_limit
+    @woodstock_account.plan_id = 1
+    @woodstock_account.save
+    @woodstock_account.update_attribute :effective_date, Date.today - 10 # As in fixtures
+    post :new_from_quote, { :quote_id => @diageo_quote.id }
+    assert_response :success
+    assert_template "limit_reached/invoices"
+  end
+
   def test_edit
     [@open_invoice, @closed_invoice, @pastdue_invoice].each do |invoice|
       get :edit,

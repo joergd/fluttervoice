@@ -1,5 +1,6 @@
 <ul id="actions">
-  <li><%= link_to_function "Send quote", "new Effect.Appear('send_invoice_panel'); Element.hide('change_status_panel')", :title => "Email this quote to your client" %></li>
+  <li><%= link_to_function "Send quote", "new Effect.Appear('send_quote_panel'); Element.hide('convert_to_invoice_panel', 'change_status_panel')", :title => "Email this quote to your client" %></li>
+  <li><%= link_to_function "Convert to invoice", "new Effect.Appear('convert_to_invoice_panel'); Element.hide('send_quote_panel', 'change_status_panel')", :title => "Convert this quote to an invoice" %></li>
 
   <li><%= link_to "Edit quote", { :action => "edit", :id => @document.id }, :title => "Edit this quote" %></li>
 

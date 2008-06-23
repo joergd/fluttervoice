@@ -1,5 +1,5 @@
-<div id="send_invoice_panel" class="panel" style="display: none;">
-  <div class="panel_cancel"><%= link_to_function "Cancel", "Element.hide('send_invoice_panel')" %></div>
+<div id="send_quote_panel" class="panel" style="display: none;">
+  <div class="panel_cancel"><%= link_to_function "Cancel", "Element.hide('send_quote_panel')" %></div>
   <h4>Send quote to <%=h @document.client.name %></h4>
   <% form_tag :action => 'deliver_quote', :id => @document.id do -%>
     <fieldset>
@@ -13,6 +13,18 @@
       <%= submit_tag "Send quote" %>
     </div>
   <% end -%>
+</div>
+
+<div id="convert_to_invoice_panel" class="panel" style="display: none;">
+  <div class="panel_cancel"><%= link_to_function "Cancel", "Element.hide('convert_to_invoice_panel')" %></div>
+  <h4>Convert quote to invoice</h4>
+   <p>This quote will still remain available to you. But it will be used as a template to set up an invoice based on this quote.</p>
+	  <% form_tag :controller => "invoices", :action => 'new_from_quote' do -%>
+			<%= hidden_field_tag :quote_id, @document.id %>
+			<div class="submit_box">
+	      <%= submit_tag "Set up invoice" %>
+			</div>
+		<% end -%>
 </div>
 
 <% if !@account.plan.free? -%>
