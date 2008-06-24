@@ -22,8 +22,10 @@ class CcController < ApplicationController
                                     :terminal => params[:p1]
                                     )
       if account.plan != plan
+        oldpaidplan = account.plan
         account.plan = plan
         account.save!
+        SystemMailer.deliver_welcome_paid(:from => "#{@app_config['system_email']}", :account => account, :oldpaidplan => oldpaidplan, :base_url => base_url) rescue true
       end
       render :text => "Approved", :status => 200
     else

@@ -1,0 +1,17 @@
+Dear <%= @account.primary_user.firstname %>,
+
+Welcome to Fluttervoice <%= @account.plan.name %>, and thank you for signing up to a paid plan! Awesome. Rad.
+
+<% if @oldpaidplan.paid? -%>
+We are cancelling your current recurring payment for Fluttervoice <%= @oldpaidplan.name %>, so that you don't pay double. Nice touch.
+<% end -%>
+
+Please note that your credit card statement is going to reflect the payment coming from
+
+THESE LOVELY DAYS
+
+
+http://<%= @base_url %>
+
+Happy Days.
+Joerg

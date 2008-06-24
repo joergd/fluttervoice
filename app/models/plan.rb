@@ -7,6 +7,10 @@ class Plan < ActiveRecord::Base
     id == FREE
   end
   
+  def paid?
+    id != FREE
+  end
+  
   # site = com/uk/za
   # displays the field from the db. Probably something like 400
   def cost(site)

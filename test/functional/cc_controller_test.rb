@@ -31,6 +31,13 @@ class CcControllerTest < ActionController::TestCase
     @woodstock_account.reload
     assert_equal @light_plan, @woodstock_account.plan
     assert_equal @light_plan, @woodstock_account.credit_card_transactions.last.plan
+
+    assert_equal 2, @emails.size
+    email = @emails.first
+    assert_match /Alert/, email.subject
+
+    email = @emails.last
+    assert_match /Welcome to Fluttervoice Lite/, email.subject
   end
 
   def test_callback_not_approved

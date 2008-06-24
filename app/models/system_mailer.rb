@@ -23,6 +23,15 @@ class SystemMailer < ActionMailer::Base
     setup(options)
   end
   
+  def welcome_paid(options)
+    account = options[:account]
+    oldpaidplan = options[:oldpaidplan]
+    options[:subject] = "Welcome to Fluttervoice #{account.plan.name}"
+    options[:recipients] = account.primary_user.email
+    options[:body] = { :account => account, :oldpaidplan => oldpaidplan, :base_url => options[:base_url] }
+    setup(options)
+  end
+  
 private
 
   def setup(options)
