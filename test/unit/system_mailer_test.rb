@@ -26,4 +26,13 @@ class SystemMailerTest < Test::Unit::TestCase
     assert_equal(@account.primary_user.email, email.to[0])
     assert_match(/You have successfully downgraded to Fluttervoice Free/, email.body)
   end
+  
+  def test_manual_intervention_alert
+    email = SystemMailer.create_manual_intervention_alert
+
+    assert_equal "text/plain", email.content_type
+    assert_equal("[Fluttervoice] Manual Intervention Alert", email.subject)
+    assert_equal("joergd@pobox.com", email.to[0])
+  end
+  
 end

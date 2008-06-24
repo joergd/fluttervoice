@@ -78,8 +78,8 @@ class ChangePlanControllerTest < Test::Unit::TestCase
     assert_equal account.subdomain, audit_account.subdomain
     assert_equal "Free", audit_account.plan
 
-    assert_equal(1, @emails.size)
-    email = @emails.first
+    assert_equal(2, @emails.size) # the other one is the manual intervention
+    email = @emails.last
     assert_equal("[Fluttervoice] Subscription confirmation to Fluttervoice Free" , email.subject)
     assert_equal("#{@joerg.email}" , email.to[0])
     assert_match(/Your credit card will no longer be charged for the next billing cycles/, email.body)

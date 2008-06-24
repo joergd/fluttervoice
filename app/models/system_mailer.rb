@@ -18,6 +18,10 @@ class SystemMailer < ActionMailer::Base
     setup(options)
   end
 
+  def manual_intervention_alert(options = {})
+    options[:subject] = "Manual Intervention Alert"
+    setup(options)
+  end
   
 private
 
