@@ -58,6 +58,11 @@ class PreferencesController < ApplicationController
   end
   
   def upload_logo
+    if params[:image_file].blank?
+      redirect_to :action => :index
+      return
+    end
+
     @preference = @account.preference
     @image = @preference.logo
     
@@ -67,7 +72,6 @@ class PreferencesController < ApplicationController
       @image.attributes = { :logo_file => params[:image_file]}.merge(audit_update_trail)  
     rescue
       logger.error("Error uploading logo #{@image.original_filename}")
-      logger.error($!)
       flash[:error] = 'There was an error uploading your logo.'
       redirect_to :action => 'index'
       return
@@ -94,7 +98,6 @@ class PreferencesController < ApplicationController
     rescue
       flash[:error] = "Error uploading logo. Please try again in a few minutes"
       logger.error("Error uploading logo")
-      logger.error($!)
     end
 
     expire_cached_logo @image.id

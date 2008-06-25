@@ -82,7 +82,6 @@ private
     rescue
       flash[:error] = "Error saving #{document.class.to_s.downcase}: Please try again in a few minutes."
       logger.error("Error saving #{document.class.to_s.downcase}")
-      logger.error($!)
       return false
     end
   end
@@ -99,7 +98,6 @@ private
       email_log.save
     rescue
       logger.error("Error logging email")
-      logger.error($!)
     end
   end
 
@@ -112,7 +110,6 @@ private
           if contact.nil?
             flash[:error] = "Illegal contact. Your email was not sent"
             logger.error("Trying to send to illegal contact")
-            logger.error($!)
             redirect_back_or_default
             return nil
           end
@@ -145,7 +142,6 @@ private
      else
        flash[:error] = "There was a problem sending your email. We have logged this error and will try and figure out what's going on."
       logger.error("Error sending document")
-      logger.error($!)
      end
   end
 

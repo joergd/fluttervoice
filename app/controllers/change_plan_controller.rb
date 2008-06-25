@@ -61,7 +61,6 @@ private
       SystemMailer.deliver_downgrade_to_free(:from => "#{@app_config['system_email']}", :account => account, :home_url => "www.#{@app_config['domain']}")
     rescue
       logger.error("Error sending downgrade to free email")
-      logger.error($!)
       ExceptionNotifier.deliver_exception_notification($!, self, request)
     end
   end

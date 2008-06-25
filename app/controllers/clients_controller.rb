@@ -51,7 +51,6 @@ class ClientsController < ApplicationController
     rescue
       flash[:error] = "Error creating client: Please try again in a few minutes."
       logger.error("Error creating client")
-      logger.error($!)
     end
   end
 

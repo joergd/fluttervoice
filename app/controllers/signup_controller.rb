@@ -84,7 +84,6 @@ private
     rescue
       flash[:error] = "Error creating account: Please try again in a few minutes."
       logger.error("Error creating account")
-      logger.error($!)
       ExceptionNotifier.deliver_exception_notification($!, self, request)
       return false
     end
@@ -95,7 +94,6 @@ private
       AuditSignup.record_free(account.subdomain, user.email, @app_config['site'], request.remote_ip)
     rescue
       logger.error("Error auditing free signup")
-      logger.error($!)
       ExceptionNotifier.deliver_exception_notification($!, self, request)
     end
   end
@@ -105,7 +103,6 @@ private
       SystemMailer.deliver_welcome_free(:from => "#{@app_config['system_email']}", :account => account, :base_url => base_url(@account))
     rescue
       logger.error("Error sending welcome free email")
-      logger.error($!)
       ExceptionNotifier.deliver_exception_notification($!, self, request)
     end
   end    
