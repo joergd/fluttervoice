@@ -16,11 +16,11 @@ config.action_controller.perform_caching             = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
+# Disable request forgery protection in test environment
+config.action_controller.allow_forgery_protection    = false
+
 # Overwrite the default settings for fixtures in tests. See Fixtures 
 # for more details about these settings.
 # config.transactional_fixtures = true
 # config.instantiated_fixtures = false
 # config.pre_loaded_fixtures = false
-
-PAYMENT_GATEWAY_USR = "BREA.KF6092114680D"
-PAYMENT_GATEWAY_PWD = "508235C3F"
