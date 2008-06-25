@@ -7,7 +7,7 @@
       <p>Login if you have an account<br/>
         <small><%= link_to "I forgot my password", { :controller => "login", :action => "forgot_password" }, :title =>  "Please log me back in" %></small>
       </p>
-      <% form_tag({ :controller => "login", :action => '' } , :id => "frm") do -%>
+			<% form_tag session_path , :id => "frm" do -%>
         <div class="float-right"><%= submit_link "login", "frm", :class => "web2000-2-s", :title => "Log me in so I can invoice" %></div>
         <%= text_field_tag :subdomain, "your Fluttervoice ID", :size => 20, :maxlength => 100, :title => "your Fluttervoice ID (your chosen web name)", :class => "fancy", :onfocus => "clickclear(this, 'your Fluttervoice ID');", :style => "width: 200px;" %>&nbsp;&nbsp;
         <%= text_field :user, :email, :size => 35, :maxlength => 100, :value => "your email address", :title => "your email address", :class => "fancy", :onfocus => "clickclear(this, 'your email address');", :style => "width: 320px;" %>&nbsp;&nbsp;

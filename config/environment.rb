@@ -9,7 +9,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   # Skip frameworks you're not going to use
-  config.frameworks -= [ :action_web_service ]
+  config.frameworks -= [ :action_web_service, :active_resource ]
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/app/services )
@@ -18,8 +18,10 @@ Rails::Initializer.run do |config|
   # (by default production uses :info, the others :debug)
   # config.log_level = :debug
 
-  require 'hodel_3000_compliant_logger'
-  config.logger = Hodel3000CompliantLogger.new(config.log_path)# Be sure to restart your web server when you modify this file.
+  if ENV['RAILS_ENV'] == "production"
+    require 'hodel_3000_compliant_logger'
+    config.logger = Hodel3000CompliantLogger.new(config.log_path)# Be sure to restart your web server when you modify this file.
+  end
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!

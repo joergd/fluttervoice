@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
   before_filter :set_timezone
   before_filter :redirect_if_wrong_user_for_account
 
+  # See ActionController::RequestForgeryProtection for details
+  # Uncomment the :secret if you're not using the cookie session store
+  protect_from_forgery # :secret => 'c88231d9e74cb35d3d327ef683602d93'
+
 private
 
   def set_timezone
