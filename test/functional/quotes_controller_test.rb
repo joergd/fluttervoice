@@ -132,14 +132,15 @@ class QuotesControllerTest < Test::Unit::TestCase
   end
 
   def test_new_with_no_session_variables_set
-    session[:document_type] = ""
-    session[:client_id] = nil
+    @request.session[:document_type] = ""
+    @request.session[:client_id] = nil
     get :new
     assert_redirected_to :action => "create"
   end
 
   def test_new
-    get :new, nil, { :user => { :id => 1 }, :client_id => 1 }
+    @request.session[:client_id] = 1
+    get :new, :user => { :id => 1 }
     assert_response :success
     assert_nil session[:original_return_to]
     assert_kind_of Quote, assigns(:document)
@@ -157,6 +158,7 @@ class QuotesControllerTest < Test::Unit::TestCase
   end
 
   def test_new_with_missing_quote_number
+    @request.session[:client_id] = 1
     post   :new,
           {  :document => {   :date => Date.today,
                             :due_date => Date.today,
@@ -171,15 +173,14 @@ class QuotesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "1",
                                       :price => "20.00",
-                                      :description => "My line" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            :client_id => 1 }
+                                      :description => "My line" } } }
 
     assert_response :success
     assert_equal "is too short (minimum is 1 characters)", assigns(:document).errors.on(:number)
   end
 
   def test_new_with_missing_lines
+    @request.session[:client_id] = 1
     post   :new,
           {  :document => {   :date => Date.today,
                             :due_date => Date.today,
@@ -190,9 +191,7 @@ class QuotesControllerTest < Test::Unit::TestCase
                             :terms => "Immediate",
                             :use_tax => "0",
                             :po_number => '',
-                            :currency_id => "ZAR" } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            :client_id => 1 }
+                            :currency_id => "ZAR" } }
     assert_response :success
     assert_equal "not there. You need at least one line item", assigns(:document).errors.on(:line_items)
   end
@@ -201,6 +200,7 @@ class QuotesControllerTest < Test::Unit::TestCase
     num_quotes = Quote.count
     num_line_items = LineItem.count
 
+    @request.session[:client_id] = 1
     post   :new,
           {  :document => {   :date => Date.today,
                             :due_date => Date.today,
@@ -215,9 +215,7 @@ class QuotesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "-1",
                                       :price => "0aa",
-                                      :description => "" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            :client_id => 1 }
+                                      :description => "" } } }
 
     assert_response :success
     assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:document).errors.on(:line_items)
@@ -231,6 +229,7 @@ class QuotesControllerTest < Test::Unit::TestCase
     num_quotes = Quote.count
     num_line_items = LineItem.count
 
+    @request.session[:client_id] = 1
     post   :new,
           {  :document => {   :date => Date.today,
                             :due_date => Date.today,
@@ -246,9 +245,7 @@ class QuotesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "1",
                                       :price => "20.00",
-                                      :description => "My line" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            :client_id => 1 }
+                                      :description => "My line" } } }
 
     assert_redirected_to :action => "show"
     assert_equal 20.00, assigns(:document).total
@@ -285,9 +282,7 @@ class QuotesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "-1",
                                       :price => "0aa",
-                                      :description => "" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-             }
+                                      :description => "" } } }
 
     assert_response :success
     assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:document).errors.on(:line_items)
@@ -306,9 +301,7 @@ class QuotesControllerTest < Test::Unit::TestCase
                             :terms => "Immediate",
                             :use_tax => "0",
                             :po_number => '',
-                            :currency_id => "ZAR" } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            }
+                            :currency_id => "ZAR" } }
 
     assert_response :success
     assert_equal "not there. You need at least one line item", assigns(:document).errors.on(:line_items)
@@ -334,9 +327,7 @@ class QuotesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "2",
                                       :quantity => "1",
                                       :price => "20.00",
-                                      :description => "My line" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-           }
+                                      :description => "My line" } } }
 
     assert_redirected_to :action => "show"
     assert_equal num_quotes, Quote.count

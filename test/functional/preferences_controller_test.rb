@@ -25,7 +25,7 @@ class PreferencesControllerTest < Test::Unit::TestCase
   end
 
   def test_index_with_non_primary
-    login(@kyle.email, 'atest')
+    login :kyle
     get :index
     assert_redirected_to :controller => 'account', :action => 'index'
     assert_equal 'You need to be the main user for the account to change the settings.', flash[:notice]
@@ -61,7 +61,7 @@ class PreferencesControllerTest < Test::Unit::TestCase
   end
 
   def test_templates_with_non_primary
-    login(@kyle.email, 'atest')
+    login :kyle
     get :templates
     assert_redirected_to :controller => 'account', :action => 'index'
     assert_equal 'You need to be the main user for the account to change the settings.', flash[:notice]
@@ -90,7 +90,7 @@ class PreferencesControllerTest < Test::Unit::TestCase
   end
 
   def test_thankyous_with_non_primary
-    login(@kyle.email, 'atest')
+    login :kyle
     get :thankyous
     assert_redirected_to :controller => 'account', :action => 'index'
     assert_equal 'You need to be the main user for the account to change the settings.', flash[:notice]
@@ -119,7 +119,7 @@ class PreferencesControllerTest < Test::Unit::TestCase
   end
 
   def test_thankyous_with_non_primary
-    login(@kyle.email, 'atest')
+    login :kyle
     get :thankyous
     assert_redirected_to :controller => 'account', :action => 'index'
     assert_equal 'You need to be the main user for the account to change the settings.', flash[:notice]
@@ -147,7 +147,7 @@ class PreferencesControllerTest < Test::Unit::TestCase
   end
 
   def test_invoicenotes_with_non_primary
-    login(@kyle.email, 'atest')
+    login :kyle
     get :invoicenotes
     assert_redirected_to :controller => 'account', :action => 'index'
     assert_equal 'You need to be the main user for the account to change the settings.', flash[:notice]

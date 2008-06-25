@@ -42,7 +42,7 @@ class ClientsController < ApplicationController
             if @contact.save
               flash[:notice] = "A new client has been created!"
               session[:new_client_id] = @client.id
-              redirect_back_or_default
+              redirect_back_or_default url_for(:action => "")
               return
             end
           end

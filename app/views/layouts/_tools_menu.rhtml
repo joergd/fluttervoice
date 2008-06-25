@@ -1,6 +1,6 @@
-<% if !main_site? && user? %>
+<% if !main_site? && logged_in? %>
   <ul id="nav_tools">
-    <li><%= link_to 'Logout', { :controller => 'logout', :action => 'index' }, :title => 'Log me out'  %></li>
+    <li><%= link_to 'Logout', logout_url, :title => 'Log me out'  %></li>
     <li><%= link_to 'Settings', { :controller => 'preferences', :action => 'index' }, :title => 'Set some options and defaults'  %></li>
     <li><%= link_to 'Account', { :controller => 'account', :action => 'index' }, :title => 'Change your account details' %></li>
   </ul>

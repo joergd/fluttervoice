@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class CcControllerTest < ActionController::TestCase
-  fixtures :accounts, :people, :plans
+  fixtures :accounts, :people, :plans ,:credit_card_transactions
   def setup
     super
     @request.host = "www.fluttervoice.co.za"

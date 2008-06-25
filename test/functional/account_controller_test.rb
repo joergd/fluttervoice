@@ -38,7 +38,7 @@ class AccountControllerTest < Test::Unit::TestCase
   end
 
   def test_edit_with_non_primary_user
-    login(@kyle.email, 'atest')
+    login :kyle
     get :edit
     assert_redirected_to :action => 'index'
     assert_equal 'You need to be the main user for the account to change the company information.', flash[:notice]

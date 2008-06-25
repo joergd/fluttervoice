@@ -157,14 +157,15 @@ class InvoicesControllerTest < Test::Unit::TestCase
   end
 
   def test_new_with_no_session_variables_set
-    session[:document_type] = ""
-    session[:client_id] = nil
+    @request.session[:document_type] = ""
+    @request.session[:client_id] = nil
     get :new
     assert_redirected_to :action => "create"
   end
 
   def test_new
-    get :new, nil, { :user => { :id => 1 }, :client_id => 1 }
+    @request.session[:client_id] = 1
+    get :new
     assert_response :success
     assert_nil session[:original_return_to]
     assert_kind_of Invoice, assigns(:document)
@@ -182,6 +183,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
   end
 
   def test_new_with_missing_invoice_number
+    @request.session[:client_id] = 1
     post   :new,
           {  :document => {   :date => Date.today,
                             :due_date => Date.today,
@@ -196,15 +198,14 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "1",
                                       :price => "20.00",
-                                      :description => "My line" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            :client_id => 1 }
+                                      :description => "My line" } } }
 
     assert_response :success
     assert_equal "is too short (minimum is 1 characters)", assigns(:document).errors.on(:number)
   end
 
   def test_new_with_missing_lines
+    @request.session[:client_id] = 1
     post   :new,
           {  :document => {   :date => Date.today,
                             :due_date => Date.today,
@@ -215,9 +216,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
                             :terms => "Immediate",
                             :use_tax => "0",
                             :po_number => '',
-                            :currency_id => "ZAR" } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            :client_id => 1 }
+                            :currency_id => "ZAR" } }
     assert_response :success
     assert_equal "not there. You need at least one line item", assigns(:document).errors.on(:line_items)
   end
@@ -226,6 +225,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
     num_invoices = Invoice.count
     num_line_items = LineItem.count
 
+    @request.session[:client_id] = 1
     post   :new,
           {  :document => {   :date => Date.today,
                             :due_date => Date.today,
@@ -240,9 +240,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "-1",
                                       :price => "0aa",
-                                      :description => "" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            :client_id => 1 }
+                                      :description => "" } } }
 
     assert_response :success
     assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:document).errors.on(:line_items)
@@ -256,6 +254,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
     num_invoices = Invoice.count
     num_line_items = LineItem.count
 
+    @request.session[:client_id] = 1
     post   :new,
           {  :document => {   :date => Date.today,
                             :due_date => Date.today,
@@ -271,9 +270,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "1",
                                       :price => "20.00",
-                                      :description => "My line" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            :client_id => 1 }
+                                      :description => "My line" } } }
 
     assert_redirected_to :action => "show"
     assert_equal 20.00, assigns(:document).amount_due
@@ -286,6 +283,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
     @woodstock_account.update_attribute(:plan_id, Plan::FREE)
     Invoice.destroy_all("account_id = #{@woodstock_account.id}")
     
+    @request.session[:client_id] = 1
     post   :new,
           {  :document => {   :date => Date.today,
                             :due_date => Date.today,
@@ -301,10 +299,8 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "1",
                                       :price => "20.00",
-                                      :description => "My line" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            :client_id => 1 }
-
+                                      :description => "My line" } } }
+                                      
     assert_redirected_to :action => "show"
     assert_equal Status::OPEN, assigns(:document).status_id
   end
@@ -352,6 +348,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
   end
 
   def test_edit_invalid
+    @request.session[:client_id] = 1
     post   :edit,
           {  :id => @diageo_invoice.id,
             :document => {   :date => Date.today,
@@ -367,9 +364,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "1",
                                       :quantity => "-1",
                                       :price => "0aa",
-                                      :description => "" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-             }
+                                      :description => "" } } }
 
     assert_response :success
     assert_equal "is not a number, can't be negative (that would be strange), is too short (minimum is 1 characters)", assigns(:document).errors.on(:line_items)
@@ -377,6 +372,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
 
   def test_edit_with_missing_line_items
     num_line_items = @diageo_invoice.line_items.size
+    @request.session[:client_id] = 1
     post   :edit,
           {  :id => @diageo_invoice.id,
             :document => {   :date => Date.today,
@@ -388,9 +384,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
                             :terms => "Immediate",
                             :use_tax => "0",
                             :po_number => '',
-                            :currency_id => "ZAR" } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-            }
+                            :currency_id => "ZAR" } }
 
     assert_response :success
     assert_equal "not there. You need at least one line item", assigns(:document).errors.on(:line_items)
@@ -400,6 +394,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
   def test_edit_with_valid_invoice
     num_invoices = Invoice.count
 
+    @request.session[:client_id] = 1
     post   :edit,
           { :id => @diageo_invoice.id,
             :document => {   :date => Date.today,
@@ -416,9 +411,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
             :line_items => { "0" => { :line_item_type_id => "2",
                                       :quantity => "1",
                                       :price => "20.00",
-                                      :description => "My line" } } },
-          {  :user => { :id => 1 }, # need to add login, else gets overwritten
-           }
+                                      :description => "My line" } } }
 
     assert_redirected_to :action => "show"
     assert_equal num_invoices, Invoice.count

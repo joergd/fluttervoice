@@ -5,14 +5,6 @@ module ApplicationHelper
     @app_config["app_name"]
   end
 
-  def current_user
-    session[:user]
-  end
-  
-  def user?
-    !current_user.nil?
-  end
-
   def primary_user?
     !current_user.nil? && !@account.nil? && @account.primary_person_id == current_user.id
   end

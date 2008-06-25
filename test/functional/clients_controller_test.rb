@@ -45,7 +45,7 @@ class ClientsControllerTest < Test::Unit::TestCase
   end
 
   def test_new_with_client_name_in_session
-    session[:document_client_name] = "My new client"
+    @request.session[:document_client_name] = "My new client"
     get :new
 
     assert_response :success

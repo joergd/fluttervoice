@@ -16,6 +16,8 @@ class ChangePlanControllerTest < Test::Unit::TestCase
 
     @emails = ActionMailer::Base.deliveries
     @emails.clear
+    
+    login
   end
 
   # Replace this with your real tests.

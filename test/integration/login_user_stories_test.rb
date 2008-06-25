@@ -5,9 +5,9 @@ class LoginUserStoriesTest < ActionController::IntegrationTest
 
   def test_changing_password
     host!("#{@woodstock_account.subdomain}.fluttervoice.co.za")
-    get "/login/change_password", :id => @joerg.id, :key => @joerg.security_token 
+    get "/users/change_password", :id => @joerg.id, :key => @joerg.jump_token 
     assert_response :success
-    post "/login/change_password", :id => @joerg.id, :key => @joerg.security_token, :user => { :password => 'password', :password_confirmation => 'password' }
+    post "/users/change_password", :id => @joerg.id, :key => @joerg.jump_token, :user => { :password => 'password', :password_confirmation => 'password' }
     assert_redirected_to :controller => "invoices", :action => ""
   end
 end

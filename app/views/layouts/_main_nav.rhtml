@@ -1,4 +1,4 @@
-<% if !main_site? && user? %>
+<% if !main_site? && logged_in? %>
   <ul>
     <li><%= link_to 'Invoices', { :controller => '/invoices', :action => 'index' }, :title => 'A summary view of your invoices' %></li>
     <li><%= link_to 'Clients', { :controller => '/clients', :action => 'index' }, :title => 'View or setup your clients'  %></li>

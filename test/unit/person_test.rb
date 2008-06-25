@@ -41,10 +41,6 @@ class PersonTest < Test::Unit::TestCase
     assert !@person.save
     assert @person.errors.invalid?('password')
 
-    @person.change_password("")
-    assert !@person.save
-    assert @person.errors.invalid?('password')
-
     @person.change_password("joergs_secure_password")
     assert @person.save
     assert @person.errors.empty?
@@ -105,11 +101,11 @@ class PersonTest < Test::Unit::TestCase
     assert p.save
   end
 
-  def test_security_token_login
-    assert_equal @joerg, User.authenticate_by_token(@woodstock_account.id, @joerg.id, @joerg.security_token)
-    assert_not_equal @joerg, User.authenticate_by_token(@painting_account.id, @joerg.id, @joerg.security_token)
-    assert_not_equal @joerg, User.authenticate_by_token(@woodstock_account.id, @sarita.id, @joerg.security_token)
-    assert_not_equal @joerg, User.authenticate_by_token(@woodstock_account.id, @joerg.id, nil)
+  def test_jump_token_login
+    assert_equal @joerg, User.authenticate_by_jump_token(@woodstock_account.id, @joerg.id, @joerg.jump_token)
+    assert_not_equal @joerg, User.authenticate_by_jump_token(@painting_account.id, @joerg.id, @joerg.jump_token)
+    assert_not_equal @joerg, User.authenticate_by_jump_token(@woodstock_account.id, @sarita.id, @joerg.jump_token)
+    assert_not_equal @joerg, User.authenticate_by_jump_token(@woodstock_account.id, @joerg.id, nil)
   end
 
 end

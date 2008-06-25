@@ -1,6 +1,5 @@
 # The filters added to this controller will be run for all controllers in the application.
 # Likewise will all the methods added be available for all controllers.
-require 'user_system'
 require 'plan_system'
 require 'ruby_extensions'
 
@@ -9,9 +8,15 @@ class ApplicationController < ActionController::Base
   before_filter :configure_charsets
   
   include ExceptionNotifiable
+
+  # These filters need to be here before authentication
+  before_filter :create_country_domain_specific_app_config
+  before_filter :extract_account_from_url
+  before_filter :display_msg_if_non_existent_account
+
+  include AuthenticatedSystem
   
   # user functionality
-  include UserSystem
   include PlanSystem
 
   # subdomain functionality
@@ -19,9 +24,6 @@ class ApplicationController < ActionController::Base
   attr_reader :account
 
   before_filter :set_session_expiration
-  before_filter :create_country_domain_specific_app_config
-  before_filter :extract_account_from_url
-  before_filter :display_msg_if_non_existent_account
 
   before_filter :set_timezone
   before_filter :redirect_if_wrong_user_for_account
@@ -38,10 +40,6 @@ private
   
   def require_ssl
       redirect_to :protocol => "https://" unless (request.ssl? || local_request?)  
-  end
-  
-  def current_user
-    session[:user]
   end
   
   def handle_error(publicMsg, devMsg, url = url_for(:controller => 'problem', :action => ''))
@@ -100,7 +98,7 @@ private
   end
 
   def redirect_if_wrong_user_for_account
-    if !@account.nil? && @account.id > 1 && !["login", "change_plan", "admin"].include?(controller_name)
+    if !@account.nil? && @account.id > 1 && !["sessions", "change_plan", "admin"].include?(controller_name)
       if !current_user.nil? && current_user.account_id != @account.id
         flash[:notice] = "You are logged-in with a username that is not valid for this account. Please try a different username instead."
         redirect_to "http://#{@account.subdomain}.#{@app_config["domain"]}/login"
@@ -163,6 +161,10 @@ private
 
   def main_site?
     ['www'].include?(@account.subdomain)
+  end
+
+  def primary_user?
+    !current_user.nil? && !@account.nil? && @account.primary_person_id == current_user.id
   end
 
   def audit_create_trail

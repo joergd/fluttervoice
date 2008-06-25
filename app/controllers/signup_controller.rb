@@ -24,7 +24,7 @@ class SignupController < ApplicationController
     if save(@account, @preference, @user)
       audit_free_signup(@account, @user)
       send_welcome_free_email(@account)
-      redirect_to "http://#{base_url(@account)}/login/jump_from_signup?id=#{@user.id}&key=#{@user.generate_security_token(15)}"
+      redirect_to "http://#{base_url(@account)}/sessions/jump_from_signup?id=#{@user.id}&key=#{@user.generate_jump_token(15)}"
     end
   end
 

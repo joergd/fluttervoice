@@ -25,7 +25,7 @@ class PeopleControllerTest < Test::Unit::TestCase
   end
 
   def test_edit_of_user_by_non_primary
-    login(@kyle.email, 'atest')
+    login :kyle
     get :edit, :id => @joerg.id
     assert_response :redirect
     assert_equal "You need to be the main user to be able to edit #{@joerg.firstname}'s details", flash[:notice]
@@ -58,7 +58,7 @@ class PeopleControllerTest < Test::Unit::TestCase
   end
 
   def test_edit_with_post_and_password_change
-    salted_password = Person.find(@joerg.id).salted_password
+    salted_password = Person.find(@joerg.id).crypted_password
     post   :edit,
           :id => @joerg.id,
           :person => {   :firstname => 'jon',
@@ -67,7 +67,7 @@ class PeopleControllerTest < Test::Unit::TestCase
                         :password => 'password',
                         :password_confirmation => 'password' }
     assert_response :redirect
-    assert_not_equal salted_password, Person.find(@joerg.id).salted_password
+    assert_not_equal salted_password, Person.find(@joerg.id).crypted_password
   end
 
   def test_edit_with_current_user_and_valid_fields
@@ -88,15 +88,14 @@ class PeopleControllerTest < Test::Unit::TestCase
           :person => {   :firstname => 'not_logged_in_user',
                         :lastname => 'soap',
                         :email => 'jon@test.co.za',
-                        :username => 'differentuser',
                         :password => '',
                         :password_confirmation => '' }
     assert_response :redirect
-    assert_not_equal session[:user].username, Person.find(@kyle.id).username
+    assert_not_equal Person.find(session[:user_id]).email, Person.find(@kyle.id).email
   end
 
   def test_delete_with_non_primary
-    login(@kyle.email, 'atest')
+    login :kyle
     get :delete, :id => @sean.id
     assert_response :redirect
     assert_equal "You need to be the main user to be able to delete people.", flash[:notice]
@@ -130,7 +129,7 @@ class PeopleControllerTest < Test::Unit::TestCase
   end
 
   def test_new_user_with_non_primary
-    login(@kyle.email, 'atest')
+    login :kyle
     get :new
     assert_response :redirect
     assert_equal "You need to be the main user of the account to be able to add additional people for your account", flash[:notice]
@@ -143,12 +142,11 @@ class PeopleControllerTest < Test::Unit::TestCase
           :person => {   :firstname => 'new',
                         :lastname => 'user',
                         :email => 'newuser@test.co.za',
-                        :username => 'newuser',
                         :password => 'password',
                         :password_confirmation => 'password' }
     assert_response :redirect
     assert_equal "Person was successfully added.", flash[:notice]
-    assert_equal @woodstock_account.id, Person.find(:first, :conditions => "username = 'newuser'").account_id
+    assert_equal @woodstock_account.id, Person.find(:first, :conditions => "email = 'newuser@test.co.za'").account_id
     assert_equal num_people + 1, Person.count
   end
 
