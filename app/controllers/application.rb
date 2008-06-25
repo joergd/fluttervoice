@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
-  protect_from_forgery # :secret => 'c88231d9e74cb35d3d327ef683602d93'
+  #protect_from_forgery # :secret => 'c88231d9e74cb35d3d327ef683602d93'
 
   before_filter :configure_charsets
   
