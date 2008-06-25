@@ -79,13 +79,16 @@ class AccountControllerTest < Test::Unit::TestCase
     assert_redirected_to :action => "cancel"
   end
 
-  def test_destroy
+  def test_cancel_and_destroy
     assert_difference('Account.count', -1) do
       assert_difference('ManualIntervention.count') do
         post :destroy, :id => @woodstock_account.id 
         assert_response :redirect
       end
     end
+    manual_intervention = ManualIntervention.last
+    assert_equal "Account cancelled. Check CC payment details.", manual_intervention.description
+    assert_equal @woodstock_account, Account.find_with_deleted(manual_intervention.account_id)
   end
 
 end

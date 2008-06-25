@@ -80,7 +80,7 @@ class Account < ActiveRecord::Base
   before_save :strip_whitespaces
   before_save :deal_with_change_of_plan
   before_create :set_effective_date
-  after_destroy :set_manual_intervention_for_cancelled_account
+  before_destroy :set_manual_intervention_for_cancelled_account
   
   def open_invoices
     Invoice.find( :all,
