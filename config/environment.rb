@@ -32,7 +32,7 @@ Rails::Initializer.run do |config|
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with 'rake db:sessions:create')
-  config.action_controller.session_store = :active_record_store
+  # config.action_controller.session_store = :active_record_store
 
 
   # Enable page/fragment caching by setting a file-based store
