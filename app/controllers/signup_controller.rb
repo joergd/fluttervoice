@@ -1,6 +1,4 @@
 class SignupController < ApplicationController
-  session :off
-  # before_filter :require_ssl, :except => [:index, :plans]
 
   # shows plans
   def index

@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-  session :off
 
   def uptime
     render :text => "success" if @tax = Tax.find(:first)
