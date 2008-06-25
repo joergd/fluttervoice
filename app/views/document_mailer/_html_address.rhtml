@@ -15,7 +15,7 @@
       <strong>O: </strong><%=h tel %><br/>
     <% end -%>
     <% if defined?(fax) && !fax.blank? -%>
-      <strong>F: </strong><%=h fax %>
+      <strong>F: </strong><%=h fax %><br/>
     <% end -%>
     <% if defined?(web) && !web.blank? -%>
       <%= link_to web, web, :title => "Visit site" %>
