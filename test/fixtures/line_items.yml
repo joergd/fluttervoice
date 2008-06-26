@@ -71,3 +71,19 @@ host_brochure_quote:
   price: 500.00
   quantity: 1
   description: host brochure website
+demo_make_brochure:
+  id: 10
+  line_item_type_id: 2
+  account_id: 99
+  document_id: 80
+  price: 16000.00
+  quantity: 1
+  description: make a brochure website
+demo_fix_car:
+  id: 11
+  line_item_type_id: 1
+  account_id: 99
+  document_id: 80
+  price: 200.00
+  quantity: 3
+  description: fix your car

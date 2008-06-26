@@ -47,7 +47,7 @@ CREATE TABLE `audit_logins` (
   `failed` tinyint(1) NOT NULL default '0',
   `created_on` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `binaries` (
   `id` int(11) NOT NULL auto_increment,
@@ -78,7 +78,7 @@ CREATE TABLE `clients` (
   `created_on` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `clients_account_id_index` (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `credit_card_transactions` (
   `id` int(11) NOT NULL auto_increment,
@@ -145,10 +145,13 @@ CREATE TABLE `documents` (
   `created_on` datetime default NULL,
   `notes` text NOT NULL,
   `type` varchar(255) default NULL,
+  `demo` tinyint(1) default NULL,
   PRIMARY KEY  (`id`),
   KEY `invoices_account_id_index` (`account_id`),
-  KEY `invoices_client_id_index` (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  KEY `invoices_client_id_index` (`client_id`),
+  KEY `documents_account_id_index` (`account_id`),
+  KEY `documents_client_id_index` (`client_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `email_logs` (
   `id` int(11) NOT NULL auto_increment,
@@ -164,7 +167,7 @@ CREATE TABLE `email_logs` (
   `updated_on` datetime default NULL,
   `created_on` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `images` (
   `id` int(11) NOT NULL auto_increment,
@@ -195,16 +198,17 @@ CREATE TABLE `line_items` (
   `account_id` int(11) NOT NULL default '0',
   `document_id` int(11) default NULL,
   `line_item_type_id` int(11) default NULL,
-  `price` decimal(10,0) NOT NULL default '0',
-  `quantity` decimal(10,0) NOT NULL default '1',
+  `price` decimal(10,2) default '0.00',
+  `quantity` decimal(10,2) default '1.00',
   `description` varchar(255) NOT NULL default '',
   `audit_updated_by_person_id` int(11) default NULL,
   `audit_created_by_person_id` int(11) default NULL,
   `updated_on` datetime default NULL,
   `created_on` datetime default NULL,
+  `position` int(11) default NULL,
   PRIMARY KEY  (`id`),
   KEY `invoice_lines_invoice_id_index` (`document_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `manual_interventions` (
   `id` int(11) NOT NULL auto_increment,
@@ -220,7 +224,7 @@ CREATE TABLE `payments` (
   `id` int(11) NOT NULL auto_increment,
   `account_id` int(11) NOT NULL default '0',
   `document_id` int(11) default NULL,
-  `amount` decimal(10,0) NOT NULL default '0',
+  `amount` decimal(10,2) default '0.00',
   `means` varchar(30) NOT NULL default '',
   `reference` varchar(30) NOT NULL default '',
   `date` date NOT NULL,
@@ -230,7 +234,7 @@ CREATE TABLE `payments` (
   `created_on` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `payments_invoice_id_index` (`document_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `people` (
   `id` int(11) NOT NULL auto_increment,
@@ -244,17 +248,19 @@ CREATE TABLE `people` (
   `mobile` varchar(30) NOT NULL default '',
   `username` varchar(30) default NULL,
   `salt` varchar(40) default NULL,
-  `salted_password` varchar(40) default NULL,
-  `security_token` varchar(40) default NULL,
-  `token_expiry` datetime default NULL,
+  `crypted_password` varchar(40) default NULL,
+  `remember_token` varchar(40) default NULL,
+  `remember_token_expires_at` datetime default NULL,
   `audit_updated_by_person_id` int(11) default NULL,
   `audit_created_by_person_id` int(11) default NULL,
   `created_on` datetime default NULL,
   `updated_on` datetime default NULL,
+  `jump_token` varchar(40) default NULL,
+  `jump_token_expires_at` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `people_account_id_index` (`account_id`),
   KEY `people_client_id_index` (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `plans` (
   `id` int(11) NOT NULL auto_increment,
@@ -303,26 +309,10 @@ CREATE TABLE `preferences` (
   KEY `preferences_account_id_index` (`account_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
-CREATE TABLE `quotes` (
-  `id` int(11) NOT NULL auto_increment,
-  `created_at` datetime default NULL,
-  `updated_at` datetime default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE `schema_migrations` (
   `version` varchar(255) NOT NULL,
   UNIQUE KEY `unique_schema_migrations` (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `sessions` (
-  `id` int(11) NOT NULL auto_increment,
-  `session_id` varchar(255) default NULL,
-  `data` text,
-  `updated_at` datetime default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `sessions_session_id_index` (`session_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `status` (
   `id` int(11) NOT NULL auto_increment,
@@ -390,6 +380,22 @@ INSERT INTO schema_migrations (version) VALUES ('20080619140047');
 INSERT INTO schema_migrations (version) VALUES ('20080620143331');
 
 INSERT INTO schema_migrations (version) VALUES ('20080620143356');
+
+INSERT INTO schema_migrations (version) VALUES ('20080622181028');
+
+INSERT INTO schema_migrations (version) VALUES ('20080622195524');
+
+INSERT INTO schema_migrations (version) VALUES ('20080623092614');
+
+INSERT INTO schema_migrations (version) VALUES ('20080623171151');
+
+INSERT INTO schema_migrations (version) VALUES ('20080625123017');
+
+INSERT INTO schema_migrations (version) VALUES ('20080625161748');
+
+INSERT INTO schema_migrations (version) VALUES ('20080626130939');
+
+INSERT INTO schema_migrations (version) VALUES ('20080626144625');
 
 INSERT INTO schema_migrations (version) VALUES ('3');
 

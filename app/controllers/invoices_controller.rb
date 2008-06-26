@@ -1,6 +1,7 @@
 class InvoicesController < DocumentsController
+  before_filter :login_required, :except => [:email_demo_invoice]
   before_filter :invoice_limit_reached?, :only => [:create, :new, :new_from_quote]
-  after_filter :store_location, :except => [:create, :new, :edit, :delete]
+  after_filter :store_location, :except => [:create, :new, :edit, :delete, :email_demo_invoice]
 
   def index
     if params[:states]
@@ -221,6 +222,31 @@ class InvoicesController < DocumentsController
 
     invoice.destroy
     redirect_to :action => '' # always go back to summary view
+  end
+
+  # Used from the Homepage
+  def email_demo_invoice
+    if params[:email] =~ /^([a-zA-Z0-9_\-\.&]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
+      @document = Invoice.demo # HARDCODED: A Demo Invoice
+      return if @document.nil?
+
+      account = Account.demo
+      to = params[:email]
+      from = @app_config['system_email']
+      message = "This is a demo invoice that somebody sent from http://www.fluttervoice.co.za. Please let us know of any abuse."
+      summary_url = "http://#{base_url(account)}/summary/" + "show".obfuscate + "/" + @document.id.to_s.obfuscate
+
+      invoice_html = construct_email_html_for_document(@document)
+
+      if DocumentMailer.deliver_invoice(to, from, "", account, @document, invoice_html, summary_url, message, @app_config)
+        log_email("Demo", @document, to, 0)
+        render :text => "", :status => 200
+      else
+        render :text => "Can't send.", :status => 500
+      end
+    else
+      render :text => "Malformed email", :status => 500
+    end
   end
 
 private

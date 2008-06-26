@@ -21,3 +21,11 @@ velocity_pay:
   primary_person_id: 1
   name: Velocity Pay Test Account
   subdomain: velocity
+demo_account:
+  id: 99
+  plan_id: 3
+  effective_date: <%= Date.today - 10 %>
+  primary_person_id: 1
+  name: Demo Account
+  subdomain: demo
+  web: www.woodstock.org

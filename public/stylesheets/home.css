@@ -165,10 +165,24 @@ HEADER
 }
 
 #demo_invoice {
+	position: relative;
 	clear: both;
 	text-align: right;
   width: 850px;
 	margin-bottom: 10px;
+}
+
+#demo_invoice_busy {
+	position: absolute;
+	top: 0px;
+	right: 320px;
+}
+
+#demo_invoice_done {
+	position: absolute;
+	top: 3px;
+	right: 320px;
+	color: green;
 }
 
 /*-------------------------------------------------

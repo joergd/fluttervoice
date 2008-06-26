@@ -1,5 +1,4 @@
 class DocumentsController < ApplicationController
-  before_filter :login_required
 
   def get_currency_symbol
     currency = Currency.find(params[:currency])

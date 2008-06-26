@@ -581,6 +581,23 @@ class InvoicesControllerTest < Test::Unit::TestCase
     assert_match /High Their/, email.body
   end
 
+  def test_email_demo_invoice
+    post :email_demo_invoice, :email => "joergd@pobox.com"
+    assert_response :success
+    email = @emails.first
+    assert_match /PRICE: R16,000\.00/, email.body
+    assert_match /R16,000\.00/, email.body
+    assert_match /Invoice 1 from Demo Account/, email.subject
+    assert_equal ["joergd@pobox.com"], email.to
+    assert_equal ["no-reply-i-am-robot@fluttervoice.co.za"], email.from
+  end
+
+  def test_email_demo_invoice_wrong_email
+    post :email_demo_invoice, :email => "joergdpobox.com"
+    assert_response 500
+    assert_nil @emails.first
+  end
+
   def test_deliver_emails_no_recipients
     assert_equal 0, EmailLog.find(:all).size
 

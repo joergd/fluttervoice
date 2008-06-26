@@ -10,6 +10,11 @@ class Invoice < Document
 
   before_save :set_to_closed_if_total_is_zero
 
+  # Finds the demo invoice - an invoice in the DB needs to be set to demo for this to work.
+  def self.demo
+    Account.demo.invoices.find_by_demo(true)
+  end
+  
   def name
     use_tax? ? "Tax Invoice #{number}" : "Invoice #{number}"
   end

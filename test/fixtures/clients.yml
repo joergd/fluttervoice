@@ -11,3 +11,7 @@ dbsa:
   id: 3
   name: The Development Bank of Southern Africa
   account_id: 2
+demo_client:
+  id: 99
+  name: The Demo Client for the Demo Account
+  account_id: 99

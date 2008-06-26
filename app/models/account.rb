@@ -82,6 +82,11 @@ class Account < ActiveRecord::Base
   before_create :set_effective_date
   before_destroy :set_manual_intervention_for_cancelled_account
   
+  # Demo Account - used for emailing demo invoices from homepage.
+  def self.demo
+    Account.find_by_subdomain("demo")
+  end
+  
   def open_invoices
     Invoice.find( :all,
                   :include => [ :client ],

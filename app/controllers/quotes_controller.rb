@@ -1,4 +1,5 @@
 class QuotesController < DocumentsController
+  before_filter :login_required
   before_filter :quote_limit_reached?
   before_filter :can_have_quotes?, :only => [:index, :create, :new, :edit]
   after_filter :store_location, :except => [:create, :new, :edit, :delete]

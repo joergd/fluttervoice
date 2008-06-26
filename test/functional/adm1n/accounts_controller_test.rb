@@ -21,7 +21,7 @@ class Adm1n::AccountsControllerTest < ActionController::TestCase
   def test_should_paying
     get :paying
     assert_response :success
-    assert_equal 2, assigns(:accounts).size
+    assert_equal 3, assigns(:accounts).size
     
     get :paying, :q => "wo"
     assert_response :success
@@ -31,6 +31,6 @@ class Adm1n::AccountsControllerTest < ActionController::TestCase
   def test_should_latest
     get :latest
     assert_response :success
-    assert_equal 4, assigns(:accounts).size
+    assert_equal 5, assigns(:accounts).size
   end
 end

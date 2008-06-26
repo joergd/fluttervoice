@@ -191,3 +191,20 @@ expired_quote:
   paid: 0
   timezone: Pretoria
 
+demo_invoice:
+  id: 80
+  type: Invoice
+  demo: 1
+  account_id: 99
+  client_id: 99
+  number: 0001
+  use_tax: 1
+  tax_percentage: 14.00
+  shipping: 20.00
+  late_fee_percentage: 5.00
+  currency_id: ZAR
+  date: <%= Date.today - 1%>
+  due_date: <%= Date.today + 1 %>
+  status_id: 1
+  subtotal: 16500
+  timezone: Pretoria

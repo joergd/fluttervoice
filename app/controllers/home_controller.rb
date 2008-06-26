@@ -23,4 +23,5 @@ class HomeController < ApplicationController
   def cancelled
     render :layout => "homepage"
   end
+  
 end

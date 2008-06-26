@@ -8,6 +8,7 @@
 <strong>City</strong>: <%= @account.city %><br/>
 <strong>Clients</strong>: <%= @account.clients.count %><br/>
 <strong>Invoices</strong>: <%= @account.invoices.count %><br/>
+<strong>Quotes</strong>: <%= @account.quotes.count %><br/>
 <strong>Logins</strong>: <%= @account.audit_logins.count %><br/>
 <strong>Created</strong>: <%= @account.created_on %><br/>
 <% if @account.deleted? -%><strong style="color: red;">DELETED</strong><% end -%>
