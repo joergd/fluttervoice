@@ -50,7 +50,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace(:adm1n) do |adm1n|
     adm1n.home "/", :controller => "home", :action => "index"
     adm1n.resources :manual_interventions, :member => { :complete => :post }
-    adm1n.resources :accounts, :collection => { :paying => :get, :latest => :get }
+    adm1n.resources :accounts, :collection => { :paying => :get, :latest => :get, :active => :get }
     adm1n.resources :credit_card_transactions
   end
     

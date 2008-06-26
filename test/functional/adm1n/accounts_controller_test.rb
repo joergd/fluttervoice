@@ -33,4 +33,10 @@ class Adm1n::AccountsControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal 5, assigns(:accounts).size
   end
+
+  def test_should_active
+    get :active
+    assert_response :success
+    assert_equal 5, assigns(:accounts).size
+  end
 end

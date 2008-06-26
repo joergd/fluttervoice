@@ -12,6 +12,10 @@ class Adm1n::AccountsController < Adm1n::ApplicationController
     @accounts = Account.find(:all, :limit => 20, :order => "created_on DESC")
   end
   
+  def active
+    @accounts = Account.find_by_sql("select accounts.* from accounts left outer join audit_logins on audit_logins.account_id = accounts.id order by audit_logins.created_on DESC limit 20")
+  end
+  
   def show
     @account = Account.find_with_deleted(params[:id])
   end
