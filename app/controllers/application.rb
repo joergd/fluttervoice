@@ -5,6 +5,7 @@ require 'ruby_extensions'
 
 class ApplicationController < ActionController::Base
   rescue_from ActionController::InvalidAuthenticityToken, :with => :access_denied
+  rescue_from CGI::Session::CookieStore::TamperedWithCookie, :with => :access_denied
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
