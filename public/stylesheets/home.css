@@ -165,8 +165,10 @@ HEADER
 }
 
 #demo_invoice {
+	clear: both;
 	text-align: right;
   width: 850px;
+	margin-bottom: 10px;
 }
 
 /*-------------------------------------------------

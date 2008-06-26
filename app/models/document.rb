@@ -4,7 +4,7 @@ class Document < ActiveRecord::Base
   belongs_to  :currency
 
   has_many    :line_items,
-              :order => "line_items.id ASC",
+              :order => "line_items.position ASC, line_items.id ASC",
               :include => [ :line_item_type ],
               :dependent => :delete_all
 

@@ -35,9 +35,10 @@ private
   def extract_lines_from_params
     line_items = Array.new
     if !params[:line_items].nil?
-      params[:line_items].sort.each do |line_no, attr|
+      params[:line_items].each do |line_no, attr|
         line_item = LineItem.new(attr.merge(audit_create_trail))
         line_item.account_id = @account.id
+        line_item.position = line_no.to_i + 1
         line_items << line_item
       end
     end
