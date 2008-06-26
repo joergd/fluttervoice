@@ -4,6 +4,7 @@
 <strong>Contacts: </strong><%= Contact.count %><br/>
 <strong>Invoices: </strong><%= Invoice.count %><br/>
 <strong>Quotes: </strong><%= Quote.count %><br/>
+<strong>Demo Emails sent: </strong><%= EmailLog.count :conditions => "email_type = 'Demo'" %><br/>
 
 <br/>
 <%= link_to "Latest", latest_adm1n_accounts_path %><br/>
