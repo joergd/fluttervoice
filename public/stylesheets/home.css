@@ -160,8 +160,13 @@ HEADER
   clear: left;
   float: left;
   margin-left: 20px;
-  margin-bottom: 10px;
   width: 800px;
+	margin-bottom: 10px;
+}
+
+#demo_invoice {
+	text-align: right;
+  width: 850px;
 }
 
 /*-------------------------------------------------

@@ -267,16 +267,32 @@ class InvoicesControllerTest < Test::Unit::TestCase
                             :po_number => '',
                             :currency_id => "ZAR",
                             :notes => "" },
-            :line_items => { "0" => { :line_item_type_id => "1",
-                                      :quantity => "1",
-                                      :price => "20.00",
-                                      :description => "My line" } } }
+            :line_items => {  "0" => { :line_item_type_id => "1",
+                                       :quantity => "1",
+                                       :price => "20.00",
+                                       :description => "My first line" },
+                              "3" => { :line_item_type_id => "1",
+                                       :quantity => "1",
+                                       :price => "20.00",
+                                       :description => "My fourth line" },
+                              "1" => { :line_item_type_id => "1",
+                                       :quantity => "1",
+                                       :price => "20.00",
+                                       :description => "My second line" },
+                              "2" => { :line_item_type_id => "1",
+                                       :quantity => "1",
+                                       :price => "20.00",
+                                       :description => "My third line" } } }
 
     assert_redirected_to :action => "show"
-    assert_equal 20.00, assigns(:document).amount_due
+    assert_equal 80.00, assigns(:document).amount_due
     assert_equal Status::DRAFT, assigns(:document).status_id
     assert_equal num_invoices + 1, Invoice.count
-    assert_equal num_line_items + 1, LineItem.count
+    assert_equal num_line_items + 4, LineItem.count
+    
+    # Test for correct order
+    assert_equal "My first line", assigns(:document).line_items.first.description
+    assert_equal "My fourth line", assigns(:document).line_items.last.description
   end
 
   def test_new_with_valid_invoice_free_account

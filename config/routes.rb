@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '', :controller => "home"
   map.connect 'cancelled', :controller => "home", :action => "cancelled"
 
+  map.email_demo_invoice "email_demo_invoice", :controller => "home", :action => "email_demo_invoice"
+  
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
   map.connect ':controller/service.wsdl', :action => 'wsdl'

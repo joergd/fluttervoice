@@ -18,6 +18,11 @@ class SignupControllerTest < Test::Unit::TestCase
     @emails.clear
   end
 
+  def test_index
+    get :index
+    assert_response :success
+  end
+  
   def test_different_domains
     %w{ www.fluttervoice.co.za www.fluttervoice.com www.fluttervoice.co.uk }.each do |tld|
       @request.host = tld
