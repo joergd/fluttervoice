@@ -11,7 +11,7 @@
   
   <% if @account.invoices.empty? -%>
 	  <div class="firsttime">
-	    The easiest way to get started is to create an invoice. If you want to see how your client receives your invoice, you could send it to a dummy client with your email address (you can always delete the dummy client later).<br/><br/>Go ahead and click that big button on the top right that says <strong>+ Create New Invoice</strong> to get started.
+	    The easiest way to get started is to create an invoice.<br/><br/>Go ahead and click that big button on the top right that says <strong>+ Create New Invoice</strong> to get started.
 	  </div>
 	  <%= image_tag "example-invoices-#{@app_config['site']}.gif", :size => "625x361", :alt => "Example invoices", :title => "Example invoices" %>
   <% else -%>  
