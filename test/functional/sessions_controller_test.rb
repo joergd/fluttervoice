@@ -25,7 +25,7 @@ class SessionsControllerTest < Test::Unit::TestCase
   
   def test_jump_from_signup
     get :jump_from_signup, :id => @joerg.id, :key => @joerg.jump_token
-    assert_redirected_to :controller => 'invoices', :action => ''
+    assert_redirected_to :controller => 'invoices', :action => 'create'
   end
   
   def test_new

@@ -48,7 +48,7 @@ class SessionsController < ApplicationController
   def jump_from_signup
     if jump_login
       flash[:notice] = "Your account has been created! Welcome, and thanks for signing up with #{@app_config['app_name']}!" 
-      redirect_to :controller => "invoices", :action => ""
+      redirect_to :controller => "invoices", :action => "create"
     end
   end
   
