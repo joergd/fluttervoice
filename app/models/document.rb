@@ -112,11 +112,11 @@ protected
   end
 
   def calc_subtotal(lines=self.line_items)
-    tot = 0
+    tot = BigDecimal("0")
     lines.each do |il|
-      tot += il.quantity * il.price
+      tot += BigDecimal(il.quantity.to_s) * BigDecimal(il.price.to_s)
     end
-    return tot
+    return tot.truncate(2)
   end
 
   # to manage denormalization of timezone between preferences and invoices

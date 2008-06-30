@@ -10,7 +10,7 @@ class LineItem < ActiveRecord::Base
   before_save :strip_whitespaces
 
   def total
-    quantity * price
+    BigDecimal((quantity * price).to_s).truncate(2)
   end
 
 protected

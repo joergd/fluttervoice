@@ -51,11 +51,11 @@ class Invoice < Document
   end
 
   def amount_due
-    total + late_fee - self.paid.to_f
+    BigDecimal((total + late_fee - self.paid).to_s).truncate(2)
   end
 
   def late_fee
-    apply_late_fee? ? total * self.late_fee_percentage * 0.01 : 0
+    apply_late_fee? ? BigDecimal((total * self.late_fee_percentage * 0.01).to_s).truncate(2) : BigDecimal("0")
   end
 
   def apply_late_fee?
@@ -79,11 +79,11 @@ private
   end
 
   def calc_paid
-    tot = 0
+    tot = BigDecimal("0")
     self.payments.each do |pmnt|
-      tot += pmnt.amount
+      tot += BigDecimal(pmnt.amount.to_s)
     end
-    return tot
+    return tot.truncate(2)
   end
 
 
