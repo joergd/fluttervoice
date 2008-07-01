@@ -8,13 +8,13 @@ function addLoadEvent(func) {
       func();
     }
   }
-}
+};
 
 function clickclear(thisfield, defaulttext) {
   if (thisfield.value == defaulttext) {
     thisfield.value = "";
   }
-}
+};
 
 function tableruler()
 {
@@ -37,7 +37,7 @@ function tableruler()
    }
   }
  }
-}
+};
 
 function onlynumbers(evt) {
 	evt = (evt) ? evt : window.event;
@@ -46,7 +46,7 @@ function onlynumbers(evt) {
 		return false;
 	}
 	return true;
-}
+};
 
 function submitenter(fld, evt) {
 	evt = (evt) ? evt : window.event;
@@ -58,4 +58,4 @@ function submitenter(fld, evt) {
   }
   else
      return true;
-}
+};
