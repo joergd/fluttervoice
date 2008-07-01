@@ -64,15 +64,6 @@ a {
   text-decoration: underline;
 }
 
-input.fancy {
-  background: #fff url(/images/input-bg.gif) repeat-x;
-  border: 1px solid #E4E4D2;
-  font-size: 18px;
-  color: #737373;
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
 h2 {
   font-weight: 100;
 }
@@ -213,7 +204,6 @@ NAVIGATION
 }
 
 #nav ul li a {
-  color: #E5B405;
 	padding: 0px;
 	margin-left: 1.8em;
 	text-decoration: none;
@@ -241,103 +231,9 @@ body#home_examples li#nav-examples a,
 body#home_plans li#nav-signup a,
 body#signup_free li#nav-signup a,
 body#blog li#nav-blog a {
-  color: #E4E4D2;
+  color: #E9999A;
 }
 
-/*-------------------------------------------------
-BUBBLE
--------------------------------------------------*/
-
-#bubble {
-  clear: both;
-  padding-top: 17px;
-  width: 850px;
-  background: url(/images/home-bubble-top.gif) top left no-repeat;
-}
-
-#bubble-hilite {
-  clear: both;
-  padding-top: 17px;
-  width: 850px;
-  background: url(/images/home-bubble-top-hilite.gif) top left no-repeat;
-}
-
-#bubble-container {
-  margin: 0px;
-  width: 850px;
-  background: #ffffff url(/images/home-bubble-sides.gif) top left repeat-y;
-  text-align: left;
-  border-bottom: 1px solid #868685;
-}
-
-#bubble-content {
-  margin: 15px;
-  margin-top: 0px;
-  padding-top: 20px;
-}
-
-#bubble-bottom {
-  margin-left: 2px;
-  margin-right: 2px;
-  height: 17px;
-  background: url(/images/home-bubble-gradient.gif) bottom left repeat-x;
-}
-
-#message {
-  float: right;
-  margin-right: 0px;
-  width: 600px;
-  font-size: 14px;
-  line-height: 20px;
-  color: #838485;
-  background-color: #ffffff;
-}
-
-#sample {
-  clear: all;
-  margin-top: 40px;
-  width: 820px;
-  height: 178px;
-  background: url(/images/home-sample.gif) top left no-repeat;
-}
-
-/*-------------------------------------------------
-BUTTONS
--------------------------------------------------*/
-
-.float-right {
-  float: right;
-}
-
-.web2000-1-xl {
-  display: block;
-  font-size: 36px; 
-  padding: 5px;
-  width: 160px;
-  color: #737373;
-  background-color: #FEF7C1;
-  text-decoration: none;
-  text-align: center; 
-}
-
-a:hover.web2000-1-xl {
-  background-color: #FAC505;
-}
-
-.web2000-2-s {
-  display: block;
-  font-size: 18px; 
-  width: 60px;
-  padding: 5px;
-  color: #737373;
-  background-color: #FEF7C1;
-  text-decoration: none;
-  text-align: center; 
-}
-
-a:hover.web2000-2-s {
-  background-color: #FAC505;
-}
 
 /*-------------------------------------------------
 FOOTER
@@ -378,33 +274,31 @@ FAQ
 -------------------------------------------------*/
 
 #faq {
-	position: relative;
-	margin: 0px auto 30px auto;
 	text-align: left;
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: normal;
 	line-height: 140%;
 	margin-top: 0;
 	font-family: georgia;
-	width: 750px;  /* bmh */
+	width: 600px;  /* bmh */
 	voice-family: "\"}\"";
 	voice-family:inherit;
-	width: 748px;
+	width: 598px;
 }
 
 html>#faq	{
-	width: 748px;
+	width: 598px;
 }
 
 div.question {
 	float: left;
-	width: 300px;
+	width: 200px;
 	text-align: right;
 }
 
 div.question h1 {
 	font-family: georgia;
-	font-size: 28px;
+	font-size: 18px;
 	font-weight: normal;
 	text-align: right;
 	line-height: 120%;
@@ -412,7 +306,7 @@ div.question h1 {
 
 div.answer {
 	float: right;
-	width: 400px;
+	width: 350px;
 }
 
 #faq p {
@@ -579,4 +473,24 @@ BLOG
   padding-bottom: 10px;
   margin-bottom: 15px;
   background: transparent url(/images/horizontal.gif) bottom left no-repeat;
+}
+
+
+/*-------------------------------------------------
+SLIDESHOW 
+-------------------------------------------------*/
+
+
+.pics {  
+  width:   600px;  
+  height:  540px;  
+  padding: 0px;  
+  margin:  0px; 
+	border: 1px solid #838485;
+} 
+
+.pics img {  
+   background-color: #fff;  
+   top:  0px; 
+   left: 0px; 
 }

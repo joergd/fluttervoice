@@ -2,14 +2,14 @@
   <div id="footer-content">
     <h2>About Fluttervoice</h2>
     <p>Fluttervoice is a product brought to you by <a href="http://www.theselovelydays.co.za" title="Ruby on Rails Cape Town South Africa">These Lovely Days</a>. We are a small collective of individuals based in Cape Town, South Africa. We use Fluttervoice a lot. 
-      <% link_to_section("Contact") do |contact| %>
-        <h4>Contact</h4>
-        <p>Our company trading address is:<br/>61 Roberts Road<br/>Woodstock, Cape Town<br/>7925<br/>South Africa</p>
-        <p>If you want to send us flowers or letter bombs, that is the address to use.</p>
-        <p>Alternatively, you could always just send us an email to <%= render :partial => "widgets/fluttervoice_email" %></p>
-        <%= link_to_function("Hide Details", contact) %>
-      <% end %>    
-    </p>
+		<a href="#" id="show_contact_link" onclick="$('#contact_section').show(); $('#show_contact_link').css('display', 'none');return false;">Contact</a></p>
+		<div id="contact_section" style="display: none;">
+       <h4>Contact</h4>
+       <p>Our company trading address is:<br/>61 Roberts Road<br/>Woodstock, Cape Town<br/>7925<br/>South Africa</p>
+       <p>If you want to send us flowers or letter bombs, that is the address to use.</p>
+       <p>Alternatively, you could always just send us an email to <%= render :partial => "widgets/fluttervoice_email" %></p>
+       <a href="#" onclick="$('#show_contact_link').show();$('#contact_section').css('display', 'none');return false;">Hide Details</a>
+		</div>
     <p><small>Any <%= enkode_mail("hello@#{ @app_config['domain'] }", "questions", "Howzit!", "[Fluttervoice]") %>? Read our <%= link_to "privacy policy", "http://www.#{@app_config['domain']}/privacy.html", :title => "Fluttervoice Privacy Policy Statement" %> and our <%= link_to "terms of service", "http://www.#{@app_config['domain']}/terms.html", :title => "Fluttervoice Terms of Service" %>.</small></p>
     <p><small><i>&copy;2006-2008 <%= link_to "These Lovely Days", "http://www.theselovelydays.co.za", :title => "Ruby on Rails Cape Town, South Africa", :style => "color: #737373; text-decoration: none;" %></i> All rights reserved. Developed by <%= link_to "brea.kfa.st", "http://brea.kfa.st", :title => "Ruby on Rails Cape Town, South Africa", :style => "color: #737373; text-decoration: none;" %></small></p>
   </div> <!-- footer-content -->

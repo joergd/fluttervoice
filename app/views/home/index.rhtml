@@ -1,21 +1,62 @@
-<div id="bubble">
-  <div id="bubble-container">
-    <div id="bubble-content">
-      <div id="message">Create elegantly <strong>designed invoices</strong> and send them to anybody with an email address - online. Perfect for <strong>small businesses and freelancers</strong>, such as designers, filmmakers, IT professionals, photographers, stylists, architects, writers, etc </div>
-      <%= link_to "sign up", { :controller => "signup", :action => "free" }, :title => "Sign up for a free account to start sending invoices", :class => "web2000-1-xl" %>
-      <div id="sample"></div>
-      <p>Login if you have an account<br/>
-        <small><%= link_to "I forgot my password", { :controller => "login", :action => "forgot_password" }, :title =>  "Please log me back in" %></small>
-      </p>
-			<% form_tag session_path , :id => "frm" do -%>
-        <div class="float-right"><%= submit_link "login", "frm", :class => "web2000-2-s", :title => "Log me in so I can invoice" %></div>
-        <%= text_field_tag :subdomain, "your Fluttervoice ID", :size => 20, :maxlength => 100, :title => "your Fluttervoice ID (your chosen web name)", :class => "fancy", :onfocus => "clickclear(this, 'your Fluttervoice ID');", :style => "width: 200px;" %>&nbsp;&nbsp;
-        <%= text_field :user, :email, :size => 35, :maxlength => 100, :value => "your email address", :title => "your email address", :class => "fancy", :onfocus => "clickclear(this, 'your email address');", :style => "width: 320px;" %>&nbsp;&nbsp;
-        <%= password_field :user, :password, :size => 15, :maxlength => 20, :value => "213das3124", :title => "your password", :class => "fancy", :onfocus => "clickclear(this, '213das3124');", :style => "width: 150px;", :onkeypress => "return submitenter(this, event);" %>
-      <% end -%>
-    </div> <!-- bubble-content -->
-    <div id="bubble-bottom"></div>
-  </div> <!-- bubble-container -->
-</div> <!-- bubble -->
-<%= render :partial => 'faq' %>
-<%= image_tag "fullpage-sample-#{@app_config['site']}.jpg", :size => "850x960", :alt => "Sample image", :title => "You can also record payments against your invoices." %>
+<div id="demo_invoice">
+	<%= image_tag "busy.gif", :size => "22x22", :style => "display: none;", :id => "demo_invoice_busy" %>
+	<span id="demo_invoice_done" style="display: none;">Done.</span>
+	<% form_tag(email_demo_invoice_url, :id => "demo_frm" ) do -%>
+		<%= text_field_tag :email, "your email address", :size => 15, :maxlength => 100, :title => "your email address", :onfocus => "clickclear(this, 'your email address');", :style => "width: 120px;" %>
+		<%= submit_tag "Email me a demo invoice", :style => "width: 180px; cursor: pointer;", :id => "submit_demo_invoice" %>
+	<% end -%>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	$('#demo_frm').ajaxForm({
+		beforeSubmit: function(){
+			$('#submit_demo_invoice').attr("disabled","disabled");
+			$('#email').attr("disabled","disabled");
+			$('#demo_invoice_busy').show();
+		},
+		success: function(response){
+			if(response == ""){
+				$('#demo_invoice_busy').css('display', 'none');
+				$('#demo_invoice_done').show();
+				$('#demo_frm').attr("disabled","disabled");
+			}
+			else {
+				$('#demo_invoice_busy').css('display', 'none');
+				$('#submit_demo_invoice').removeAttr("disabled");
+				$('#email').removeAttr("disabled");
+			}
+		}
+	});
+//]]>
+</script>
+
+<div style="position:relative;">
+	<div style="flaot: left; width: 250px; height: 1900px; text-align: left;">
+		<h1>Simple<br/>Invoicing.</h1><h2>For freelancers<br/>and small businesses.</h2>
+		<p><a href="http://demo.fluttervoice.co.za/summary/457524a9a503312e/fa325e628d05c9e0" target="_blank" title="Easy and simple online invoice">View a DEMO invoice</a></p>
+		<br/>
+		<p><%= link_to "Login", login_url %></p>
+	</div>
+	<div style="position:absolute; top: 0px; left: 250px; width:650px">
+		<div id="s1" class="pics">			
+			<img src="/images/tour-summary.png" width="600" height="410" alt="Tour - Summary" />
+			<img src="/images/tour-show.png" width="600" height="533" alt="Tour - Show" />
+			<img src="/images/tour-send.png" width="600" height="492" alt="Tour - Send" />
+			<img src="/images/tour-edit.png" width="600" height="540" alt="Tour - Edit" />
+			<img src="/images/tour-payment.png" width="600" height="414" alt="Tour - Payment" />
+		</div>
+		<%= render :partial => 'faq' %>
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	$('#s1').cycle({ 
+	    fx:    'fade', 
+	    speed:  2500 
+	 });
+//]]>
+</script>
+
+

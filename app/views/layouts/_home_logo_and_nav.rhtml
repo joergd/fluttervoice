@@ -10,15 +10,6 @@
 <% end -%>
 <div id="logo"></div>
 <div id="tagline">Want to <span class="hilite">email invoices?</span> Without the pain? We've got the answer.</div>
-<div id="demo_invoice">
-	<%= image_tag "busy.gif", :size => "22x22", :style => "display: none;", :id => "demo_invoice_busy" %>
-	<span id="demo_invoice_done" style="display: none;">Done.</span>
-	<% form_remote_tag 	:url => email_demo_invoice_url,
-	 										:loading => "$('submit_demo_invoice').disabled=true;$('demo_invoice_busy').show();",
-											:success => "$('demo_invoice_busy').hide();$('demo_invoice_done').show();$('demo_frm').disabled=true;",
-											:failure => "$('demo_invoice_busy').hide();$('submit_demo_invoice').disabled=false;",
-											:html => { :id => "demo_frm" } do -%>
-		<%= text_field_tag :email, "your email address", :size => 15, :maxlength => 100, :title => "your email address", :onfocus => "clickclear(this, 'your email address');", :style => "width: 120px;" %>
-		<%= submit_tag "Email me a demo invoice", :style => "width: 180px; cursor: pointer;", :id => "submit_demo_invoice" %>
-	<% end -%>
-</div>
+
+
+

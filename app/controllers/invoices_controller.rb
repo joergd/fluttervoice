@@ -242,10 +242,10 @@ class InvoicesController < DocumentsController
         log_email("Demo", @document, to, 0)
         render :text => "", :status => 200
       else
-        render :text => "Can't send.", :status => 500
+        render :text => "Can't send.", :status => 200
       end
     else
-      render :text => "Malformed email", :status => 500
+      render :text => "Malformed email", :status => 200
     end
   end
 

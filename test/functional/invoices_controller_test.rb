@@ -594,7 +594,7 @@ class InvoicesControllerTest < Test::Unit::TestCase
 
   def test_email_demo_invoice_wrong_email
     post :email_demo_invoice, :email => "joergdpobox.com"
-    assert_response 500
+    assert_response :success
     assert_nil @emails.first
   end
 

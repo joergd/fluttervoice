@@ -5,22 +5,13 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-  <title><%= site_title() %> | The most handsome way to send invoices online</title>
-  <meta name="keywords" content="invoices, easy, free, online, freelancers, elegant, beautiful, email, payments, templates, css, design, html, invoicing system, application, hosted, web2.0, south africa, cape town, ruby, ruby on rails, ror" />
+  <title><%= site_title() %> | Simple Invoicing</title>
+  <meta name="keywords" content="invoices, simple, easy, free, online, freelancers, elegant, beautiful, email, payments, templates, css, design, html, invoicing system, application, hosted, web2.0, south africa, cape town, ruby, ruby on rails, ror" />
   <meta name="description" content="Create elegantly designed invoices and send them to anybody with an email address - online. Perfect for freelancers, such as designers, filmmakers, IT professionals, photographers, stylists, architects, writers. And it's free!" />
   <link rel="Bookmark Icon" href="/favicon.ico" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <%= stylesheet_link_tag 'home' %>
-  <%= stylesheet_link_tag 'niftyCorners' %>
-  <%= javascript_include_tag "application", "prototype", "effects", "behaviour", "niftycube", "cookies", "filter", :cache => "all" %>
-
-  <script type="text/javascript" language="javascript" charset="utf-8">
-    // <![CDATA[
-      NiftyLoad=function(){
-        Nifty("a.web2000-1-xl,a.web2000-2-s", "transparent");
-      }
-    // ]]>
-  </script>
+  <%= javascript_include_tag "application", "jquery.pack.js", "jquery-form", "jquery.cycle.all.pack.js", "cookies", :cache => "home" %>
 
 </head>
 
