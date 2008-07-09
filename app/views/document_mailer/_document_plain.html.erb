@@ -9,9 +9,9 @@
 
 <%=h account.name %>
 <%= render :partial => "document_mailer/address", :locals => { :address => account.address, :tel => account.tel, :fax => account.fax, :web => account.web } %>
-<% if !account.vat_registration.blank? -%>
-VAT Registration: <%=h account.vat_registration %>
-<% end -%>
+<% if !account.vat_registration.blank? -%>VAT Registration: <%=h account.vat_registration %><% end -%>
+
+<% if !account.company_registration.blank? -%>Company Registration: <%=h account.company_registration %><% end -%>
 
 
 TO: <%=h document.client.name %>

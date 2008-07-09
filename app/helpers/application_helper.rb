@@ -71,14 +71,14 @@ module ApplicationHelper
     concat(link_to_function(name, update_page{ |page| 
       page[section_id].show
       page[link_id].hide
-    }, html_opts.update(:id => link_id)))
+    }, html_opts.update(:id => link_id)), block.binding)
     # Hidden section
-    concat(tag('div', { :id => section_id, :style => 'display: none;' }, true))
+    concat(tag('div', { :id => section_id, :style => 'display: none;' }, true), block.binding)
     yield update_page{|page| 
       page[section_id].hide
       page[link_id].show        
     }
-    concat('</div>')
+    concat('</div>', block.binding)
   end
 
 end

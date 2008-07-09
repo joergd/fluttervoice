@@ -10,8 +10,11 @@
         <strong class="fn org"><%=h @account.name %></strong>
         <%= render(:partial => '/widgets/address', :locals => { :address => @account.address, :tel => @account.tel, :fax => @account.fax, :web => @account.web }) %>
       </div>
-      <% if !@account.vat_registration.blank? -%>
-        <p class="account_vat_registration">VAT Registration: <%=h @account.vat_registration %></p>
+      <% if !@account.vat_registration.blank? || !@account.company_registration.blank? -%>
+        <p class="account_registration">
+					<% if !@account.vat_registration.blank? -%>VAT Registration: <%=h @account.vat_registration %><br/><% end -%>
+					<% if !@account.company_registration.blank? -%>Company Registration: <%=h @account.company_registration %><% end -%>
+				</p>
       <% end -%>
     </td>
   </tr>
