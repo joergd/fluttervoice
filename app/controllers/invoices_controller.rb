@@ -119,6 +119,7 @@ class InvoicesController < DocumentsController
     
     @document = Invoice.new(quote.attributes)
     @document.number = nil
+    @document.date = nil
     
     quote.line_items.each do |line_item|
       @document.line_items << LineItem.new(line_item.attributes)
