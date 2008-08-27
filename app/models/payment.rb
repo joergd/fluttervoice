@@ -18,7 +18,7 @@ protected
   end
 
   def validate
-    errors.add(:amount, "should really be more than zero") unless amount > 0
+    errors.add(:amount, "should really be more than zero") unless (amount || 0) > 0
   end
 
   def validate_foreign_keys
