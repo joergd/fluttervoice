@@ -1,0 +1,28 @@
+<div id="sidebar">
+  <%= render :partial => "submenu" %>
+</div>
+
+<div id="content">
+
+  <%= display_error %>
+  <%= display_notice %>
+
+  <h2>Default quote notes</h2>
+  
+  <%= error_messages_for :preference %>
+  
+  <% form_tag :action => 'quotenotes' do -%>  
+  
+    <h4>Add additional quote details to your quotes</h4>
+    <p>These could be anything you like, terms & conditions, or notes like salesperson information. Any notes you enter here will appear at the bottom of your quote. Or you can simply leave it blank if you don't want to add any extra information. You can override these default notes on individual quotes.</p>
+    
+    <div class="box">
+      <%= text_area :preference, :quote_notes, :cols => 40, :rows => 10 %>
+    </div>
+    
+    <div class="submit_box">
+      <%= submit_tag 'Save quote notes' %>
+    </div>
+  <% end -%>
+  
+</div>

@@ -56,6 +56,18 @@ class PreferencesController < ApplicationController
       flash[:notice] = "Your invoice notes were saved."
     end
   end
+
+  def quotenotes
+    if request.get?
+      @preference = @account.preference
+      return
+    end
+    
+    @preference = @account.preference
+    if @account.preference.update_attributes(params[:preference].merge(audit_update_trail))
+      flash[:notice] = "Your quote notes were saved."
+    end
+  end
   
   def upload_logo
     if params[:image_file].blank?

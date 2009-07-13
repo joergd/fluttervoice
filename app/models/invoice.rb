@@ -69,6 +69,15 @@ class Invoice < Document
     self.save
   end
 
+  def setup_defaults
+    preference = Preference.find(:first, :conditions => ["account_id = ?", self.account_id])
+    self.tax_system = preference.tax_system
+    self.tax_percentage = preference.tax_percentage
+    self.currency_id = preference.currency_id
+    self.terms = preference.terms
+    self.notes = preference.invoice_notes
+  end
+
 private
 
   # 1=open, 2=closed, 3=draft

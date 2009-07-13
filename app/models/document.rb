@@ -53,15 +53,6 @@ class Document < ActiveRecord::Base
     self.use_tax? ? self.subtotal * self.tax_percentage * 0.01 : 0
   end
 
-  def setup_defaults
-    preference = Preference.find(:first, :conditions => ["account_id = ?", self.account_id])
-    self.tax_system = preference.tax_system
-    self.tax_percentage = preference.tax_percentage
-    self.currency_id = preference.currency_id
-    self.terms = preference.terms
-    self.notes = preference.invoice_notes
-  end
-
   # storing the symbol in an internal variable is useful, especially when
   # listing invoice lines, as we don't have to go to the db for every line
   # to determine the symbol

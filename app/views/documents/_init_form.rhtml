@@ -3,7 +3,7 @@
   <%= render :partial => "documents/edit_line_item" %>
 
   <% document.line_items.each do |il| -%>
-    populateLine(<%= il.line_item_type_id %>, <%= il.quantity %>, <%= il.price %>, "<%=h il.description %>");
+    populateLine(<%= il.line_item_type_id %>, <%= il.quantity %>, <%= il.price %>, "<%= il.description %>");
   <% end -%>
 
   recalc();
