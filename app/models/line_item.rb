@@ -17,6 +17,8 @@ protected
 
   def strip_whitespaces
     self.description.strip!
+    self.description.gsub!("\n", " ")
+    self.description.gsub!("\r", " ")
   end
 
   def validate
