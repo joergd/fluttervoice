@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class CreditCardTransactionTest < Test::Unit::TestCase
+class CreditCardTransactionTest < ActiveSupport::TestCase
   fixtures :credit_card_transactions
 
   # Replace this with your real tests.

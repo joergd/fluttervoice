@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class DocumentTemplateTest < Test::Unit::TestCase
+class DocumentTemplateTest < ActiveSupport::TestCase
   fixtures :document_templates
 
   def setup

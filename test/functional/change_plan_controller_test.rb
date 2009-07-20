@@ -4,7 +4,7 @@ require 'change_plan_controller'
 # Re-raise errors caught by the controller.
 class ChangePlanController; def rescue_action(e) raise e end; end
 
-class ChangePlanControllerTest < Test::Unit::TestCase
+class ChangePlanControllerTest < ActionController::TestCase
   fixtures :accounts, :people, :plans
   def setup
     @controller = ChangePlanController.new

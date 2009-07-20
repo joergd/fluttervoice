@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class InvoiceTest < Test::Unit::TestCase
+class InvoiceTest < ActiveSupport::TestCase
   fixtures :documents, :accounts, :clients, :status, :line_items, :preferences, :terms, :currencies
 
   def setup

@@ -4,7 +4,7 @@ require 'clients_controller'
 # Re-raise errors caught by the controller.
 class ClientsController; def rescue_action(e) raise e end; end
 
-class ClientsControllerTest < Test::Unit::TestCase
+class ClientsControllerTest < ActionController::TestCase
   fixtures :clients, :accounts, :people, :plans
 
   def setup

@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'document_mailer'
 
-class DocumentMailerTest < Test::Unit::TestCase
+class DocumentMailerTest < ActiveSupport::TestCase
   fixtures :documents, :accounts, :clients, :line_items, :preferences
 
   def setup

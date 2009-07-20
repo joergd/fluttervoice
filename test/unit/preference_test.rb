@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class PreferenceTest < Test::Unit::TestCase
+class PreferenceTest < ActiveSupport::TestCase
   fixtures :preferences, :accounts, :documents, :images
 
   def setup

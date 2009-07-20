@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class EmailLogTest < Test::Unit::TestCase
+class EmailLogTest < ActiveSupport::TestCase
   fixtures :email_logs
 
   def setup

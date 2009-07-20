@@ -4,7 +4,7 @@ require 'payments_controller'
 # Re-raise errors caught by the controller.
 class PaymentsController; def rescue_action(e) raise e end; end
 
-class PaymentsControllerTest < Test::Unit::TestCase
+class PaymentsControllerTest < ActionController::TestCase
   fixtures :payments, :people, :accounts, :documents, :clients
 
   def setup

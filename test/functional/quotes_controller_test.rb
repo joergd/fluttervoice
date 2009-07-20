@@ -4,7 +4,7 @@ require 'quotes_controller'
 # Re-raise errors caught by the controller.
 class QuotesController; def rescue_action(e) raise e end; end
 
-class QuotesControllerTest < Test::Unit::TestCase
+class QuotesControllerTest < ActionController::TestCase
   fixtures :accounts, :plans, :preferences, :people, :documents, :line_items, :line_item_types, :clients, :currencies
 
   def setup

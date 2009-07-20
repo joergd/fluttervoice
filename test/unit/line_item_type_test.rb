@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class LineItemTypeTest < Test::Unit::TestCase
+class LineItemTypeTest < ActiveSupport::TestCase
   fixtures :line_item_types
 
   # Replace this with your real tests.

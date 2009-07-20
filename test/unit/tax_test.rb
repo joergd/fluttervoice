@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class TaxTest < Test::Unit::TestCase
+class TaxTest < ActiveSupport::TestCase
   fixtures :taxes
 
   def setup

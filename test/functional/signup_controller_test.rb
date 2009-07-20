@@ -4,7 +4,7 @@ require 'signup_controller'
 # Re-raise errors caught by the controller.
 class SignupController; def rescue_action(e) raise e end; end
 
-class SignupControllerTest < Test::Unit::TestCase
+class SignupControllerTest < ActionController::TestCase
   fixtures :accounts, :people, :taxes, :currencies, :plans
 
   def setup

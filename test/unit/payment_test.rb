@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class PaymentTest < Test::Unit::TestCase
+class PaymentTest < ActiveSupport::TestCase
   fixtures :payments, :accounts, :documents, :line_items, :line_item_types
 
   def setup

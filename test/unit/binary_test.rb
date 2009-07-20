@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class BinaryTest < Test::Unit::TestCase
+class BinaryTest < ActiveSupport::TestCase
   fixtures :binaries
 
   def setup

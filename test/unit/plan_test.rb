@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class PlanTest < Test::Unit::TestCase
+class PlanTest < ActiveSupport::TestCase
   fixtures :plans
 
   def setup

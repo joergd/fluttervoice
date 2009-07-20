@@ -4,7 +4,7 @@ require 'summary_controller'
 # Re-raise errors caught by the controller.
 class SummaryController; def rescue_action(e) raise e end; end
 
-class SummaryControllerTest < Test::Unit::TestCase
+class SummaryControllerTest < ActionController::TestCase
   fixtures :accounts, :preferences, :documents, :line_items, :line_item_types, :clients, :currencies
 
   def setup

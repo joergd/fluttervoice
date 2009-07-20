@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'user_notify'
 
-class UserNotifyTest < Test::Unit::TestCase
+class UserNotifyTest < ActiveSupport::TestCase
   fixtures :accounts, :people
 
   def setup

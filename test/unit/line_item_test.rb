@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class LineItemTest < Test::Unit::TestCase
+class LineItemTest < ActiveSupport::TestCase
   fixtures :line_items, :documents, :accounts
 
   def setup

@@ -4,7 +4,7 @@ require 'invoices_controller'
 # Re-raise errors caught by the controller.
 class InvoicesController; def rescue_action(e) raise e end; end
 
-class InvoicesControllerTest < Test::Unit::TestCase
+class InvoicesControllerTest < ActionController::TestCase
   fixtures :accounts, :plans, :preferences, :people, :documents, :line_items, :line_item_types, :clients, :currencies
 
   def setup

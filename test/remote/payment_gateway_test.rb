@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'yaml'
 
-class PaymentGatewayTest < Test::Unit::TestCase
+class PaymentGatewayTest < ActiveSupport::TestCase
   fixtures :accounts, :plans
 
   def setup

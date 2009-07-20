@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class AuditLoginTest < Test::Unit::TestCase
+class AuditLoginTest < ActiveSupport::TestCase
   fixtures :audit_logins
 
   def setup

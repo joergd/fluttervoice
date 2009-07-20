@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class CurrencyTest < Test::Unit::TestCase
+class CurrencyTest < ActiveSupport::TestCase
   fixtures :currencies
 
   def setup
