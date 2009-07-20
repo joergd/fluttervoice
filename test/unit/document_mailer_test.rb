@@ -21,13 +21,13 @@ class DocumentMailerTest < ActiveSupport::TestCase
                                           'High Their',
                                           { 'app_name' => 'Fluttervoice' })
 
-    assert_equal "multipart/alternative", email.content_type
     assert_equal("Invoice #{@invoice.number} from #{@invoice.account.name}", email.subject)
     assert_equal('joergd@pobox.com', email.to[0])
     assert_match(/High Their/, email.body)
     assert_match(/Summary page/, email.body)
     assert_match(/Summary page<\/a>/, email.body)
-    assert_match(/http:\/\/www\.woodstock\.org/, email.body)
+    assert_match(/Click to see your summary page/, email.body)
+    assert_match(/Pathfinder/, email.body)
   end
 
   def test_reminder
@@ -42,13 +42,13 @@ class DocumentMailerTest < ActiveSupport::TestCase
                                           'High Their',
                                           { 'app_name' => 'Fluttervoice' })
 
-    assert_equal "multipart/alternative", email.content_type
     assert_equal("Reminder for Invoice #{@invoice.number} from #{@invoice.account.name}", email.subject)
     assert_equal('joergd@pobox.com', email.to[0])
     assert_match(/High Their/, email.body)
     assert_match(/Summary page/, email.body)
     assert_match(/Summary page<\/a>/, email.body)
-    assert_match(/http:\/\/www\.woodstock\.org/, email.body)
+    assert_match(/Click to see your summary page/, email.body)
+    assert_match(/Pathfinder/, email.body)
   end
 
   def test_thankyou
@@ -62,12 +62,12 @@ class DocumentMailerTest < ActiveSupport::TestCase
                                           'High Their',
                                           { 'app_name' => 'Fluttervoice' })
 
-    assert_equal "multipart/alternative", email.content_type
     assert_equal("Thankyou for Invoice #{@invoice.number} from #{@invoice.account.name}", email.subject)
     assert_equal('joergd@pobox.com', email.to[0])
     assert_match(/High Their/, email.body)
     assert_match(/Summary page/, email.body)
     assert_match(/Summary page<\/a>/, email.body)
+    assert_match(/Click to see your summary page/, email.body)
   end
 
   def test_quote
@@ -82,13 +82,13 @@ class DocumentMailerTest < ActiveSupport::TestCase
                                           'High Their',
                                           { 'app_name' => 'Fluttervoice' })
 
-    assert_equal "multipart/alternative", email.content_type
     assert_equal("Quote #{@quote.number} from #{@quote.account.name}", email.subject)
     assert_equal('joergd@pobox.com', email.to[0])
     assert_match(/High Their/, email.body)
     assert_match(/Summary page/, email.body)
     assert_match(/Summary page<\/a>/, email.body)
-    assert_match(/http:\/\/www\.woodstock\.org/, email.body)
+    assert_match(/Click to see your summary page/, email.body)
+    assert_match(/Pathfinder/, email.body)
   end
 
 end

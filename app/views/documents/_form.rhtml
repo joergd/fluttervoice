@@ -1,7 +1,7 @@
 <fieldset>
   <dl id="inv_preamble_form">
     <dt><strong><label for="invoice_date">Date</label></strong></dt><dd><%= date_select :document, :date, :order => [:day, :month, :year] %></dd>
-    <%= error_message_on document, :number, "The invoice number " %>
+    <%= error_message_on document, :number, :prepend_text => "The invoice number " %>
     <dt><strong><label for="document_number"><%= document.class.to_s %> number *</label></strong></dt>
     <dd>
       <%= text_field :document, :number, :maxlength => 10, :size => 30  %>
@@ -9,7 +9,7 @@
         (last used: <%= @last_document_number_used %>)
       <% end -%>
     </dd>
-    <%= error_message_on :document, :po_number, "Purchase order number " %>
+    <%= error_message_on :document, :po_number, :prepend_text => "Purchase order number " %>
     <dt><label for="document_po_number">PO/ref number</label></dt><dd><%= text_field :document, :po_number, :maxlength => 10, :size => 30  %></dd>
   </dl>
 </fieldset>
@@ -28,7 +28,7 @@
 
 <!-- ***** invoice lines added through javascript ***** -->
 
-  <%= error_message_on :document, :line_items, "A field " %>
+  <%= error_message_on :document, :line_items, :prepend_text => "A field " %>
   <%= render :partial => "documents/line_item_header" %>
   <div id="lineitemrows"></div>
 
@@ -42,9 +42,9 @@
 <table id="calcs_table_form" cellpadding="0" cellspacing="0" border="0">
   <tr>
     <td>
-      <%= error_message_on :document, :tax_percentage, "The tax percentage " %>
-      <%= error_message_on :document, :shipping, "Your shipping amount " %>
-      <%= error_message_on :document, :use_tax, "The use tax checkbox " %>
+      <%= error_message_on :document, :tax_percentage, :prepend_text => "The tax percentage " %>
+      <%= error_message_on :document, :shipping, :prepend_text => "Your shipping amount " %>
+      <%= error_message_on :document, :use_tax, :prepend_text => "The use tax checkbox " %>
       <table id="invoice_calcs" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td></td>

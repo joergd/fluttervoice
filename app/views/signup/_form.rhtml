@@ -3,7 +3,7 @@
     <legend>1. Your business name</legend>
     <p>This is your name, or the name of your business or organisation.</p>
     <dl class="form">
-      <%= error_message_on :account, :name, "Your business name " %>
+      <%= error_message_on :account, :name, :prepend_text => "Your business name " %>
       <dt><label for="account_name">Name</label></dt><dd><%= text_field :account, :name, :maxlength => 100, :size => 30  %></dd>
     </dl>
   </fieldset>
@@ -14,7 +14,7 @@
     <p>Please be careful - you cannot change this at a later stage. This will also be the web address you and your clients use to view your invoices.</p>
     <p>Please take note of your <%= @app_config["app_name"] %> ID as you will need it in future (in conjunction with your username and password) to log in to your account.</p>
     <dl>
-      <%= error_message_on :account, :subdomain, "Your subdomain " %>
+      <%= error_message_on :account, :subdomain, :prepend_text => "Your subdomain " %>
       <dt><label for="account_subdomain">http://</label></dt><dd><%= text_field :account, :subdomain, :maxlength => 15, :size => 15  %>.<%= @app_config["domain"] %></dd>
     </dl>
   </fieldset>

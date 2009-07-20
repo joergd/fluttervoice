@@ -1,6 +1,6 @@
 <fieldset>
   <dl class="account_form">
-    <%= error_message_on :account, :name, "Company name " %>
+    <%= error_message_on :account, :name, :prepend_text => "Company name " %>
     <dt><strong><label for="account_name">Company name *</label></strong></dt><dd><%= text_field :account, :name, :maxlength => 100, :size => 30  %></dd>
     <dt><label for="account_address1">Address1</label></dt><dd><%= text_field :account, :address1, :maxlength => 100, :size => 30  %></dd>
     <dt><label for="account_address2">Address2</label></dt><dd><%= text_field :account, :address2, :maxlength => 100, :size => 30  %></dd>

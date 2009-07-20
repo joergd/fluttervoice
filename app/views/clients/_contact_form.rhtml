@@ -1,14 +1,14 @@
 <fieldset>
   <dl class="contact_form">
-    <%= error_message_on :contact, :firstname, "The firstname " %>
+    <%= error_message_on :contact, :firstname, :prepend_text => "The firstname " %>
     <dt><strong><label for="contact_firstname">Firstname *</label></strong></dt><dd><%= text_field :contact, :firstname, :maxlength => 30, :size => 30  %></dd>
-    <%= error_message_on :contact, :lastname, "The lastname " %>
+    <%= error_message_on :contact, :lastname, :prepend_text => "The lastname " %>
     <dt><strong><label for="contact_lastname">Lastname *</label></strong></dt><dd><%= text_field :contact, :lastname, :maxlength => 30, :size => 30  %></dd>
-    <%= error_message_on :contact, :email, "The email address " %>
+    <%= error_message_on :contact, :email, :prepend_text => "The email address " %>
     <dt><strong><label for="contact_email">Email *</label></strong></dt><dd><%= text_field :contact, :email, :maxlength => 255, :size => 30  %></dd>
-    <%= error_message_on :contact, :tel, "The telephone number " %>
+    <%= error_message_on :contact, :tel, :prepend_text => "The telephone number " %>
     <dt><label for="contact_tel">Tel</label></dt><dd><%= text_field :contact, :tel, :maxlength => 30, :size => 30  %></dd>
-    <%= error_message_on :contact, :mobile, "The mobile phone number " %>
+    <%= error_message_on :contact, :mobile, :prepend_text => "The mobile phone number " %>
     <dt><label for="contact_mobile">Mobile</label></dt><dd><%= text_field :contact, :mobile, :maxlength => 30, :size => 30  %></dd>
   </dl>
 </fieldset>

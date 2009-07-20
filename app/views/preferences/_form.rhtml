@@ -5,7 +5,7 @@
     <dt><label for="preference_currency_id">Currency</label></dt><dd><%= collection_select :preference, :currency_id, @currencies, :code, :name, {}, :style => "width:205px;"  %></dd>
     <dt><label for="preference_terms">Terms</label></dt><dd><%= collection_select :preference, :terms, @terms, :description, :description %></dd>
     <dt><label for="preference_tax_system">Tax system</label></dt><dd><%= collection_select :preference, :tax_system, @taxes, :name, :name %></dd>
-    <%= error_message_on :preference, :tax_percentage, "The tax percentage " %>
+    <%= error_message_on :preference, :tax_percentage, :prepend_text => "The tax percentage " %>
     <dt><label for="preference_tax_percentage">Tax percentage</label></dt><dd><%= text_field :preference, :tax_percentage, :maxlength => 5, :size => 5 %>%</dd>
   </dl>
 </fieldset>

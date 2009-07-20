@@ -1,19 +1,19 @@
 <fieldset>
 <dl id="person_form">
-  <%= error_message_on :person, :firstname, "The firstname " %>
+  <%= error_message_on :person, :firstname, :prepend_text => "The firstname " %>
   <dt><strong><label for="person_firstname">Firstname *</label></strong></dt><dd><%= text_field :person, :firstname, :maxlength => 30, :size => 30  %></dd>
-  <%= error_message_on :person, :lastname, "The lastname " %>
+  <%= error_message_on :person, :lastname, :prepend_text => "The lastname " %>
   <dt><strong><label for="person_lastname">Lastname *</label></strong></dt><dd><%= text_field :person, :lastname, :maxlength => 30, :size => 30  %></dd>
-  <%= error_message_on :person, :email, "The email address " %>
+  <%= error_message_on :person, :email, :prepend_text => "The email address " %>
   <dt><strong><label for="person_email">Email *</label></strong></dt><dd><%= text_field :person, :email, :maxlength => 255, :size => 30  %></dd>
-  <%= error_message_on :person, :tel, "The phone number " %>
+  <%= error_message_on :person, :tel, :prepend_text => "The phone number " %>
   <dt><label for="person_tel">Tel</label></dt><dd><%= text_field :person, :tel, :maxlength => 30, :size => 30  %></dd>
-  <%= error_message_on :person, :mobile, "The mobile phone number " %>
+  <%= error_message_on :person, :mobile, :prepend_text => "The mobile phone number " %>
   <dt><label for="person_mobile">Mobile</label></dt><dd><%= text_field :person, :mobile, :maxlength => 30, :size => 30  %></dd>
   <% if @person.user? %>
-    <%= error_message_on :person, :password, "The password " %>
+    <%= error_message_on :person, :password, :prepend_text => "The password " %>
     <dt><strong><label for="person_password">Password *</label></strong></dt><dd><%= password_field :person, :password, :maxlength => 30, :size => 30 %></dd>
-    <%= error_message_on :person, :password_confirmation, "The password confirmation " %>
+    <%= error_message_on :person, :password_confirmation, :prepend_text => "The password confirmation " %>
     <dt><strong><label for="person_password_confirmation">Confirm Password *</label></strong></dt><dd><%= password_field :person, :password_confirmation, :maxlength => 30, :size => 30 %></dd>
   <% end %>
 </dl>
