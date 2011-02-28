@@ -22,7 +22,7 @@ class Document < ActiveRecord::Base
                               :within => 0..30
   validates_length_of          :currency_id,
                               :is => 3
-  validates_uniqueness_of     :number, :scope => "account_id"
+  validates_uniqueness_of     :number, :scope => ["account_id", "type"]
 
   before_save  :set_subtotal
   before_save :validate_foreign_keys
