@@ -1,3 +1,11 @@
+RESTART
+
+sudo /etc/init.d/mongrel_cluster start -e production
+sudo /etc/init.d/httpd start  
+
+
+
+
 == Welcome to Rails
 
 Rails is a web-application and persistance framework that includes everything
